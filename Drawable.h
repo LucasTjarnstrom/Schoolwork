@@ -18,21 +18,24 @@ public:
     Drawable(Drawable && dr);                   // move constructor
     Drawable& operator= (Drawable const & it);  // copy assignment
     Drawable& operator= (Drawable && it);       // move assignment
-
-    int get_x_pos() const;
-    void set_x_pos(int);
-    int get_y_pos() const;
-    void set_y_pos(int);
-    int get_x_velocity() const;
-    void set_x_velocity(int);
-    int get_y_velocity() const;
-    void set_y_velocity();
-    // int get_y_acc() const;
-    void set_y_acc(int);
-    int get_x_size() const;
-    void set_x_size(int);
-    int get_y_size() const;
-    void set_y_size(int);
+    
+    // Position
+    virtual int get_x_pos() const;
+    virtual void set_x_pos(int);
+    virtual int get_y_pos() const;
+    virtual void set_y_pos(int);
+    // Velocity, acceleration
+    virtual int get_x_velocity() const;
+    virtual void set_x_velocity(int);
+    virtual int get_y_velocity() const;
+    virtual void set_y_velocity();
+    // virtual int get_y_acc() const;
+    virtual void set_y_acc(int);
+    // Size
+    virtual int get_x_size() const;
+    virtual void set_x_size(int);
+    virtual int get_y_size() const;
+    virtual void set_y_size(int);
 
     virtual void draw_this(canvas) = 0;
 
