@@ -8,4 +8,3 @@ Player::Player(int vit)
     : Character(vit)
 {
 }
-
