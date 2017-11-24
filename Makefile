@@ -12,14 +12,20 @@ CCFLAGS = -std=c++17 -Wpedantic -Wall -Wextra -Werror -Weffc++ -I$(SFML_ROOT)/in
 #SFML-flaggor
 SFMLFLAGS = -L$(SFML_ROOT)/lib -lsfml-graphics -lsfml-window -lsfml-system
 
-main: main.o
-	$(CCC) main.o -o main $(SFMLFLAGS)
+# Huvudmål
+main: build/main.o
+	$(CCC) build/main.o -o main $(SFMLFLAGS)
 
-main.o: $(SOURCE)/main.cc
-	$(CCC) $(CCFLAGS) -c $(SOURCE)/main.cc 
+# Delmål
+build/main.o: $(SOURCE)/main.cc
+	$(CCC) $(CCFLAGS) -c $(SOURCE)/main.cc -o build/main.o
 
+.PHONY : clean
 clean:
 	@ \rm -rf *.o *.gch core
+	@ \rm -rf build/*.o build/*.gch build/core
 
+.PHONY : zap
 zap: clean
 	@ \rm -rf main  *~
+	@ \rm -rf build/*~
