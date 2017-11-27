@@ -8,11 +8,14 @@ TESTFILES = test-files
 CCC = g++
 
 # Kompilatorflaggor
-CCFLAGS = -std=c++17 -Wpedantic -Wall -Wextra -Werror -Weffc++
+CCFLAGS = -std=c++17 -Wpedantic -Wall -Wextra -Werror -Weffc++ -I$(SFML_ROOT)/include
+
+#SFML-flaggor
+SFMLFLAGS = -L$(SFML_ROOT)/lib -lsfml-graphics -lsfml-window -lsfml-system
 
 # Huvudmål
 player-test: $(TESTFILES)/test_main.o $(TESTFILES)/Player.o $(TESTFILES)/Character.o $(TESTFILES)/Drawable.o $(TESTFILES)/player-test.cc
-	$(CCC) $(CCFLAGS) $(TESTFILES)/test_main.o $(TESTFILES)/Player.o $(TESTFILES)/Character.o $(TESTFILES)/Drawable.o $(TESTFILES)/player-test.cc -o player-test
+	$(CCC) $(CCFLAGS) $(TESTFILES)/test_main.o $(TESTFILES)/Player.o $(TESTFILES)/Character.o $(TESTFILES)/Drawable.o $(TESTFILES)/player-test.cc -o player-test $(SFMLFLAGS)
 
 # Delmål
 test_main.o: $(TESTFILES)/test_main.cc

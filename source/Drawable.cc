@@ -3,10 +3,26 @@
  */
 
 #include "Drawable.h"
+#include <string>
+#include <iostream>
+#include <exception>
 
-Drawable::Drawable(int xp, int yp, int xs, int ys)
+using namespace std;
+
+Drawable::Drawable(int xp, int yp, int xs, int ys, string file_name)
     : x_pos{xp}, y_pos{yp}, x_size{xs}, y_size{ys}
 {
+    try
+    {
+	texture.loadFromFile(file_name, sf::IntRect(0,0,x_size,y_size));
+    }
+    catch (exception& e)
+    {
+	cout << e.what() << endl;
+    }
+
+    sprite.setTexture(texture);
+
 }                
     
 // Position
@@ -80,4 +96,9 @@ int Drawable::get_y_size() const
 void Drawable::set_y_size(int ys)
 {
     y_size = ys;
+}
+
+sf::Sprite Drawable::get_sprite()
+{
+    return sprite;
 }

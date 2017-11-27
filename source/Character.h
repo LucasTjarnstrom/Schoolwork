@@ -13,7 +13,7 @@ class Character : public Drawable
 public:
     Character() = default; // default constructor
     Character(int); // constructor
-    Character(int,int,int,int);
+    Character(int,int,int,int,std::string);
     virtual ~Character() = default; // destructor
 
     //Character(Character const& it); // copy constructor

@@ -5,15 +5,15 @@
 #ifndef DRAWABLE_H
 #define DRAWABLE_H
 
-//#include<canvas>
-//#include<sprite>
+#include <SFML/Graphics.hpp>
+#include <string>
 
 class Drawable
 {
 public:
     Drawable() = default;                       // default constructor
     virtual ~Drawable() = default;              // destructor
-    Drawable(int,int,int,int);                  // constructor (sprite är utelämnad)
+    Drawable(int,int,int,int,std::string);      // constructor 
     //Drawable(Drawable const & dr)               // copy constructor
     //Drawable(Drawable && dr);                   // move constructor
     //Drawable& operator= (Drawable const & it);  // copy assignment
@@ -37,6 +37,8 @@ public:
     virtual int get_y_size() const;
     virtual void set_y_size(int);
 
+    virtual sf::Sprite get_sprite();
+
     //virtual void draw_this(canvas) = 0;
 
 protected:
@@ -47,7 +49,8 @@ protected:
     int y_acc {-10}; // där g ska vara tyngdkonstanten av något slag i negativ y, fys. kord.p.
     int x_size {};
     int y_size {};
-    //sprite sprite; // en datamedlem av typen sprite som heter sprite
+    sf::Texture texture {};
+    sf::Sprite sprite {}; // en datamedlem av typen sprite som heter sprite
 };
 
 #endif

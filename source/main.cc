@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "Player.h"
 
 int main()
 {
@@ -26,13 +27,15 @@ int main()
     int j = 0;
     //window.setPosition(sf::Vector2i(i,j));
 
+
+    Player PC (12,12,0,0,"resources/image.png");
+
     while (window.isOpen())
     {
-        i = rand() % 100;
-	j = rand() % 100;
+        //i = rand() % 100;
+	//j = rand() % 100;
 	//window.setPosition(sf::Vector2i(i,j));
 
-	
 	sprite.setPosition(sf::Vector2f(500 + i, 200 + j));
 
         sf::Event event;
@@ -85,7 +88,8 @@ int main()
 
         window.clear(sf::Color(10,110,191));
         //window.draw(shape);
-	window.draw(sprite);
+	//window.draw(sprite);
+	window.draw(PC.get_sprite());
         window.display();
     }
 
