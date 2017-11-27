@@ -9,6 +9,11 @@ Character::Character(int vit)
 {
 }
 
+Character::Character(int xp, int yp, int xs, int ys)
+    : Drawable(xp, yp, xs, ys)
+{
+}
+
 void Character::set_vitality(int vit)
 {
     vitality = vit;

@@ -11,8 +11,8 @@ CCC = g++
 CCFLAGS = -std=c++17 -Wpedantic -Wall -Wextra -Werror -Weffc++
 
 # Huvudmål
-player-test: $(TESTFILES)/test_main.o $(TESTFILES)/Player.o $(TESTFILES)/Character.o $(TESTFILES)/player-test.cc
-	$(CCC) $(CCFLAGS) $(TESTFILES)/test_main.o $(TESTFILES)/Player.o $(TESTFILES)/Character.o $(TESTFILES)/player-test.cc -o player-test
+player-test: $(TESTFILES)/test_main.o $(TESTFILES)/Player.o $(TESTFILES)/Character.o $(TESTFILES)/Drawable.o $(TESTFILES)/player-test.cc
+	$(CCC) $(CCFLAGS) $(TESTFILES)/test_main.o $(TESTFILES)/Player.o $(TESTFILES)/Character.o $(TESTFILES)/Drawable.o $(TESTFILES)/player-test.cc -o player-test
 
 # Delmål
 test_main.o: $(TESTFILES)/test_main.cc
@@ -23,6 +23,9 @@ $(TESTFILES)/Player.o : Player.h Player.cc Character.h Character.cc
 
 $(TESTFILES)/Character.o : Character.h Character.cc
 	$(CCC) $(CCFLAGS) -c Character.cc -o $(TESTFILES)/Character.o
+
+$(TESTFILES)/Drawable.o : Drawable.h Drawable.cc
+	$(CCC) $(CCFLAGS) -c Drawable.cc -o $(TESTFILES)/Drawable.o
 
 .PHONY : clean
 clean:

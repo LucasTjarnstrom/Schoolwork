@@ -13,6 +13,7 @@ class Player : public Character
 public:
     Player() = default;           // default constructor
     Player(int);                  // constructor
+    Player(int,int,int,int);
 
     //void jump() override;
     //void attack() override;

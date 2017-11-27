@@ -6,12 +6,14 @@
 #define CHARACTER_H
 
 #include <string>
+#include "Drawable.h"
 
-class Character// : public Drawable
+class Character : public Drawable
 {
 public:
     Character() = default; // default constructor
     Character(int); // constructor
+    Character(int,int,int,int);
     virtual ~Character() = default; // destructor
 
     //Character(Character const& it); // copy constructor
