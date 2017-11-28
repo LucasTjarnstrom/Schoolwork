@@ -2,6 +2,8 @@
 #include <iostream>
 #include "Player.h"
 
+using namespace std;
+
 int main()
 {
     sf::Color c(252,10,191,255);
@@ -29,9 +31,13 @@ int main()
 
 
     Player PC (12,12,0,0,"resources/image.png");
+    sf::Vector2f pos(PC.get_x_pos(), PC.get_y_pos());
 
+    int move_x {0};
+    
     while (window.isOpen())
     {
+        move_x = 0;
         //i = rand() % 100;
 	//j = rand() % 100;
 	//window.setPosition(sf::Vector2i(i,j));
@@ -57,7 +63,13 @@ int main()
 		    std::cout << "system:" << event.key.system << std::endl;
 		    window.close();
 		}
-		
+
+		if (event.key.code == sf::Keyboard::D)
+		    move_x = 1;
+
+		if (event.key.code == sf::Keyboard::A)
+		    move_x = -1;
+		    
 	    case sf::Event::MouseMoved:
 		{
 		    //std::cout << "new mouse x: " << event.mouseMove.x << std::endl;
@@ -85,6 +97,12 @@ int main()
 		
 	    }
         }
+
+	PC.get_sprite().setPosition(PC.get_x_pos() + move_x, PC.get_y_pos());
+	PC.set_x_pos(PC.get_x_pos() + move_x);
+
+	cout << PC.get_sprite().getPosition().x << endl;
+	cout << PC.get_x_pos() << endl;
 
         window.clear(sf::Color(10,110,191));
         //window.draw(shape);

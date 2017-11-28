@@ -37,7 +37,7 @@ public:
     virtual int get_y_size() const;
     virtual void set_y_size(int);
 
-    virtual sf::Sprite get_sprite();
+    virtual sf::Sprite& get_sprite();
 
     //virtual void draw_this(canvas) = 0;
 

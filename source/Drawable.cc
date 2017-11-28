@@ -98,7 +98,7 @@ void Drawable::set_y_size(int ys)
     y_size = ys;
 }
 
-sf::Sprite Drawable::get_sprite()
+sf::Sprite& Drawable::get_sprite()
 {
     return sprite;
 }
