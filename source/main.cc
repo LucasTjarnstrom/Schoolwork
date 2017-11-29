@@ -32,13 +32,11 @@ int main()
 
     Player PC (12,12,0,0,"resources/image.png");
     sf::Vector2f pos(PC.get_x_pos(), PC.get_y_pos());
-
-    int move_x {0};
     
     sf::Clock clock;
     while (window.isOpen())
     {
-        move_x = 0;
+      PC.set_x_velocity(0);
         //i = rand() % 100;
 	//j = rand() % 100;
 	//window.setPosition(sf::Vector2i(i,j));
@@ -66,10 +64,10 @@ int main()
 		}
 
 		if (event.key.code == sf::Keyboard::D)
-		    move_x = 1;
+		  PC.set_x_velocity(1);
 
 		if (event.key.code == sf::Keyboard::A)
-		    move_x = -1;
+		  PC.set_x_velocity(-1);
 		    
 	    case sf::Event::MouseMoved:
 		{
@@ -99,8 +97,8 @@ int main()
 	    }
         }
 
-	PC.get_sprite().setPosition(PC.get_x_pos() + move_x, PC.get_y_pos());
-	PC.set_x_pos(PC.get_x_pos() + move_x);
+	PC.get_sprite().setPosition(PC.get_x_pos(), PC.get_y_pos());
+	PC.set_x_pos(PC.get_x_pos() + PC.get_x_velocity());
 
 	cout << PC.get_sprite().getPosition().x << endl;
 	cout << PC.get_x_pos() << endl;
