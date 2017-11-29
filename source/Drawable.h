@@ -39,7 +39,7 @@ public:
 
     virtual sf::Sprite& get_sprite();
 
-    //virtual void draw_this(canvas) = 0;
+    virtual sf::Sprite draw_this() = 0;
 
 protected:
     double x_pos {};

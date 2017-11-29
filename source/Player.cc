@@ -16,3 +16,8 @@ Player::Player(double xp, double yp, double xs, double ys, string file_name)
     : Character(xp, yp, xs, ys, file_name)
 {
 }
+
+sf::Sprite Player::draw_this()
+{
+    return sprite;
+}

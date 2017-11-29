@@ -13,11 +13,11 @@ CCFLAGS = -std=c++17 -Wpedantic -Wall -Wextra -Weffc++ -I$(SFML_ROOT)/include
 SFMLFLAGS = -L$(SFML_ROOT)/lib -lsfml-graphics -lsfml-window -lsfml-system
 
 #Objektmoduler
-OBJECTS = build/main.o build/Drawable.o build/Character.o build/Player.o 
+OBJECTS = build/main.o build/Drawable.o build/Character.o build/Player.o build/Level.o build/Game.o
 
 # Huvudmål
 main: $(OBJECTS)
-	$(CCC) build/main.o build/Drawable.o build/Character.o build/Player.o -o main $(SFMLFLAGS)
+	$(CCC) build/main.o build/Drawable.o build/Character.o build/Player.o build/Game.o -o main $(SFMLFLAGS)
 
 # Delmål
 build/main.o: $(SOURCE)/main.cc
@@ -31,6 +31,12 @@ build/Character.o : $(SOURCE)/Character.h $(SOURCE)/Character.cc
 
 build/Drawable.o : $(SOURCE)/Drawable.h $(SOURCE)/Drawable.cc
 	$(CCC) $(CCFLAGS) -c $(SOURCE)/Drawable.cc -o build/Drawable.o
+
+build/Level.o : $(SOURCE)/Level.h $(SOURCE)/Level.cc
+	$(CCC) $(CCFLAGS) -c $(SOURCE)/Level.cc -o build/Level.o
+
+build/Game.o : $(SOURCE)/Game.h $(SOURCE)/Game.cc
+	$(CCC) $(CCFLAGS) -c $(SOURCE)/Game.cc -o build/Game.o
 
 .PHONY : clean
 clean:
