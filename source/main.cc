@@ -35,6 +35,7 @@ int main()
 
     int move_x {0};
     
+    sf::Clock clock;
     while (window.isOpen())
     {
         move_x = 0;
@@ -104,11 +105,21 @@ int main()
 	cout << PC.get_sprite().getPosition().x << endl;
 	cout << PC.get_x_pos() << endl;
 
+	PC.set_y_velocity(PC.get_y_velocity() + PC.get_y_acc()); //gravity
+	PC.set_y_pos(PC.get_y_pos() + PC.get_y_velocity());
+
         window.clear(sf::Color(10,110,191));
         //window.draw(shape);
 	//window.draw(sprite);
 	window.draw(PC.get_sprite());
         window.display();
+	
+	sf::Time elapsed = clock.getElapsedTime();
+	while (elapsed.asSeconds() < 1/60) //caps the system at 60 fps
+	  {
+	  elapsed = clock.getElapsedTime();
+	  }
+	clock.restart();
     }
 
     return 0;

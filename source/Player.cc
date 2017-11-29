@@ -12,7 +12,7 @@ Player::Player(int vit)
 {
 }
 
-Player::Player(int xp, int yp, int xs, int ys, string file_name)
+Player::Player(double xp, double yp, double xs, double ys, string file_name)
     : Character(xp, yp, xs, ys, file_name)
 {
 }

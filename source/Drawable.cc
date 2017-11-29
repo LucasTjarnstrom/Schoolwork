@@ -9,7 +9,7 @@
 
 using namespace std;
 
-Drawable::Drawable(int xp, int yp, int xs, int ys, string file_name)
+Drawable::Drawable(double xp, double yp, double xs, double ys, string file_name)
     : x_pos{xp}, y_pos{yp}, x_size{xs}, y_size{ys}
 {
     try
@@ -26,74 +26,74 @@ Drawable::Drawable(int xp, int yp, int xs, int ys, string file_name)
 }                
     
 // Position
-int Drawable::get_x_pos() const
+double Drawable::get_x_pos() const
 {
     return x_pos;
 }
 
-void Drawable::set_x_pos(int xp)
+void Drawable::set_x_pos(double xp)
 {
     x_pos = xp;
 }
 
-int Drawable::get_y_pos() const
+double Drawable::get_y_pos() const
 {
     return y_pos;
 }
 
-void Drawable::set_y_pos(int yp)
+void Drawable::set_y_pos(double yp)
 {
     y_pos = yp;
 }
 
 // Velocity, acceleration
-int Drawable::get_x_velocity() const
+double Drawable::get_x_velocity() const
 {
     return x_velocity;
 }
 
-void Drawable::set_x_velocity(int xv)
+void Drawable::set_x_velocity(double xv)
 {
     x_velocity = xv;
 }
 
-int Drawable::get_y_velocity() const
+double Drawable::get_y_velocity() const
 {
     return y_velocity;
 }
 
-void Drawable::set_y_velocity(int yv)
+void Drawable::set_y_velocity(double yv)
 {
     y_velocity = yv;
 }
 
-int Drawable::get_y_acc() const
+double Drawable::get_y_acc() const
 {
     return y_acc;
 }
 
-void Drawable::set_y_acc(int ya)
+void Drawable::set_y_acc(double ya)
 {
     y_acc = ya;
 }
 
 // Size
-int Drawable::get_x_size() const
+double Drawable::get_x_size() const
 {
     return x_size;
 }
 
-void Drawable::set_x_size(int xs)
+void Drawable::set_x_size(double xs)
 {
     x_size = xs;
 }
 
-int Drawable::get_y_size() const
+double Drawable::get_y_size() const
 {
     return y_size;
 }
   
-void Drawable::set_y_size(int ys)
+void Drawable::set_y_size(double ys)
 {
     y_size = ys;
 }

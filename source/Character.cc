@@ -12,7 +12,7 @@ Character::Character(int vit)
 {
 }
 
-Character::Character(int xp, int yp, int xs, int ys, string file_name)
+Character::Character(double xp, double yp, double xs, double ys, string file_name)
     : Drawable(xp, yp, xs, ys, file_name)
 {
 }
