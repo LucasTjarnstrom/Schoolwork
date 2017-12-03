@@ -6,6 +6,7 @@
 #define GAME_H
 
 #include <SFML/Graphics.hpp>
+#include "Player.h"
 
 class Game
 {
@@ -20,6 +21,8 @@ private:
     //void handle_player_input(sf::Keyboard::Key key, bool is_pressed);
 
     sf::RenderWindow window {};
+    Player player {};
+    
     //bool move_left {false};
     //bool move_right {false};
 

@@ -12,21 +12,19 @@
 using namespace std;
 
 Game::Game()
-    : window(sf::VideoMode(1280, 720), "SFML works!")
+    : window(sf::VideoMode(1280, 720), "SFML works!"),
+      player{Player(12,12,0,0,"resources/image.png")}
 {
     window.setFramerateLimit(60); // FPS set to 60
 }
 
 void Game::run()
-{
-    Player PC (12,12,0,0,"resources/image.png");
-    sf::Vector2f pos(PC.get_x_pos(), PC.get_y_pos());
-    
+{   
     sf::Clock clock;
 
     while (window.isOpen())
     {
-	PC.set_x_velocity(0);
+	player.set_x_velocity(0);
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -48,10 +46,10 @@ void Game::run()
     		}
 
     		if (event.key.code == sf::Keyboard::D)
-		    PC.set_x_velocity(1);
+		    player.set_x_velocity(1);
 
     		if (event.key.code == sf::Keyboard::A)
-		    PC.set_x_velocity(-1);
+		    player.set_x_velocity(-1);
 		    
     	    case sf::Event::MouseMoved:
 	    {
@@ -81,19 +79,19 @@ void Game::run()
     	    }
         }
 
-    	PC.get_sprite().setPosition(PC.get_x_pos(), PC.get_y_pos());
-    	PC.set_x_pos(PC.get_x_pos() + PC.get_x_velocity());
+    	player.get_sprite().setPosition(player.get_x_pos(), player.get_y_pos());
+    	player.set_x_pos(player.get_x_pos() + player.get_x_velocity());
 
-    	cout << PC.get_sprite().getPosition().x << endl;
-    	cout << PC.get_x_pos() << endl;
+    	cout << player.get_sprite().getPosition().x << endl;
+    	cout << player.get_x_pos() << endl;
 
-    	PC.set_y_velocity(PC.get_y_velocity() + PC.get_y_acc()); //gravity
-    	PC.set_y_pos(PC.get_y_pos() + PC.get_y_velocity());
+    	player.set_y_velocity(player.get_y_velocity() + player.get_y_acc()); //gravity
+        player.set_y_pos(player.get_y_pos() + player.get_y_velocity());
 
         window.clear(sf::Color(10,110,191));
         //window.draw(shape);
     	//window.draw(sprite);
-    	window.draw(PC.get_sprite());
+    	window.draw(player.get_sprite());
         window.display();
 	
     	sf::Time elapsed = clock.getElapsedTime();
