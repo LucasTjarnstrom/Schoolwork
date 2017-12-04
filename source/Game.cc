@@ -20,7 +20,7 @@ Game::Game()
 
 void Game::run()
 {   
-    sf::Clock clock;
+    //sf::Clock clock;
     while (window.isOpen())
     {
 	player.set_x_velocity(0);
@@ -28,12 +28,12 @@ void Game::run()
 	update();
 	render();
 	
-    	sf::Time elapsed = clock.getElapsedTime();
-    	while (elapsed.asSeconds() < 1/60) //caps the system at 60 fps
-	{
-	    elapsed = clock.getElapsedTime();
-	}
-    	clock.restart();
+    	//sf::Time elapsed = clock.getElapsedTime();
+    	//while (elapsed.asSeconds() < 1/60) //caps the system at 60 fps
+	//{
+	//    elapsed = clock.getElapsedTime();
+	//}
+    	//clock.restart();
     }   
 }
 
