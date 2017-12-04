@@ -49,13 +49,8 @@ void Game::process_events()
 	    window.close();
 	    
 	case sf::Event::KeyPressed:
-	    if (event.key.code == sf::Keyboard::Escape)
+	    if (event.key.code == sf::Keyboard::Escape) //press escape -> close window
 	    {
-	    	std::cout << "the escape key was pressed" << std::endl;
-	    	std::cout << "control:" << event.key.control << std::endl;
-	    	std::cout << "alt:" << event.key.alt << std::endl;
-	    	std::cout << "shift:" << event.key.shift << std::endl;
-	    	std::cout << "system:" << event.key.system << std::endl;
 	    	window.close();
 	    } else
 		handle_player_input(event.key.code, true);
@@ -86,12 +81,12 @@ void Game::update()
 	player.set_x_velocity(1);
 
     player.set_x_pos(player.get_x_pos() + player.get_x_velocity());
-    cout << player.get_sprite().getPosition().x << endl;
-    cout << player.get_x_pos() << endl;
     
     player.set_y_velocity(player.get_y_velocity() + player.get_y_acc()); //gravity
     player.set_y_pos(player.get_y_pos() + player.get_y_velocity());
     
+    cout << "Physics updated" << endl;
+   
 }
 void Game::render()
 {
@@ -100,6 +95,8 @@ void Game::render()
     window.clear(sf::Color(10,110,191));
     window.draw(player.get_sprite());
     window.display();
+
+    cout << "Graphics updated" << endl;
 }
 
 void Game::handle_player_input(sf::Keyboard::Key key, bool is_pressed)
