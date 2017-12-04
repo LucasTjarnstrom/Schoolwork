@@ -13,11 +13,7 @@ class Character : public Drawable
 public:
     Character() = default; // default constructor
     Character(int); // constructor
-<<<<<<< HEAD
     Character(double,double,double,double,std::string);
-=======
-    Character(int,int,int,int,int,std::string);
->>>>>>> master
     virtual ~Character() = default; // destructor
 
     //Character(Character const& it); // copy constructor
@@ -25,7 +21,7 @@ public:
     //Character& operator=(Character const& it); // copy assignment
     //Character& operator=(Character && it); // move assignment
 
-    // Setters and getters
+    // Setters and getters do not have to be virtual
     virtual void set_vitality(int);
     virtual int get_vitality() const;
 

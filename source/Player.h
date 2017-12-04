@@ -13,11 +13,7 @@ class Player : public Character
 public:
     Player() = default;           // default constructor
     Player(int);                  // constructor
-<<<<<<< HEAD
     Player(double,double,double,double,std::string);
-=======
-    Player(int,int,int,int,int,std::string);
->>>>>>> master
 
     //void jump() override;
     //void attack() override;
