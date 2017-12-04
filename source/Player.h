@@ -13,7 +13,11 @@ class Player : public Character
 public:
     Player() = default;           // default constructor
     Player(int);                  // constructor
-    Player(int,int,int,int,int,std::string);
+<<<<<<< HEAD
+    Player(double,double,double,double,std::string);
+
+    sf::Sprite draw_this() override;
+>>>>>>> basic-graphics
 
     //void jump() override;
     //void attack() override;

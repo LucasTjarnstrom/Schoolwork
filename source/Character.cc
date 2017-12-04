@@ -3,14 +3,17 @@
  */
 
 #include "Character.h"
+#include <string>
+
+using namespace std;
 
 Character::Character(int vit)
     : vitality{vit}
 {
 }
 
-Character::Character(int xp, int yp, int xs, int ys)
-    : Drawable(xp, yp, xs, ys)
+Character::Character(double xp, double yp, double xs, double ys, string file_name)
+    : Drawable(xp, yp, xs, ys, file_name)
 {
 }
 
