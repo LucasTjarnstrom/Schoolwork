@@ -15,16 +15,16 @@ public:
     void run();
 
 private:
-    //void process_events();
-    //void update();
-    //void render();
-    //void handle_player_input(sf::Keyboard::Key key, bool is_pressed);
+    void process_events();
+    void update();
+    void render();
+    void handle_player_input(sf::Keyboard::Key key, bool is_pressed);
 
     sf::RenderWindow window {};
     Player player {};
     
-    //bool move_left {false};
-    //bool move_right {false};
+    bool move_left {false};
+    bool move_right {false};
 
 };
 
