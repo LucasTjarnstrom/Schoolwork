@@ -35,16 +35,36 @@ void Start_Menu::process_events()
 	case sf::Event::MouseMoved:
 	  {
 	    cout << "new mouse x: " << event.mouseMove.x << endl;
+	    cout << "new mouse y: " << event.mouseMove.y << endl;
 	    break;
 	  }
 	case sf::Event::MouseButtonPressed:
 	  {
 	    if (event.mouseButton.button == sf::Mouse::Left)
 	      {
-		cout << "Click!" << endl;
+		if( sf::Mouse::getPosition(window).x < 600 && sf::Mouse::getPosition(window).y < 170 )
+		  {
+		    cout << "Click!" << endl;
+		  }
 	      }
+
+	    /*
+
+	    if ( (event.mouseMove.y < 170 && event.mouseMove.x < 600) && (event.mouseButton.button == sf::Mouse::Left) )
+	      {
+		cout << "Clicked button!" << endl;
+	      } 
+
+
+	    if ( sf::Mouse::getPosition(window).x > sf::Sprite::getGlobalBounds(start_button).left )
+	      {
+		cout << "In correct area" << endl;
+	      }
+
+	    */
+
 	    break;
-	  }
+	    }
 	default:
 	  break;
 	}
