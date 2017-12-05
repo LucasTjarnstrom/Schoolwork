@@ -15,6 +15,8 @@ public:
     Player(int);                  // constructor
     Player(double,double,double,double,std::string);
 
+    sf::Sprite draw_this() override;
+
     //void jump() override;
     //void attack() override;
     //void move(std::string const &) override;
