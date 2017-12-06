@@ -28,12 +28,12 @@ void Game::run()
 	update();
 	render();
 	
-    	//sf::Time elapsed = clock.getElapsedTime();
-    	//while (elapsed.asSeconds() < 1/60) //caps the system at 60 fps
-	//{
-	//    elapsed = clock.getElapsedTime();
-	//}
-    	//clock.restart();
+        /*sf::Time elapsed = clock.getElapsedTime();
+    	while (elapsed.asSeconds() < 1/60) //caps the system at 60 fps
+	{
+	    elapsed = clock.getElapsedTime();
+	}
+    	clock.restart();*/
     }   
 }
 
