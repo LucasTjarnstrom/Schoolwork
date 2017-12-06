@@ -40,8 +40,14 @@ string Start_Menu::process_events()
 	{
 	case sf::Event::Closed:
 	  {
-	    window.close();
+	    return "Quit";
 	  }
+	case sf::Event::KeyPressed:
+	    if (event.key.code == sf::Keyboard::Escape) //press escape -> close window
+	    {
+	    	return "Quit";
+	    } else if (event.key.code == sf::Keyboard::Return)
+		return "Start game";
 	case sf::Event::MouseButtonPressed:
 	  {
 	    if (event.mouseButton.button == sf::Mouse::Left)

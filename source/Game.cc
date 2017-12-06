@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <string>
+#include <exception>
 
 #include "Game.h"
 #include "Player.h"
@@ -13,7 +14,7 @@ using namespace std;
 
 Game::Game()
     : window(sf::VideoMode(1280, 720), "SFML works!"),
-      player{Player(12,12,0,0,"resources/image.png")}
+      player{Player(0,0,0,0,"resources/image.png")}
 {
     window.setFramerateLimit(60); // FPS set to 60
 }
@@ -24,7 +25,6 @@ void Game::run(string user_choice)
     {
       while (window.isOpen())
 	{
-	  player.set_x_velocity(0);
 	  process_events();
 	  update();
 	  render();
@@ -50,7 +50,7 @@ void Game::run(string user_choice)
 
   else
     {
-      cout << "This should not happen!" << endl;
+	throw logic_error("Start_Menu returns invalid string!");
       return;
     }
 }

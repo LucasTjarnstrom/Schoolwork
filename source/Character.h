@@ -43,6 +43,7 @@ protected:
     int vitality {};
     int current_health {};
     bool facing_right {}; // ska kanske vara private
+    bool faced_right {};
 };
 
 #endif 
