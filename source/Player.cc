@@ -22,10 +22,10 @@ sf::Sprite Player::draw_this()
 {
     sprite.setPosition(x_pos, y_pos);
     
-    if(faced_right != facing_right)
-	sprite.scale(-1.f,1.f);
+    //if(faced_right != facing_right)
+    //	sprite.scale(-1.f,1.f);
 
-    faced_right = facing_right;
+    //faced_right = facing_right;
     
     return sprite;
 }

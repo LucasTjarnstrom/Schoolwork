@@ -6,9 +6,13 @@
 #include <iostream>
 #include <string>
 #include <exception>
+#include <memory>
 
 #include "Game.h"
 #include "Player.h"
+#include "Map.h"
+#include "Floor.h"
+#include "Collision.h"
 
 using namespace std;
 
@@ -17,6 +21,9 @@ Game::Game()
       player{Player(0,0,0,0,"resources/image.png")}
 {
     window.setFramerateLimit(60); // FPS set to 60
+    
+    unique_ptr<Floor> temp = make_unique<Floor>(0,720,0,0,"resources/floor.png");
+    map.get_environments().push_back(move(temp));
 }
 
 void Game::run(string user_choice)
@@ -107,8 +114,14 @@ void Game::update()
 }
 void Game::render()
 {
+    if(Collision::BoundingBoxTest(player.draw_this(), map.get_environments().front()->draw_this()))
+    {
+	player.set_y_velocity(-1);
+    }
+
     window.clear(sf::Color(10,110,191));
     window.draw(player.draw_this());
+    window.draw(map.get_environments().front()->draw_this());
     window.display();
 
     cout << "Graphics updated" << endl;

@@ -7,6 +7,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Player.h"
+#include "Map.h"
 
 class Game
 {
@@ -22,6 +23,7 @@ private:
 
     sf::RenderWindow window {};
     Player player {};
+    Map map {};
     
     std::string movement {};
     bool move_left {false};
