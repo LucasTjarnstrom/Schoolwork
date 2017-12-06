@@ -18,10 +18,6 @@ class Start_Menu
   std::string process_events();
   void handle_player_input(sf::Mouse::Button button);
   void render();
-  void start_game();
-  void continue_game();
-  void show_high_score_list();
-  void quit();
 
   sf::RenderWindow window {};
   Button start_button {};

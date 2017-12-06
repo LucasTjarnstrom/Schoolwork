@@ -23,10 +23,12 @@ string Start_Menu::run()
       user_choice = process_events();
       if (user_choice != "")
 	{
+	  window.close();
 	  return user_choice;
 	}
       render();
     }
+  return "";
 }
 
 string Start_Menu::process_events()
@@ -36,16 +38,9 @@ string Start_Menu::process_events()
     {
       switch(event.type)
 	{
-	  //window closed
 	case sf::Event::Closed:
 	  {
 	    window.close();
-	  }
-	case sf::Event::MouseMoved:
-	  {
-	    cout << "new mouse x: " << event.mouseMove.x << endl;
-	    cout << "new mouse y: " << event.mouseMove.y << endl;
-	    break;
 	  }
 	case sf::Event::MouseButtonPressed:
 	  {
@@ -70,10 +65,6 @@ string Start_Menu::process_events()
 			 sf::Mouse::getPosition(window).y > 480 && sf::Mouse::getPosition(window).y < 530)
 		  {
 		    return "Quit";
-		  }
-		else
-		  {
-		    cout << "Nothing happens." << endl;
 		  }
 	      }
 	    break;

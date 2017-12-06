@@ -12,7 +12,7 @@ class Game
 {
 public:
     Game();
-    void run();
+    void run(std::string user_choice);
 
 private:
     void process_events();
