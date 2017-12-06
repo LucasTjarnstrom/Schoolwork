@@ -13,11 +13,11 @@ CCFLAGS = -std=c++17 -Wpedantic -Wall -Wextra -Weffc++ -I$(SFML_ROOT)/include
 SFMLFLAGS = -L$(SFML_ROOT)/lib -lsfml-graphics -lsfml-window -lsfml-system
 
 #Objektmoduler
-OBJECTS = build/main.o build/Drawable.o build/Character.o build/Player.o build/Button.o build/Level.o build/Game.o build/Start_Menu.o
+OBJECTS = build/main.o build/Drawable.o build/Character.o build/Player.o build/Button.o build/Level.o build/Game.o build/Start_Menu.o build/Environment.o build/Floor.o build/Wall.o build/Map.o
 
 # Huvudmål
 main: $(OBJECTS)
-	$(CCC) build/main.o build/Drawable.o build/Character.o build/Player.o build/Button.o build/Game.o build/Start_Menu.o -o main $(SFMLFLAGS)
+	$(CCC) build/main.o build/Drawable.o build/Character.o build/Player.o build/Button.o build/Game.o build/Start_Menu.o build/Environment.o build/Floor.o build/Wall.o build/Map.o -o main $(SFMLFLAGS)
 
 # Delmål
 build/main.o: $(SOURCE)/main.cc
@@ -43,6 +43,18 @@ build/Game.o : $(SOURCE)/Game.h $(SOURCE)/Game.cc
 
 build/Start_Menu.o : $(SOURCE)/Start_Menu.h $(SOURCE)/Start_Menu.cc
 	$(CCC) $(CCFLAGS) -c $(SOURCE)/Start_Menu.cc -o build/Start_Menu.o
+
+build/Environment.o : $(SOURCE)/Environment.h $(SOURCE)/Environment.cc
+	$(CCC) $(CCFLAGS) -c $(SOURCE)/Environment.cc -o build/Environment.o
+
+build/Floor.o : $(SOURCE)/Floor.h $(SOURCE)/Floor.cc
+	$(CCC) $(CCFLAGS) -c $(SOURCE)/Floor.cc -o build/Floor.o
+
+build/Wall.o : $(SOURCE)/Wall.h $(SOURCE)/Wall.cc
+	$(CCC) $(CCFLAGS) -c $(SOURCE)/Wall.cc -o build/Wall.o
+
+build/Map.o : $(SOURCE)/Map.h $(SOURCE)/Map.cc
+	$(CCC) $(CCFLAGS) -c $(SOURCE)/Map.cc -o build/Map.o
 
 .PHONY : clean
 clean:
