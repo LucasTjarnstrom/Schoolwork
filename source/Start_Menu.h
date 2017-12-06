@@ -1,26 +1,29 @@
 /*
-
  * Start_Menu.h
  */
 
 #ifndef START_MENU_H
 #define START_MENU_H
 
-class Start_Menu : public Level
+#include "Button.h"
+#include <string>
+
+class Start_Menu
 {
-public:
-  Start_Menu() = default; // default constructor
-  virtual ~Start_Menu() = default; // destructor
+ public:
+  Start_Menu();
+  std::string run();
 
-  Start_Menu(Start_Menu const& it); // copy constructor
-  Start_Menu(Start_Menu && it); // move constructor
-  Start_Menu& operator=(Start_Menu const& it); // copy assignment
-  Start_Menu& operator=(Start_Menu && it); // move assignment
+ private:
+  std::string process_events();
+  void handle_player_input(sf::Mouse::Button button);
+  void render();
 
-  void start_game();
-  void continue();
-  void show_high_score_list();
-  void quit();
+  sf::RenderWindow window {};
+  Button start_button {};
+  Button continue_button {};
+  Button high_score_button {};
+  Button quit_button {};
 };
 
 #endif

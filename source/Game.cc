@@ -18,14 +18,41 @@ Game::Game()
     window.setFramerateLimit(60); // FPS set to 60
 }
 
-void Game::run()
+void Game::run(string user_choice)
 {   
-    while (window.isOpen())
+  if ( user_choice == "Start game" )
     {
-	process_events();
-	update();
-	render();
-    }   
+      while (window.isOpen())
+	{
+	  player.set_x_velocity(0);
+	  process_events();
+	  update();
+	  render();
+	}   
+    }
+
+  else if ( user_choice == "Continue" )
+    {
+      cout << "Continue game" << endl;
+      return;
+    }
+
+  else if ( user_choice == "Show high scores" )
+    {
+      cout << "Show high scores" << endl;
+      return;
+    }
+  
+  else if(user_choice == "Quit" )
+    {
+      return;
+    }
+
+  else
+    {
+      cout << "This should not happen!" << endl;
+      return;
+    }
 }
 
 void Game::process_events()
