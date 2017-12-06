@@ -19,9 +19,8 @@ public:
 
     //void jump() override;
     //void attack() override;
-    //void move(std::string const &) override;
+    void move(std::string const &) override;
     //void take_damage(int) override;
-
 };
 
 #endif 

@@ -23,6 +23,7 @@ private:
     sf::RenderWindow window {};
     Player player {};
     
+    std::string movement {};
     bool move_left {false};
     bool move_right {false};
 

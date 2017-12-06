@@ -20,20 +20,11 @@ Game::Game()
 
 void Game::run()
 {   
-    //sf::Clock clock;
     while (window.isOpen())
     {
-	player.set_x_velocity(0);
 	process_events();
 	update();
 	render();
-	
-        /*sf::Time elapsed = clock.getElapsedTime();
-    	while (elapsed.asSeconds() < 1/60) //caps the system at 60 fps
-	{
-	    elapsed = clock.getElapsedTime();
-	}
-    	clock.restart();*/
     }   
 }
 
@@ -76,24 +67,21 @@ void Game::process_events()
 void Game::update()
 {
     if(move_left)
-	player.set_x_velocity(-1);
-    if(move_right)
-	player.set_x_velocity(1);
+	movement = "left";
+    else if(move_right)
+	movement = "right";
+    else
+	movement = "nothing";
 
-    player.set_x_pos(player.get_x_pos() + player.get_x_velocity());
-    
-    player.set_y_velocity(player.get_y_velocity() + player.get_y_acc()); //gravity
-    player.set_y_pos(player.get_y_pos() + player.get_y_velocity());
-    
+    player.move(movement);
+
     cout << "Physics updated" << endl;
    
 }
 void Game::render()
 {
-    player.get_sprite().setPosition(player.get_x_pos(), player.get_y_pos());
-
     window.clear(sf::Color(10,110,191));
-    window.draw(player.get_sprite());
+    window.draw(player.draw_this());
     window.display();
 
     cout << "Graphics updated" << endl;

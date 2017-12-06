@@ -37,3 +37,14 @@ int Character::get_current_health() const
 {
     return current_health;
 }
+
+void Character::set_facing_right(bool fr)
+{
+    facing_right = fr;
+}
+
+bool Character::get_facing_right()
+{
+    return facing_right;
+}
+
