@@ -6,6 +6,7 @@
 #define START_MENU_H
 
 #include "Button.h"
+#include "High_Score_List.h"
 #include <string>
 
 class Start_Menu

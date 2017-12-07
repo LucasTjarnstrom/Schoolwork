@@ -14,6 +14,7 @@
 #include "Floor.h"
 #include "Wall.h"
 #include "Collision.h"
+#include "High_Score_List.h"
 
 using namespace std;
 
@@ -49,7 +50,9 @@ void Game::run(string user_choice)
 
   else if ( user_choice == "Show high scores" )
     {
-      cout << "Show high scores" << endl;
+      window.close();
+      High_Score_List score {};
+      score.run();
       return;
     }
   
@@ -57,7 +60,6 @@ void Game::run(string user_choice)
     {
       return;
     }
-
   else
     {
 	throw logic_error("Start_Menu returns invalid string!");
