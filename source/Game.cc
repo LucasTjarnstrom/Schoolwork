@@ -12,18 +12,21 @@
 #include "Player.h"
 #include "Map.h"
 #include "Floor.h"
+#include "Wall.h"
 #include "Collision.h"
 
 using namespace std;
 
 Game::Game()
     : window(sf::VideoMode(1280, 720), "SFML works!"),
-      player{Player(0,0,0,0,"resources/player.png")}
+      player{Player(70,0,0,0,"resources/player.png")}
 {
     window.setFramerateLimit(60); // FPS set to 60
     
-    unique_ptr<Floor> temp = make_unique<Floor>(0,400,0,0,"resources/floor2.png");
-    map.get_environments().push_back(move(temp));
+    unique_ptr<Floor> temp1 = make_unique<Floor>(0,400,0,0,"resources/floor2.png");
+    map.get_environments().push_back(move(temp1));
+    unique_ptr<Wall> temp2 = make_unique<Wall>(0,-100,0,0,"resources/wall2.png");
+    map.get_environments().push_back(move(temp2));
 }
 
 void Game::run(string user_choice)
@@ -106,25 +109,38 @@ void Game::update()
 	movement = "right";
     else
 	movement = "nothing";
-
+  
     player.move(movement);
 
-    cout << "Physics updated" << endl;
+    //cout << "Physics updated" << endl;
    
 }
+
 void Game::render()
 {
-    if(Collision::BoundingBoxTest(player.draw_this(), map.get_environments().front()->draw_this()))
+
+  if (Collision::BoundingBoxTest(player.draw_this(), map.get_environments().front()->draw_this()) &&
+	Collision::BoundingBoxTest(player.draw_this(), map.get_environments().back()->draw_this()))
     {
 	player.set_y_velocity(-0.1);
+	cout << "Floor & Wall Collision!!" << endl;
+	player.set_x_velocity(12); // hur ska detta funka?
+    } else if(Collision::BoundingBoxTest(player.draw_this(), map.get_environments().front()->draw_this()))
+    {
+	player.set_y_velocity(-0.1);
+    }else if(Collision::BoundingBoxTest(player.draw_this(), map.get_environments().back()->draw_this()))
+    {
+        cout << "Wall Collision!!" << endl;
+	player.set_x_velocity(12); // hur ska detta funka?
     }
 
     window.clear(sf::Color(10,110,191));
     window.draw(player.draw_this());
     window.draw(map.get_environments().front()->draw_this());
+    window.draw(map.get_environments().back()->draw_this());
     window.display();
 
-    cout << "Graphics updated" << endl;
+    //cout << "Graphics updated" << endl;
 }
 
 void Game::handle_player_input(sf::Keyboard::Key key, bool is_pressed)

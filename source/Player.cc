@@ -5,6 +5,7 @@
 #include "Player.h"
 #include <string>
 #include <exception>
+#include <iostream>
 
 using namespace std;
 
@@ -16,16 +17,20 @@ Player::Player(int vit)
 Player::Player(double xp, double yp, double xs, double ys, string file_name)
     : Character(xp, yp, xs, ys, file_name)
 {
+    sprite.setOrigin(50,0);
 }
 
 sf::Sprite Player::draw_this()
 {
     sprite.setPosition(x_pos, y_pos);
     
-    //if(faced_right != facing_right) //funkar inte korrekt
-    //	sprite.scale(-1.f,1.f);
-
-    //faced_right = facing_right;
+    if(faced_right != facing_right) //funkar inte korrekt
+    	sprite.scale(-1.f,1.f);       // bör kanske implementera hjälpfunktioner flip och unflip
+        
+	// https://en.sfml-dev.org/forums/index.php?topic=7572.0
+    else
+	sprite.scale(1.f,1.f);
+    faced_right = facing_right;
     
     return sprite;
 }
