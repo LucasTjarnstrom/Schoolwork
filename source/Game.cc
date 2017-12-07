@@ -18,7 +18,7 @@ using namespace std;
 
 Game::Game()
     : window(sf::VideoMode(1280, 720), "SFML works!"),
-      player{Player(0,0,0,0,"resources/image.png")}
+      player{Player(0,0,0,0,"resources/player.png")}
 {
     window.setFramerateLimit(60); // FPS set to 60
     
@@ -133,4 +133,6 @@ void Game::handle_player_input(sf::Keyboard::Key key, bool is_pressed)
 	move_left = is_pressed;
     else if (key == sf::Keyboard::D)
 	move_right = is_pressed;
+    else if (key == sf::Keyboard::Space)
+	player.jump();
 }

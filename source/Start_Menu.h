@@ -10,20 +10,21 @@
 
 class Start_Menu
 {
- public:
-  Start_Menu();
-  std::string run();
+public:
+    Start_Menu();
+    std::string run();
 
- private:
-  std::string process_events();
-  void handle_player_input(sf::Mouse::Button button);
-  void render();
+private:
+    std::string process_events();
+    void handle_player_input(sf::Mouse::Button button);
+    void render();
 
-  sf::RenderWindow window {};
-  Button start_button {};
-  Button continue_button {};
-  Button high_score_button {};
-  Button quit_button {};
+    sf::RenderWindow window {};
+    Button start_button {};
+    Button continue_button {};
+    Button high_score_button {};
+    Button quit_button {};
+
 };
 
 #endif

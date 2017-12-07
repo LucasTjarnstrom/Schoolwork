@@ -11,13 +11,9 @@
 class Drawable
 {
 public:
-    Drawable() = default;                       // default constructor
-    virtual ~Drawable() = default;              // destructor
+    Drawable() = default;                                   // default constructor
+    virtual ~Drawable() = default;                          // destructor
     Drawable(double,double,double,double,std::string);      // constructor 
-    //Drawable(Drawable const & dr)               // copy constructor
-    //Drawable(Drawable && dr);                   // move constructor
-    //Drawable& operator= (Drawable const & it);  // copy assignment
-    //Drawable& operator= (Drawable && it);       // move assignment
     
     // Position
     virtual double get_x_pos() const;
@@ -46,7 +42,7 @@ protected:
     double y_pos {};
     double x_velocity {0};
     double y_velocity {0};
-    double y_acc {0.05}; // där g ska vara tyngdkonstanten av något slag i negativ y, fys. kord.p.
+    double y_acc {0.1}; // där g ska vara tyngdkonstanten av något slag i negativ y, fys. kord.p.
     double x_size {};
     double y_size {};
     sf::Texture texture {};

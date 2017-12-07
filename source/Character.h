@@ -33,7 +33,7 @@ public:
     virtual bool get_facing_right();
 
     // "Player operations" are pure virtual because the method implementation will not be uniform across subclasses
-    //virtual void jump() = 0; 
+    virtual void jump() = 0; 
     //virtual void attack() = 0;
     virtual void move(std::string const &) = 0;
     //virtual void take_damage(int) = 0;

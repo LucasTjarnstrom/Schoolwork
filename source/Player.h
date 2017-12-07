@@ -17,7 +17,7 @@ public:
 
     sf::Sprite draw_this() override;
 
-    //void jump() override;
+    void jump() override;
     //void attack() override;
     void move(std::string const &) override;
     //void take_damage(int) override;

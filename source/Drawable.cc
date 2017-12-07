@@ -22,7 +22,6 @@ Drawable::Drawable(double xp, double yp, double xs, double ys, string file_name)
     }
 
     sprite.setTexture(texture);
-
 }                
     
 // Position

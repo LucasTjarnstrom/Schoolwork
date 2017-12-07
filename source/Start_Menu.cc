@@ -5,14 +5,13 @@
 using namespace std;
 
 Start_Menu::Start_Menu()
-  : window(sf::VideoMode(1280, 720), "Start menu"),
+    : window(sf::VideoMode(1280, 720), "Start menu"),
     start_button{Button(12,12,0,0,"resources/button_start-game.png")},
-  continue_button{Button(12,12,0,0,"resources/button_continue.png")},
-  high_score_button{Button(12,12,0,0,"resources/button_high-scores.png")},
-  quit_button{Button(12,12,0,0,"resources/button_quit.png")}
-
+    continue_button{Button(12,12,0,0,"resources/button_continue.png")},
+    high_score_button{Button(12,12,0,0,"resources/button_high-scores.png")},
+    quit_button{Button(12,12,0,0,"resources/button_quit.png")}
 {
-  window.setFramerateLimit(60);
+    window.setFramerateLimit(60);    
 }
 
 string Start_Menu::run()
@@ -89,6 +88,7 @@ void Start_Menu::render()
   high_score_button.get_sprite().setPosition(560,420);
   quit_button.get_sprite().setPosition(560,480);
   window.clear(sf::Color(10,110,191));
+  //window.draw(background);
   window.draw(start_button.get_sprite());
   window.draw(continue_button.get_sprite());
   window.draw(high_score_button.get_sprite());

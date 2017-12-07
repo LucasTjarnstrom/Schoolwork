@@ -22,7 +22,7 @@ sf::Sprite Player::draw_this()
 {
     sprite.setPosition(x_pos, y_pos);
     
-    //if(faced_right != facing_right)
+    //if(faced_right != facing_right) //funkar inte korrekt
     //	sprite.scale(-1.f,1.f);
 
     //faced_right = facing_right;
@@ -50,4 +50,9 @@ void Player::move(std::string const & movement)
     x_pos += x_velocity;
     y_velocity += y_acc; //gravity
     y_pos += y_velocity;
+}
+
+void Player::jump()
+{
+    y_velocity = -4;
 }
