@@ -21,6 +21,10 @@ public:
     //void attack() override;
     void move(std::string const &) override;
     //void take_damage(int) override;
+
+//private:
+    int jump_counter {1}; // får ändras senare
+
 };
 
 #endif 

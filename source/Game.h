@@ -28,7 +28,7 @@ private:
     std::string movement {};
     bool move_left {false};
     bool move_right {false};
-
+    bool jump {false};
 };
 
 #endif

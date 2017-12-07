@@ -59,5 +59,9 @@ void Player::move(std::string const & movement)
 
 void Player::jump()
 {
-    y_velocity = -4;
+    if(jump_counter > 0)
+    {
+	y_velocity = -4;	
+	jump_counter--;
+    }
 }

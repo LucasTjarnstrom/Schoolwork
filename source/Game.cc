@@ -128,6 +128,7 @@ void Game::render()
     } else if(Collision::BoundingBoxTest(player.draw_this(), map.get_environments().front()->draw_this()))
     {
 	player.set_y_velocity(-0.1);
+	player.jump_counter = 1;
     }else if(Collision::BoundingBoxTest(player.draw_this(), map.get_environments().back()->draw_this()))
     {
         cout << "Wall Collision!!" << endl;
@@ -150,5 +151,8 @@ void Game::handle_player_input(sf::Keyboard::Key key, bool is_pressed)
     else if (key == sf::Keyboard::D)
 	move_right = is_pressed;
     else if (key == sf::Keyboard::Space)
-	player.jump();
+    {
+	if(is_pressed)
+	    player.jump();
+    }
 }
