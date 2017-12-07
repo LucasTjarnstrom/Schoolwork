@@ -22,7 +22,7 @@ Game::Game()
 {
     window.setFramerateLimit(60); // FPS set to 60
     
-    unique_ptr<Floor> temp = make_unique<Floor>(0,720,0,0,"resources/floor.png");
+    unique_ptr<Floor> temp = make_unique<Floor>(0,400,0,0,"resources/floor2.png");
     map.get_environments().push_back(move(temp));
 }
 
@@ -116,7 +116,7 @@ void Game::render()
 {
     if(Collision::BoundingBoxTest(player.draw_this(), map.get_environments().front()->draw_this()))
     {
-	player.set_y_velocity(-1);
+	player.set_y_velocity(-0.1);
     }
 
     window.clear(sf::Color(10,110,191));
