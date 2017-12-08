@@ -27,6 +27,8 @@ Game::Game()
     map.get_environments().push_back(move(temp1));
     unique_ptr<Wall> temp2 = make_unique<Wall>(0,-100,0,0,"resources/wall2.png");
     map.get_environments().push_back(move(temp2));
+    unique_ptr<Wall> temp3 = make_unique<Wall>(500,-100,0,0,"resources/wall2.png");
+    map.get_environments().push_back(move(temp3));
 }
 
 void Game::run(string user_choice)
@@ -118,29 +120,43 @@ void Game::update()
 
 void Game::render()
 {
-
   if (Collision::BoundingBoxTest(player.draw_this(), map.get_environments().front()->draw_this()) &&
 	Collision::BoundingBoxTest(player.draw_this(), map.get_environments().back()->draw_this()))
     {
 	player.set_y_velocity(-0.1);
 	cout << "Floor & Wall Collision!!" << endl;
-	player.set_x_velocity(12); // hur ska detta funka?
+	if (player.get_facing_right()) //Checks from what direction the character is colliding with the wall
+	  {
+	    player.set_x_pos(player.get_x_pos() - 5); //This value has to be >= the character's x-velocity.
+	  }
+	else
+	  {
+	    player.set_x_pos(player.get_x_pos() + 5); //This value has to be >= the character's x-velocity.
+	  }
     } else if(Collision::BoundingBoxTest(player.draw_this(), map.get_environments().front()->draw_this()))
     {
-	player.set_y_velocity(-0.1);
-	player.jump_counter = 1;
+      player.set_y_velocity(-0.1);
+      player.jump_counter = 1;
     }else if(Collision::BoundingBoxTest(player.draw_this(), map.get_environments().back()->draw_this()))
     {
-        cout << "Wall Collision!!" << endl;
-	player.set_x_velocity(12); // hur ska detta funka?
+      cout << "Wall Collision!!" << endl;
+      if (player.get_facing_right()) //from what direction is the character colliding with the wall?
+	{
+	  player.set_x_pos(player.get_x_pos() - 5); //This value has to be >= the character's x-velocity.
+	}
+      else
+	{
+	    player.set_x_pos(player.get_x_pos() + 5); //This value has to be >= the character's x-velocity.
+	  }
     }
 
     window.clear(sf::Color(10,110,191));
     window.draw(player.draw_this());
-    window.draw(map.get_environments().front()->draw_this());
-    window.draw(map.get_environments().back()->draw_this());
+    for (auto it = map.get_environments().begin(); it != map.get_environments().end(); it++)
+      {
+	window.draw((*it) -> draw_this());
+      }
     window.display();
-
     //cout << "Graphics updated" << endl;
 }
 
