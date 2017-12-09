@@ -51,9 +51,8 @@ void Game::run(string user_choice)
   else if ( user_choice == "Show high scores" )
     {
       window.close();
-      High_Score_List score {};
-      score.run();
-      return;
+      High_Score_List high_score_list {};
+      high_score_list.run();
     }
   
   else if(user_choice == "Quit" )

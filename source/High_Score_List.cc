@@ -51,9 +51,10 @@ void High_Score_List::process_events()
 		   sf::Mouse::getPosition(window).y > 0 && sf::Mouse::getPosition(window).y < 100)
 		  {
 		    window.close();
-		    Start_Menu menu {};
-		    cout << "Menu" << endl;
-		    menu.run();
+		    Start_Menu start_menu {};
+		    string user_choice = start_menu.run();
+		    Game game {};
+		    game.run(user_choice);
 		  }
 	      }
 	    break;
