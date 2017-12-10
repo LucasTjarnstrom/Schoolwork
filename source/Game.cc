@@ -22,6 +22,11 @@ Game::Game()
       player{Player(70,0,0,0,"resources/player.png")}
 {
     window.setFramerateLimit(60); // FPS set to 60
+
+    //player_health.setFont(font);
+    player_health.setString("Hello");
+    player_health.setCharacterSize(24);
+
     
     unique_ptr<Floor> temp1 = make_unique<Floor>(0,400,0,0,"resources/floor2.png");
     map.get_environments().push_back(move(temp1));
@@ -152,6 +157,7 @@ void Game::render()
 
     window.clear(sf::Color(10,110,191));
     window.draw(player.draw_this());
+    window.draw(player_health);
     for (auto it = map.get_environments().begin(); it != map.get_environments().end(); it++)
       {
 	window.draw((*it) -> draw_this());

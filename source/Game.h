@@ -24,6 +24,8 @@ private:
     sf::RenderWindow window {};
     Player player {};
     Map map {};
+    sf::Text player_health {};
+    sf::Text player_attack {};
     
     std::string movement {};
     bool move_left {false};
