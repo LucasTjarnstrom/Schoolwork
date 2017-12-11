@@ -75,3 +75,27 @@ int Player::get_weapon_damage() const
 {
     return weapon_damage;
 }
+
+void Player::is_colliding() 
+{
+    y_velocity = -0.1;
+    jump_counter = 1;
+}
+
+void Player::is_colliding(string arg)
+{
+    if(arg == "floor")
+    {
+	y_velocity = -0.1;
+	jump_counter = 1;
+    } else if("wall"){
+	if(facing_right)
+	    x_pos -= 5;
+	else
+	    x_pos += 5;
+    } else if("floor_wall")
+	if(facing_right)
+	    x_pos -= 5;
+	else
+	    x_pos += 5;
+}

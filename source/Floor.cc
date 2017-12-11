@@ -18,3 +18,7 @@ sf::Sprite Floor::draw_this()
     return sprite;
 }
 
+void Floor::is_colliding()
+{
+    return;
+}

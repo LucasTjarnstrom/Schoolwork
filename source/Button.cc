@@ -17,3 +17,8 @@ sf::Sprite Button::draw_this()
 {
   return sprite;
 }
+
+void Button::is_colliding()
+{
+    return;
+}

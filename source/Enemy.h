@@ -19,6 +19,7 @@ public:
     //void attack() override;
     void move(std::string const &) override;
     //void take_damage(int) override;
+    void is_colliding() override;
 };
 
 #endif 
