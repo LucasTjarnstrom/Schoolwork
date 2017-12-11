@@ -46,3 +46,8 @@ void Enemy::jump()
 {
     y_velocity = -4;
 }
+
+void Enemy::is_colliding()
+{
+    return;
+}

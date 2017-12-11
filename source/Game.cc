@@ -157,27 +157,12 @@ void Game::render()
 			if (dynamic_cast<Floor*> ((*it2).get()) != nullptr) // Checks if the other object is a Floor
 			{
 			    //----------Colliding with both a Floor and a Wall----------
-			    if (player.get_facing_right()) //Checks from what direction the character is colliding with the wall
-			    {
-				player.set_x_pos(player.get_x_pos() - 5); //This value has to be >= the character's x-velocity.
-				player.set_current_health(player.get_current_health() - 1);
-			    }
-			    else
-			    {
-				player.set_x_pos(player.get_x_pos() + 5); //This value has to be >= the character's x-velocity.
-			    }
+			    player.is_colliding("floor_wall");
 			}
 			else
 			{
 			    //----------Colliding with a Wall----------
-			    if (player.get_facing_right()) //Checks from what direction the character is colliding with the wall
-			    {
-				player.set_x_pos(player.get_x_pos() - 5); //This value has to be >= the character's x-velocity.
-			    }
-			    else
-			    {
-				player.set_x_pos(player.get_x_pos() + 5); //This value has to be >= the character's x-velocity.
-			    }
+			    player.is_colliding("wall");
 			}
 		    }
 		}
@@ -185,8 +170,7 @@ void Game::render()
 	    else
 	    {
 		//----------Colliding with a Floor----------
-		player.set_y_velocity(-0.1);
-		player.jump_counter = 1;
+		player.is_colliding("floor");
 	    }
 	}
     }
