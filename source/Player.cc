@@ -39,12 +39,12 @@ void Player::move(std::string const & movement)
 {
     if (movement == "left")
     {
-	x_velocity = -1;
+	x_velocity = -5;
 	facing_right = false;
     }
     else if (movement == "right")
     {
-	x_velocity = 1;
+	x_velocity = 5;
 	facing_right = true;
     }
     else if (movement == "nothing")
