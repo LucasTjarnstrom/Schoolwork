@@ -232,7 +232,12 @@ void Game::render()
 	    }
 	}
     }
-    
+  
+  if(attacking) //fulhax extravaganza  
+      if (Collision::BoundingBoxTest(player.attack(1), enemies.front()->draw_this())){
+	  enemies.front()->set_y_velocity(enemies.front()->get_y_velocity() + -0.5);
+      }
+	  
     window.clear(sf::Color(10,110,191));
     window.draw(player.draw_this());
     for (auto it = enemies.begin(); it != enemies.end(); it++)
