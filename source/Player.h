@@ -6,6 +6,7 @@
 #define PLAYER_H
 
 #include "Character.h"
+#include "Player_Attack.h"
 #include <string>
 
 class Player : public Character
@@ -21,17 +22,16 @@ public:
     int get_weapon_damage() const;
 
     void jump() override;
-    //void attack() override;
+    void attack() override;
+    sf::Sprite attack(int);
     void move(std::string const &) override;
     //void take_damage(int) override;
-    void is_colliding() override;
-    void is_colliding(std::string);
+    void is_colliding(std::string) override;
 
 //private:
     int jump_counter {1}; // får ändras senare
     int weapon_damage {};
-    
-
+    Player_Attack attack_ {};
 };
 
 #endif 

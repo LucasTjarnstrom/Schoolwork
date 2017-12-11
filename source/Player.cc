@@ -15,7 +15,8 @@ Player::Player(int vit)
 }
 
 Player::Player(double xp, double yp, double xs, double ys, string file_name)
-    : Character(xp, yp, xs, ys, file_name)
+    : Character(xp, yp, xs, ys, file_name),
+      attack_(0,0,0,0,"resources/player_attack.png")
 {
     sprite.setOrigin(50,0);
 }
@@ -76,12 +77,6 @@ int Player::get_weapon_damage() const
     return weapon_damage;
 }
 
-void Player::is_colliding() 
-{
-    y_velocity = -0.1;
-    jump_counter = 1;
-}
-
 void Player::is_colliding(string arg)
 {
     if(arg == "floor")
@@ -98,4 +93,19 @@ void Player::is_colliding(string arg)
 	    x_pos -= 5;
 	else
 	    x_pos += 5;
+}
+
+void Player::attack()
+{
+    cout << "Fel attack!" << endl;
+}
+
+sf::Sprite Player::attack(int)
+{
+    if(facing_right)
+	attack_.get_sprite().setPosition(x_pos + 50, y_pos+25);
+    else
+	attack_.get_sprite().setPosition(x_pos - 100, y_pos+25);
+
+    return attack_.get_sprite();
 }

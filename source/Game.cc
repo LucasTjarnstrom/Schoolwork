@@ -214,26 +214,12 @@ void Game::render()
 			  if (dynamic_cast<Floor*> ((*it2).get()) != nullptr) // Checks if the other object is a Floor
 			    {
 			      //----------Colliding with both a Floor and a Wall----------
-			      if ((*enemyit)->get_facing_right()) //Checks from what direction the character is colliding with the wall
-				{
-				  (*enemyit)->set_x_pos((*enemyit)->get_x_pos() - 5); //This value has to be >= the character's x-velocity.
-				}
-			      else
-				{
-				  (*enemyit)->set_x_pos((*enemyit)->get_x_pos() + 5); //This value has to be >= the character's x-velocity.
-				}
+				(*enemyit)->is_colliding("wall");
 			    }
 			  else
 			    {
 			      //----------Colliding with a Wall----------
-			      if ((*enemyit)->get_facing_right()) //Checks from what direction the character is colliding with the wall
-				{
-				  (*enemyit)->set_x_pos((*enemyit)->get_x_pos() - 5); //This value has to be >= the character's x-velocity.
-				}
-			      else
-				{
-				  (*enemyit)->set_x_pos((*enemyit)->get_x_pos() + 5); //This value has to be >= the character's x-velocity.
-				}
+				(*enemyit)->is_colliding("wall");
 			    }
 			}
 		    }
@@ -241,12 +227,11 @@ void Game::render()
 	      else
 		{
 		  //----------Colliding with a Floor----------
-		  (*enemyit)->set_y_velocity(-0.1);
+		    (*enemyit)->is_colliding("floor");
 		}
 	    }
 	}
     }
-    
     
     window.clear(sf::Color(10,110,191));
     window.draw(player.draw_this());
@@ -258,9 +243,15 @@ void Game::render()
     {
 	window.draw((*it) -> draw_this());
     }
+
+    if(attacking)
+	window.draw(player.attack(1));
+
+
+
+
     window.draw(draw_player_health());
     window.draw(draw_player_attack());
-
     window.display();
     //cout << "Graphics updated" << endl;
 }
@@ -275,7 +266,14 @@ void Game::handle_player_input(sf::Keyboard::Key key, bool is_pressed)
     {
 	if(is_pressed)
 	    player.jump();
+    } else if (key == sf::Keyboard::W)
+    {
+	if(is_pressed){
+	    cout << "Magic Missile!" << endl; // player.attack();
+	}
+	attacking = is_pressed;
     }
+
 }
 
 sf::Text Game::draw_player_health()
