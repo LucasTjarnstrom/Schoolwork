@@ -6,6 +6,8 @@
 #include "High_Score_List.h"
 #include <iostream>
 #include <string>
+#include <vector>
+#include <fstream>
 
 
 using namespace std;
@@ -73,4 +75,25 @@ void High_Score_List::render()
   window.draw(splash_screen.get_sprite());
   window.draw(return_button.get_sprite());
   window.display();
+}
+
+
+void High_Score_List::add_entry(unique_ptr<Entry> entry)
+{
+  //entries.push_back(move(entry));
+  
+  string new_entry = entry->to_string();
+
+  ofstream outfile;
+  outfile.open("Highscorelist.txt");
+  outfile << new_entry;
+
+}
+
+void High_Score_List::show_score()
+{
+
+  ifstream infile;
+  infile.open("Highscorelist.txt");
+
 }

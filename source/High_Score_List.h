@@ -8,13 +8,15 @@
 #include "Game.h"
 #include "Start_Menu.h"
 #include "Button.h"
+#include "Entry.h"
 #include <string>
 #include <memory>
+#include <vector>
 
 class High_Score_List : public Game
 {
 public:
-  High_Score_List(); // default constructor
+  High_Score_List(); // constructor
   //High_Score_List(std::unique_ptr<vector<Entry>>); // constructor
 
   void run();
@@ -24,13 +26,13 @@ public:
   // High_Score_List& operator=(High_Score_List const& it); // copy assignment
   // High_Score_List& operator=(High_Score_List && it); // move assignment
 
-  //void show_score();
-  //void add_entry(std::unique_ptr<Entry>);
+  void show_score();
+  void add_entry(std::unique_ptr<Entry> entry);
   //void save_to_file(std::string);
   //void load_to_file(std::string);
 
 protected:
-  //entries vector<std::unique_ptr<Entry>>;
+  std::vector<std::unique_ptr<Entry>> entries;
 
   sf::RenderWindow window{};
   Button splash_screen {};
@@ -38,6 +40,7 @@ protected:
 
   void render();
   void process_events();
+
 };
 
 #endif 
