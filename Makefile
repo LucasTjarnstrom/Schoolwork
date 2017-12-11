@@ -13,11 +13,11 @@ CCFLAGS = -std=c++17 -Wpedantic -Wall -Wextra -Weffc++ -I$(SFML_ROOT)/include
 SFMLFLAGS = -L$(SFML_ROOT)/lib -lsfml-graphics -lsfml-window -lsfml-system
 
 #Objektmoduler
-OBJECTS = build/main.o build/Drawable.o build/Character.o build/Player.o build/Button.o build/Level.o build/Game.o build/Start_Menu.o build/Environment.o build/Floor.o build/Wall.o build/Map.o build/Collision.o
+OBJECTS = build/main.o build/Drawable.o build/Character.o build/Player.o build/Button.o build/Level.o build/Game.o build/Start_Menu.o build/Environment.o build/Floor.o build/Wall.o build/Map.o build/Collision.o build/High_Score_List.o
 
 # Huvudmål
 main: $(OBJECTS)
-	$(CCC) build/main.o build/Drawable.o build/Character.o build/Player.o build/Button.o build/Game.o build/Start_Menu.o build/Environment.o build/Floor.o build/Wall.o build/Map.o build/Collision.o -o main $(SFMLFLAGS)
+	$(CCC) build/main.o build/Drawable.o build/Character.o build/Player.o build/Button.o build/Game.o build/Start_Menu.o build/Environment.o build/Floor.o build/Wall.o build/Map.o build/Collision.o build/High_Score_List.o -o main $(SFMLFLAGS)
 
 # Delmål
 build/main.o: $(SOURCE)/main.cc
@@ -58,6 +58,9 @@ build/Map.o : $(SOURCE)/Map.h $(SOURCE)/Map.cc
 
 build/Collision.o : $(SOURCE)/Collision.h $(SOURCE)/Collision.cc
 	$(CCC) $(CCFLAGS) -c $(SOURCE)/Collision.cc -o build/Collision.o
+
+build/High_Score_List.o : $(SOURCE)/High_Score_List.h $(SOURCE)/High_Score_List.cc
+	$(CCC) $(CCFLAGS) -c $(SOURCE)/High_Score_List.cc -o build/High_Score_List.o
 
 .PHONY : clean
 clean:

@@ -17,6 +17,7 @@ Start_Menu::Start_Menu()
 string Start_Menu::run()
 {
   string user_choice{};
+  process_events();
   while (window.isOpen())
     {
       user_choice = process_events();
