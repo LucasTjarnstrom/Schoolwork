@@ -48,3 +48,12 @@ bool Character::get_facing_right()
     return facing_right;
 }
 
+void Character::set_strength(int str)
+{
+    strength = str;
+}
+
+int Character::get_strength() const
+{
+    return strength;
+}

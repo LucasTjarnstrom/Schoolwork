@@ -32,6 +32,9 @@ public:
     virtual void set_facing_right(bool);
     virtual bool get_facing_right();
 
+    virtual void set_strength(int);
+    virtual int get_strength() const;
+
     // "Player operations" are pure virtual because the method implementation will not be uniform across subclasses
     virtual void jump() = 0; 
     //virtual void attack() = 0;

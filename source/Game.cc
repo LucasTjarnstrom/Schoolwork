@@ -7,6 +7,7 @@
 #include <string>
 #include <exception>
 #include <memory>
+#include <sstream>
 
 #include "Game.h"
 #include "Player.h"
@@ -19,14 +20,29 @@ using namespace std;
 
 Game::Game()
     : window(sf::VideoMode(1280, 720), "SFML works!"),
-      player{Player(70,0,0,0,"resources/player.png")}
+      player{Player(200,150,0,0,"resources/player.png")}
 {
+    player.set_vitality(10);
+    player.set_current_health(player.get_vitality());
+    player.set_strength(1);
+
     window.setFramerateLimit(60); // FPS set to 60
 
-    //player_health.setFont(font);
-    player_health.setString("Hello");
-    player_health.setCharacterSize(24);
+    // Font
+    arial.loadFromFile("resources/arial.ttf");
+    
+    // Setting up GUI for displaying player's health
+    player_health.setFont(arial);
+    player_health.setCharacterSize(30);
+    player_health.setStyle(sf::Text::Bold);
+    player_health.setColor(sf::Color(255, 255, 255));
 
+    // Setting up GUI for displaying player's strength + weapon damage
+    player_attack.setFont(arial);
+    player_attack.setCharacterSize(30);
+    player_attack.setStyle(sf::Text::Bold);
+    player_attack.setColor(sf::Color(255, 255, 255));
+    player_attack.setPosition(960,0);
     
     unique_ptr<Floor> temp1 = make_unique<Floor>(0,400,0,0,"resources/floor2.png");
     map.get_environments().push_back(move(temp1));
@@ -133,6 +149,7 @@ void Game::render()
 	if (player.get_facing_right()) //Checks from what direction the character is colliding with the wall
 	  {
 	    player.set_x_pos(player.get_x_pos() - 5); //This value has to be >= the character's x-velocity.
+	    player.set_current_health(player.get_current_health() - 1);
 	  }
 	else
 	  {
@@ -157,11 +174,14 @@ void Game::render()
 
     window.clear(sf::Color(10,110,191));
     window.draw(player.draw_this());
-    window.draw(player_health);
     for (auto it = map.get_environments().begin(); it != map.get_environments().end(); it++)
       {
 	window.draw((*it) -> draw_this());
       }
+
+    window.draw(draw_player_health());
+    window.draw(draw_player_attack());
+
     window.display();
     //cout << "Graphics updated" << endl;
 }
@@ -177,4 +197,23 @@ void Game::handle_player_input(sf::Keyboard::Key key, bool is_pressed)
 	if(is_pressed)
 	    player.jump();
     }
+}
+
+sf::Text Game::draw_player_health()
+{
+    stringstream ss;
+    ss << player.get_current_health() << "/" << player.get_vitality();
+    player_health.setString(ss.str());
+    player_health.setPosition(player.get_x_pos() - 40, player.get_y_pos() - 40);
+
+    return player_health;
+}
+
+sf::Text Game::draw_player_attack()
+{
+    stringstream ss;
+    ss << "Your attack is: " << player.get_strength() << " + " << player.get_weapon_damage();
+    player_attack.setString(ss.str());
+
+    return player_attack;
 }

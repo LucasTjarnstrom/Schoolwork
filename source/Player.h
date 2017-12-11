@@ -17,6 +17,9 @@ public:
 
     sf::Sprite draw_this() override;
 
+    void set_weapon_damage(int);
+    int get_weapon_damage() const;
+
     void jump() override;
     //void attack() override;
     void move(std::string const &) override;
@@ -24,6 +27,8 @@ public:
 
 //private:
     int jump_counter {1}; // får ändras senare
+    int weapon_damage {};
+    
 
 };
 

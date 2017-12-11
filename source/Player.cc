@@ -65,3 +65,13 @@ void Player::jump()
 	jump_counter--;
     }
 }
+
+void Player::set_weapon_damage(int dm)
+{
+    weapon_damage = dm;
+}
+
+int Player::get_weapon_damage() const
+{
+    return weapon_damage;
+}
