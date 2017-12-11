@@ -142,48 +142,49 @@ void Game::update()
 
 void Game::render()
 {
+    for (auto it = map.get_environments().begin(); it != map.get_environments().end(); it++)
     {
-      if (Collision::BoundingBoxTest(player.draw_this(), (*it)->draw_this())) //Checks if player is colliding with anything
+	if (Collision::BoundingBoxTest(player.draw_this(), (*it)->draw_this())) //Checks if player is colliding with anything
 	{
-	  if (dynamic_cast<Wall*> ((*it).get()) != nullptr) // Checks if player is colliding with a Wall
+	    if (dynamic_cast<Wall*> ((*it).get()) != nullptr) // Checks if player is colliding with a Wall
 	    {
-	      for (auto it2 = map.get_environments().begin(); it2 != map.get_environments().end(); it2++)
+		for (auto it2 = map.get_environments().begin(); it2 != map.get_environments().end(); it2++)
 		{
-		  if (Collision::BoundingBoxTest(player.draw_this(), (*it2)->draw_this())) //Checks if player is colliding with another object
+		    if (Collision::BoundingBoxTest(player.draw_this(), (*it2)->draw_this())) //Checks if player is colliding with another object
 		    {
-		      if (dynamic_cast<Floor*> ((*it2).get()) != nullptr) // Checks if the other object is a Floor
+			if (dynamic_cast<Floor*> ((*it2).get()) != nullptr) // Checks if the other object is a Floor
 			{
-			  //----------Colliding with both a Floor and a Wall----------
-			  if (player.get_facing_right()) //Checks from what direction the character is colliding with the wall
+			    //----------Colliding with both a Floor and a Wall----------
+			    if (player.get_facing_right()) //Checks from what direction the character is colliding with the wall
 			    {
-			      player.set_x_pos(player.get_x_pos() - 5); //This value has to be >= the character's x-velocity.
-			      player.set_current_health(player.get_current_health() - 1);
+				player.set_x_pos(player.get_x_pos() - 5); //This value has to be >= the character's x-velocity.
+				player.set_current_health(player.get_current_health() - 1);
 			    }
-			  else
+			    else
 			    {
-			      player.set_x_pos(player.get_x_pos() + 5); //This value has to be >= the character's x-velocity.
+				player.set_x_pos(player.get_x_pos() + 5); //This value has to be >= the character's x-velocity.
 			    }
 			}
-		      else
+			else
 			{
-			  //----------Colliding with a Wall----------
-			  if (player.get_facing_right()) //Checks from what direction the character is colliding with the wall
+			    //----------Colliding with a Wall----------
+			    if (player.get_facing_right()) //Checks from what direction the character is colliding with the wall
 			    {
-			      player.set_x_pos(player.get_x_pos() - 5); //This value has to be >= the character's x-velocity.
+				player.set_x_pos(player.get_x_pos() - 5); //This value has to be >= the character's x-velocity.
 			    }
-			  else
+			    else
 			    {
-			      player.set_x_pos(player.get_x_pos() + 5); //This value has to be >= the character's x-velocity.
+				player.set_x_pos(player.get_x_pos() + 5); //This value has to be >= the character's x-velocity.
 			    }
 			}
 		    }
 		}
 	    }
-	  else
+	    else
 	    {
-	      //----------Colliding with a Floor----------
-	      player.set_y_velocity(-0.1);
-	      player.jump_counter = 1;
+		//----------Colliding with a Floor----------
+		player.set_y_velocity(-0.1);
+		player.jump_counter = 1;
 	    }
 	}
     }
@@ -191,9 +192,9 @@ void Game::render()
     window.clear(sf::Color(10,110,191));
     window.draw(player.draw_this());
     for (auto it = map.get_environments().begin(); it != map.get_environments().end(); it++)
-      {
+    {
 	window.draw((*it) -> draw_this());
-      }
+    }
 
     window.draw(draw_player_health());
     window.draw(draw_player_attack());
