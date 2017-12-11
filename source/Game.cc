@@ -51,6 +51,8 @@ Game::Game()
     map.get_environments().push_back(move(temp2));
     unique_ptr<Wall> temp3 = make_unique<Wall>(500,-100,0,0,"resources/wall2.png");
     map.get_environments().push_back(move(temp3));
+
+
 }
 
 void Game::run(string user_choice)
