@@ -60,9 +60,7 @@ Game::Game()
     enemy_health.setColor(sf::Color(255, 255, 255));
     enemy_health.setPosition(400,400);
     
-    map.create_environment("floor",0,710,0,0);
-    map.create_environment("floor",500,710,0,0);
-    map.create_environment("floor",1000,710,0,0);
+    map.create_environment("floor_1280px",0,690,0,0);
     map.create_environment("wall",1270,210,0,0);
     map.create_environment("wall",0,210,0,0);
 
