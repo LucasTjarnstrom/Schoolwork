@@ -38,6 +38,11 @@ void Map::create_environment(std::string type, int xp, int yp, int xs, int ys)
       unique_ptr<Wall> temp = make_unique<Wall> (xp,yp,xs,ys,"resources/wall_100px.png");
       add_environment(move(temp));
     }
+  else if (type == "wall_20px")
+    {
+      unique_ptr<Wall> temp = make_unique<Wall> (xp,yp,xs,ys,"resources/wall_20px.png");
+      add_environment(move(temp));
+    }
   else if (type == "ceiling")
     {
       unique_ptr<Ceiling> temp = make_unique<Ceiling> (xp,yp,xs,ys,"resources/floor2.png");
