@@ -5,6 +5,7 @@
 #include "Enemy.h"
 #include <string>
 #include <exception>
+#include <sstream>
 
 using namespace std;
 
@@ -12,6 +13,10 @@ Enemy::Enemy(double xp, double yp, double xs, double ys, string file_name)
     : Character(xp, yp, xs, ys, file_name)
 {
     sprite.setOrigin(50,0);
+
+    health_text.setCharacterSize(30);
+    health_text.setStyle(sf::Text::Bold);
+    health_text.setColor(sf::Color(255, 255, 255));
 }
 
 sf::Sprite Enemy::draw_this()
@@ -71,8 +76,17 @@ sf::Sprite Enemy::attack()
     return sprite;
 }
 
-// sf::Text Enemy::health_to_text()
-// {
-//     return health_text;
+sf::Text Enemy::health_to_text()
+{
+    stringstream ss;
+    ss << current_health << "/" << vitality;
+    health_text.setString(ss.str());
+    health_text.setPosition(x_pos - 30, y_pos - 40);
+    
+    return health_text;   
+}
 
-// }
+void Enemy::set_font(sf::Font fn)
+{
+    health_text.setFont(fn);
+}

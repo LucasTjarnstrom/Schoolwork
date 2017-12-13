@@ -50,11 +50,11 @@ Game::Game()
     player_attack.setPosition(960,0);
 
     // Setting up testing for enemy hp
-    enemy_health.setFont(arial);
-    enemy_health.setCharacterSize(30);
-    enemy_health.setStyle(sf::Text::Bold);
-    enemy_health.setColor(sf::Color(255, 255, 255));
-    enemy_health.setPosition(400,400);
+    // enemy_health.setFont(arial);
+    // enemy_health.setCharacterSize(30);
+    // enemy_health.setStyle(sf::Text::Bold);
+    // enemy_health.setColor(sf::Color(255, 255, 255));
+    // enemy_health.setPosition(400,400);
     
     map.create_environment("floor",0,710,0,0);
     map.create_environment("floor",500,710,0,0);
@@ -69,6 +69,16 @@ Game::Game()
     enemies.front()->set_vitality(10);
     enemies.front()->set_current_health(1);
     enemies.back()->set_current_health(1);
+    enemies.back()->set_vitality(10);
+
+    // set enemies' font
+    if(!enemies.empty())
+    {
+      for (auto it = enemies.begin(); it != enemies.end(); it++)
+      {
+	  (*it) -> set_font(arial);
+      }
+    }
     
 }
 
@@ -321,9 +331,7 @@ void Game::render()
 	  window.draw(player.attack());
   window.draw(draw_player_health());
   window.draw(draw_player_attack());
-  if(!enemies.empty())
-      window.draw(draw_enemy_health());
-  //window.draw(enemy_health);
+  draw_enemy_health();
   window.display();
   //cout << "Graphics updated" << endl;
 }
@@ -363,13 +371,15 @@ sf::Text Game::draw_player_attack()
     return player_attack;
 }
 
-sf::Text Game::draw_enemy_health()
+void Game::draw_enemy_health()
 {
-    stringstream ss;
-    ss << enemies.front()->get_current_health() << "/" << enemies.front()->get_vitality();
-    enemy_health.setString(ss.str());
-    enemy_health.setPosition(enemies.front()->get_x_pos() - 30, enemies.front()->get_y_pos() - 40);
-    
-    return player_health;
+    // if(!enemies.empty())
+    // 	for (auto it = enemies.begin(); it != enemies.end(); it++)
+    // 	{
+    // 	    window.draw((*it) -> health_to_text());
+    // 	}
+
+    // if(!enemies.empty())
+    //     window.draw(enemies.front()->health_to_text());
 
 }

@@ -21,9 +21,12 @@ public:
     //void take_damage(int) override;
     void is_colliding(std::string) override;
 
-    //sf::Text health_to_text();
+    sf::Text health_to_text();
+    void set_font(sf::Font);
 
-//private:
-//    sf::Text health_text {};
+private:
+    sf::Text health_text {};
+
+};
 
 #endif 
