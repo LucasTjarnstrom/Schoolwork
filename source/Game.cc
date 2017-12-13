@@ -23,7 +23,7 @@
 using namespace std;
 
 Game::Game()
-    : window(sf::VideoMode(1280, 720), "SFML works!"),
+    : window(sf::VideoMode(1280, 720), "Snoppenheimer"),
       player{Player(200,550,0,0,"resources/player.png")}
 
 {
@@ -65,7 +65,22 @@ Game::Game()
     map.create_environment("floor",1000,710,0,0);
     map.create_environment("wall",1270,210,0,0);
     map.create_environment("wall",0,210,0,0);
-    map.create_environment("ceiling",0,500,0,0);	
+
+    map.create_environment("wall_100px",600,620,0,0);
+    map.create_environment("floor_100px",600,615,0,0);
+    map.create_environment("wall_100px",690,620,0,0);
+
+    map.create_environment("ceiling",0,550,0,0);
+    map.create_environment("floor",0,540,0,0);
+    map.create_environment("wall_20px",490,540,0,0);
+
+    map.create_environment("floor",300,360,0,0);
+    map.create_environment("ceiling",300,370,0,0);
+    map.create_environment("wall_20px",290,360,0,0);
+
+    map.create_environment("wall_100px",190,450,0,0);
+    map.create_environment("floor_100px",10,440,0,0);
+    map.create_environment("floor_100px",100,440,0,0);
 
     create_enemy("ghoul",200,550,0,0);
 

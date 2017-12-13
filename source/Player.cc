@@ -25,10 +25,8 @@ sf::Sprite Player::draw_this()
 {
     sprite.setPosition(x_pos, y_pos);
     
-    if(faced_right != facing_right) //funkar inte korrekt
-    	sprite.scale(-1.f,1.f);       // bör kanske implementera hjälpfunktioner flip och unflip
-        
-	// https://en.sfml-dev.org/forums/index.php?topic=7572.0
+    if(faced_right != facing_right) 
+    	sprite.scale(-1.f,1.f);   
     else
 	sprite.scale(1.f,1.f);
     faced_right = facing_right;
@@ -62,7 +60,7 @@ void Player::jump()
 {
     if(jump_counter > 0)
     {
-	y_velocity = -4;	
+	y_velocity = -7;	
 	jump_counter--;
     }
 }
@@ -81,7 +79,7 @@ void Player::is_colliding(string arg)
 {
   if(arg == "floor")
     {
-      y_velocity = -0.1;
+      y_velocity = -0.2;
       jump_counter = 1;
     }
   else if(arg == "wall")

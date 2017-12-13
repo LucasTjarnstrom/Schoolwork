@@ -51,7 +51,7 @@ void Enemy::is_colliding(string arg)
 {
     if(arg == "floor")
     {
-	y_velocity = -0.1;
+	y_velocity = -0.2;
     } else if(arg == "wall"){
 	if(facing_right)
 	    x_pos -= 5;
