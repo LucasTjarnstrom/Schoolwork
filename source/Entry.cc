@@ -4,14 +4,14 @@
 
 #include <SFML/Graphics.hpp>
 #include "Entry.h"
-#include <stringstream>
+#include <sstream>
+#include <ostream>
 
 using namespace std;
 
 Entry::Entry()
   : score{}, name{}, date{}
 {
-  date = return_time();
 }
 
 
@@ -21,12 +21,16 @@ string Entry::return_time()
   tm * now = localtime(&t);
   stringstream ss;
   ss << (now->tm_year + 1900) << "-" << (now->tm_mon + 1) << "-" << (now->tm_mday);
-  return ss;
+  return ss.str();
 }
 
 string Entry::to_string()
 {
   stringstream ss;
   ss << "CoolKille" << " " << "Technomancer" << " " << "-3" << " " << return_time();
-  return ss;
+  //ss << name << " " << score << " " << return_time();
+  return ss.str();
 }
+
+
+

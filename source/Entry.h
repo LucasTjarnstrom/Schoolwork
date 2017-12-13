@@ -5,10 +5,9 @@
 #ifndef ENTRY_H
 #define ENTRY_H
 
-#include "High_Score_List.h"
 #include <string>
 
-class Entry : public High_Score_List
+class Entry
 {
  public:
   Entry();

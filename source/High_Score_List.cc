@@ -41,7 +41,7 @@ void High_Score_List::process_events()
 	    return;
 	  }
 	case sf::Event::KeyPressed:
-	    if (event.key.code == sf::Keyboard::Escape) 
+	  if (event.key.code == sf::Keyboard::Escape) 
 	    {
 	      window.close();
 	    } 
@@ -58,11 +58,17 @@ void High_Score_List::process_events()
 		    Game game {};
 		    game.run(user_choice);
 		  }
+
+		else if (sf::Mouse::getPosition(window).x > 560 && sf::Mouse::getPosition(window).x < 880 &&
+		   sf::Mouse::getPosition(window).y > 300 && sf::Mouse::getPosition(window).y < 539)
+		  {
+		    show_score();
+		  }
 	      }
-	    break;
-	  }
-	default:
 	  break;
+	  }
+    default:
+      break;
 	}
     }
 }
@@ -80,20 +86,25 @@ void High_Score_List::render()
 
 void High_Score_List::add_entry(unique_ptr<Entry> entry)
 {
-  //entries.push_back(move(entry));
-  
-  string new_entry = entry->to_string();
 
-  ofstream outfile;
-  outfile.open("Highscorelist.txt");
-  outfile << new_entry;
-
+  entries.push_back(move(entry));
 }
 
 void High_Score_List::show_score()
 {
 
   ifstream infile;
-  infile.open("Highscorelist.txt");
+  infile.open("resources/Highscorelist.txt");
+  cout << "Hallåj" << endl;
 
 }
+
+void High_Score_List::save_to_file(unique_ptr<Entry> entry)
+{
+  string new_entry = entry->to_string();
+
+  ofstream outfile;
+  outfile.open("resources/Highscorelist.txt");
+  outfile << new_entry;
+}
+
