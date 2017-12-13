@@ -82,7 +82,7 @@ Game::Game()
     map.create_environment("floor_100px",10,440,0,0);
     map.create_environment("floor_100px",100,440,0,0);
 
-    create_enemy("ghoul",200,550,0,0);
+    create_enemy("ghoul",200,600,0,0);
 
     enemies.front()->set_vitality(10);
     enemies.front()->set_current_health(10);
