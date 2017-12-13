@@ -18,7 +18,7 @@ Player::Player(double xp, double yp, double xs, double ys, string file_name)
     : Character(xp, yp, xs, ys, file_name),
       attack_(0,0,0,0,"resources/player_attack.png")
 {
-    sprite.setOrigin(50,0);
+    sprite.setOrigin(26,0);
 }
 
 sf::Sprite Player::draw_this()
