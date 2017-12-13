@@ -35,6 +35,10 @@ Game::Game()
 
     // Font
     arial.loadFromFile("resources/arial.ttf");
+
+    //Background
+    bgtexture.loadFromFile("resources/background.png");
+    bgsprite.setTexture(bgtexture);
     
     // Setting up GUI for displaying player's health
     player_health.setFont(arial);
@@ -285,7 +289,10 @@ void Game::render()
       }
  }
   
-    window.clear(sf::Color(10,110,191));
+  window.clear();
+
+    window.draw(bgsprite);
+  
     window.draw(player.draw_this());
     for (auto it = enemies.begin(); it != enemies.end(); it++)
       {

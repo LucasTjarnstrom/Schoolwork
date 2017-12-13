@@ -23,6 +23,9 @@ class Game
   void add_enemy(std::unique_ptr<Enemy>);
 
  private:
+
+    sf::Texture bgtexture;
+    sf::Sprite bgsprite;
   void process_events();
   void update();
   void render();
