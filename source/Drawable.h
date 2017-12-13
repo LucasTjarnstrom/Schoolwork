@@ -43,7 +43,7 @@ protected:
     double y_pos {};
     double x_velocity {0};
     double y_velocity {0};
-    double y_acc {0.1}; // där g ska vara tyngdkonstanten av något slag i negativ y, fys. kord.p.
+    double y_acc {0.2}; // där g ska vara tyngdkonstanten av något slag i negativ y, fys. kord.p.
     double x_size {};
     double y_size {};
     sf::Texture texture {};
