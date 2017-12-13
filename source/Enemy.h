@@ -20,6 +20,10 @@ public:
     void move(std::string const &) override;
     //void take_damage(int) override;
     void is_colliding(std::string) override;
-};
+
+    //sf::Text health_to_text();
+
+//private:
+//    sf::Text health_text {};
 
 #endif 

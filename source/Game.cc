@@ -64,9 +64,11 @@ Game::Game()
     map.create_environment("ceiling",0,500,0,0);	
 
     create_enemy("ghoul",200,550,0,0);
+    create_enemy("ghoul",300,550,0,0);
 
     enemies.front()->set_vitality(10);
-    enemies.front()->set_current_health(10);
+    enemies.front()->set_current_health(1);
+    enemies.back()->set_current_health(1);
     
 }
 
@@ -173,7 +175,6 @@ void Game::process_events()
 
 void Game::update()
 {
-    //cout << clock.getElapsedTime().asSeconds() << endl;
     if(clock.getElapsedTime().asSeconds() >= 1)
     {
 	if(player.attack_counter <= 0)
@@ -191,10 +192,18 @@ void Game::update()
   
     player.move(movement);
 
-    for (auto it = enemies.begin(); it != enemies.end(); it++)
-      {
-	(*it) -> move("nothing");
-      }
+    // check if any enemies have died and moves enemies
+    if(!enemies.empty())
+    {
+	auto it = enemies.begin();
+	while(it != enemies.end()){
+	    (*it)->move("nothing");
+	    if((*it)->get_current_health() <= 0){
+		it = enemies.erase(it);
+	    }else
+		it++;
+	}
+    }
 }
 
 void Game::render()
@@ -236,75 +245,87 @@ void Game::render()
     }
 
   //----------ENEMY COLLISION WITH ENVIRONMENT----------
-  for (auto enemyit = enemies.begin(); enemyit != enemies.end(); enemyit++)
-    {
-      for (auto it = map.get_environments().begin(); it != map.get_environments().end(); it++)
-	{
-	  if (Collision::BoundingBoxTest((*enemyit)->draw_this(), (*it)->draw_this())) //Checks if the enemy is colliding with anything
-	    {
-	      if (dynamic_cast<Wall*> ((*it).get()) != nullptr) // Checks if the enemy is colliding with a Wall
-		{
-		  for (auto it2 = map.get_environments().begin(); it2 != map.get_environments().end(); it2++)
-		    {
-		      if (Collision::BoundingBoxTest((*enemyit)->draw_this(), (*it2)->draw_this())) //Checks if the enemy is colliding with another object
-			{
-			  if (dynamic_cast<Floor*> ((*it2).get()) != nullptr) // Checks if the other object is a Floor
-			    {
-			      //----------Colliding with both a Floor and a Wall----------
-				(*enemyit)->is_colliding("wall");
-			    }
-			  else
-			    {
-			      //----------Colliding with a Wall----------
-				(*enemyit)->is_colliding("wall");
-			    }
-			}
-		    }
-		}
-	      else
-		{
-		  //----------Colliding with a Floor----------
-		    (*enemyit)->is_colliding("floor");
-		}
-	    }
-	}
-    }
+  if(!enemies.empty()){
+      for (auto enemyit = enemies.begin(); enemyit != enemies.end(); enemyit++)
+      {
+	  for (auto it = map.get_environments().begin(); it != map.get_environments().end(); it++)
+	  {
+	      if (Collision::BoundingBoxTest((*enemyit)->draw_this(), (*it)->draw_this())) //Checks if the enemy is colliding with anything
+	      {
+		  if (dynamic_cast<Wall*> ((*it).get()) != nullptr) // Checks if the enemy is colliding with a Wall
+		  {
+		      for (auto it2 = map.get_environments().begin(); it2 != map.get_environments().end(); it2++)
+		      {
+			  if (Collision::BoundingBoxTest((*enemyit)->draw_this(), (*it2)->draw_this())) //Checks if the enemy is colliding with another object
+			  {
+			      if (dynamic_cast<Floor*> ((*it2).get()) != nullptr) // Checks if the other object is a Floor
+			      {
+				  //----------Colliding with both a Floor and a Wall----------
+				  (*enemyit)->is_colliding("wall");
+			      }
+			      else
+			      {
+				  //----------Colliding with a Wall----------
+				  (*enemyit)->is_colliding("wall");
+			      }
+			  }
+		      }
+		  }
+		  else
+		  {
+		      //----------Colliding with a Floor----------
+		      (*enemyit)->is_colliding("floor");
+		  }
+	      }
+	  }
+      }
+  }
   
-  if(attacking) //fulhax extravaganza (kollar om fiende kolliderar med players attack)
+  // ------ Collision with Player's Attack and enemies -------
+  if(attacking)
   {
       if(player.attack_counter > 0)
       {
-	  if (Collision::BoundingBoxTest(player.attack(), enemies.front()->draw_this()))
+	  if(!enemies.empty())
 	  {
-	      //enemies.front()->set_y_velocity(enemies.front()->get_y_velocity() + -0.5);
-	      enemies.front()->set_current_health(enemies.front()->get_current_health() - 
-						  player.get_strength());
+	      for (auto enemyit = enemies.begin(); enemyit != enemies.end(); enemyit++)
+	      {
+		  if (Collision::BoundingBoxTest(player.attack(), (*enemyit)->draw_this()))
+		  {
+		      (*enemyit)->set_current_health(enemies.front()->get_current_health() - 
+						     player.get_strength());
+		  }
+	      }
 	  }
-	  player.attack_counter--;
-	    
+	  player.attack_counter--;  
       }
- }
+  }
   
-    window.clear(sf::Color(10,110,191));
-    window.draw(player.draw_this());
-    for (auto it = enemies.begin(); it != enemies.end(); it++)
+  window.clear(sf::Color(10,110,191));
+  window.draw(player.draw_this());
+  if(!enemies.empty())
+  {
+      for (auto it = enemies.begin(); it != enemies.end(); it++)
       {
-	window.draw((*it) -> draw_this());
+	  window.draw((*it) -> draw_this());
       }
-    for (auto it = map.get_environments().begin(); it != map.get_environments().end(); it++)
-    {
-	window.draw((*it) -> draw_this());
-    }
+  }
+    
+  for (auto it = map.get_environments().begin(); it != map.get_environments().end(); it++)
+  {
+      window.draw((*it) -> draw_this());
+  }
 
-    if(attacking)
-	if(player.attack_counter > 0)
-	    window.draw(player.attack());
-    window.draw(draw_player_health());
-    window.draw(draw_player_attack());
-    window.draw(draw_enemy_health());
-    window.draw(enemy_health);
-    window.display();
-    //cout << "Graphics updated" << endl;
+  if(attacking)
+      if(player.attack_counter > 0)
+	  window.draw(player.attack());
+  window.draw(draw_player_health());
+  window.draw(draw_player_attack());
+  if(!enemies.empty())
+      window.draw(draw_enemy_health());
+  //window.draw(enemy_health);
+  window.display();
+  //cout << "Graphics updated" << endl;
 }
 
 void Game::handle_player_input(sf::Keyboard::Key key, bool is_pressed)
@@ -319,23 +340,6 @@ void Game::handle_player_input(sf::Keyboard::Key key, bool is_pressed)
 	    player.jump();
     } else if (key == sf::Keyboard::W)
     {
-	// 	cout << clock.getElapsedTime().asSeconds() << endl;
-	// 	if(is_pressed){
-	// 	    cout << "Magic Missile!" << endl; // player.
-	// 	    if(clock.getElapsedTime().asSeconds() >= 1.0)
-	// 	    {
-	// 		cout << "attacking" << endl;
-	// 	        attacking = true;
-	// 		clock.restart();
-	// 	    } else
-	// 		attacking = false;
-	    
-	// 	} else
-	// 	    attacking = false;
-	// }
-	//if(is_pressed){
-	//    cout << "Magic Missile!" << endl;
-	//}
 	attacking = is_pressed;
     }
 }

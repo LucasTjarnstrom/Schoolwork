@@ -62,9 +62,17 @@ void Enemy::is_colliding(string arg)
 	    x_pos -= 5;
 	else
 	    x_pos += 5;
+    else
+	throw logic_error("Invalid collision!");
 }
 
 sf::Sprite Enemy::attack()
 {
     return sprite;
 }
+
+// sf::Text Enemy::health_to_text()
+// {
+//     return health_text;
+
+// }
