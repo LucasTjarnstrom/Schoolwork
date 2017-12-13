@@ -83,12 +83,12 @@ void Player::is_colliding(string arg)
     {
 	y_velocity = -0.1;
 	jump_counter = 1;
-    } else if("wall"){
+    } else if(arg =="wall"){
 	if(facing_right)
 	    x_pos -= 5;
 	else
 	    x_pos += 5;
-    } else if("floor_wall")
+    } else if(arg == "floor_wall")
 	if(facing_right)
 	    x_pos -= 5;
 	else
