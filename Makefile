@@ -13,11 +13,11 @@ CCFLAGS = -std=c++17 -Wpedantic -Wall -Wextra -Weffc++ -I$(SFML_ROOT)/include
 SFMLFLAGS = -L$(SFML_ROOT)/lib -lsfml-graphics -lsfml-window -lsfml-system
 
 #Objektmoduler
-OBJECTS = build/main.o build/Drawable.o build/Character.o build/Player.o build/Button.o build/Level.o build/Game.o build/Start_Menu.o build/Environment.o build/Floor.o build/Wall.o build/Map.o build/Collision.o build/High_Score_List.o build/Enemy.o
+OBJECTS = build/main.o build/Drawable.o build/Character.o build/Player.o build/Button.o build/Level.o build/Game.o build/Start_Menu.o build/Environment.o build/Floor.o build/Wall.o build/Ceiling.o build/Map.o build/Collision.o build/High_Score_List.o build/Enemy.o
 
 # Huvudmål
 main: $(OBJECTS)
-	$(CCC) build/main.o build/Drawable.o build/Character.o build/Player.o build/Button.o build/Game.o build/Start_Menu.o build/Environment.o build/Floor.o build/Wall.o build/Map.o build/Collision.o build/High_Score_List.o build/Enemy.o -o main $(SFMLFLAGS)
+	$(CCC) build/main.o build/Drawable.o build/Character.o build/Player.o build/Button.o build/Game.o build/Start_Menu.o build/Environment.o build/Floor.o build/Wall.o build/Ceiling.o build/Map.o build/Collision.o build/High_Score_List.o build/Enemy.o -o main $(SFMLFLAGS)
 
 # Delmål
 build/main.o: $(SOURCE)/main.cc
@@ -52,6 +52,9 @@ build/Floor.o : $(SOURCE)/Floor.h $(SOURCE)/Floor.cc
 
 build/Wall.o : $(SOURCE)/Wall.h $(SOURCE)/Wall.cc
 	$(CCC) $(CCFLAGS) -c $(SOURCE)/Wall.cc -o build/Wall.o
+
+build/Ceiling.o : $(SOURCE)/Ceiling.h $(SOURCE)/Ceiling.cc
+	$(CCC) $(CCFLAGS) -c $(SOURCE)/Ceiling.cc -o build/Ceiling.o
 
 build/Map.o : $(SOURCE)/Map.h $(SOURCE)/Map.cc
 	$(CCC) $(CCFLAGS) -c $(SOURCE)/Map.cc -o build/Map.o

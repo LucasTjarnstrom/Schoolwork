@@ -15,6 +15,7 @@
 #include "Map.h"
 #include "Floor.h"
 #include "Wall.h"
+#include "Ceiling.h"
 #include "Collision.h"
 #include "High_Score_List.h"
 #include "Enemy.h"
@@ -23,7 +24,7 @@ using namespace std;
 
 Game::Game()
     : window(sf::VideoMode(1280, 720), "SFML works!"),
-      player{Player(200,150,0,0,"resources/player.png")}
+      player{Player(200,550,0,0,"resources/player.png")}
 
 {
     player.set_vitality(10);
@@ -56,9 +57,11 @@ Game::Game()
     map.get_environments().push_back(move(temp3));
     unique_ptr<Wall> temp4 = make_unique<Wall>(500,-100,0,0,"resources/wall2.png");
     map.get_environments().push_back(move(temp4));
+    unique_ptr<Ceiling> temp5 = make_unique<Ceiling>(0,500,0,0,"resources/floor2.png");
+    map.get_environments().push_back(move(temp5));
 
-    unique_ptr<Enemy> temp5 = make_unique<Enemy>(200,200,0,0,"resources/enemy.png");
-    enemies.push_back(move(temp5));
+    unique_ptr<Enemy> temp6 = make_unique<Enemy>(200,550,0,0,"resources/enemy.png");
+    enemies.push_back(move(temp6));
     
 }
 
@@ -181,22 +184,26 @@ void Game::render()
 		    {
 		      if (dynamic_cast<Floor*> ((*it2).get()) != nullptr) // Checks if the other object is a Floor
 			{
-			    //----------Colliding with both a Floor and a Wall----------
-			    player.is_colliding("floor_wall");
+			  //----------Colliding with both a Floor and a Wall----------
+			  player.is_colliding("floor_wall");
 			}
 		      else
-		      {
+			{
 			  //----------Colliding with a Wall----------
 			  player.is_colliding("wall");	  
-		      }
+			}
 		    }
 		}
 	    }
+	  else if (dynamic_cast<Ceiling*> ((*it).get()) != nullptr) //Checks if player is colliding with a Ceiling
+	    {
+	      player.is_colliding("ceiling");
+	    }
 	  else
-	  {
+	    {
 	      //----------Colliding with a Floor----------
 	      player.is_colliding("floor");	      
-	  }
+	    }
 	}
     }
 
