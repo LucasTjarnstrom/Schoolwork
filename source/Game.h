@@ -17,9 +17,10 @@ class Game
   Game();
   void run(std::string user_choice);
   
+  void create_enemy(std::string type, int xp, int yp, int xs, int ys);
   std::vector<std::unique_ptr<Enemy>>& get_enemies();
   void set_enemies(std::vector<std::unique_ptr<Enemy>>&);
-  void add_enemy(std::unique_ptr<Enemy>&);
+  void add_enemy(std::unique_ptr<Enemy>);
   
 
  private:

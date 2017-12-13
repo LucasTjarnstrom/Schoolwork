@@ -15,9 +15,10 @@ public:
     Map() = default;
     Map(std::vector<std::unique_ptr<Environment>>&);
 
+    void create_environment(std::string type, int xp, int yp, int xs, int ys);
     std::vector<std::unique_ptr<Environment>>& get_environments();
     void set_environments(std::vector<std::unique_ptr<Environment>>&);
-    void add_environment(std::unique_ptr<Environment>&);
+    void add_environment(std::unique_ptr<Environment>);
     
 private:
     std::vector<std::unique_ptr<Environment>> environments {};
