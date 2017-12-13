@@ -18,7 +18,7 @@ sf::Sprite Wall::draw_this()
     return sprite;
 }
 
-void Wall::is_colliding()
+void Wall::is_colliding(string)
 {
     return;
 }

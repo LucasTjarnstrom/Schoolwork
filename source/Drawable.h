@@ -36,7 +36,7 @@ public:
     virtual sf::Sprite& get_sprite();
 
     virtual sf::Sprite draw_this() = 0;
-    virtual void is_colliding() = 0;
+    virtual void is_colliding(std::string) = 0;
 
 protected:
     double x_pos {};

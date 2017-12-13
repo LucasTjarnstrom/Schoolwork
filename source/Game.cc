@@ -47,8 +47,15 @@ Game::Game()
     player_attack.setStyle(sf::Text::Bold);
     player_attack.setColor(sf::Color(255, 255, 255));
     player_attack.setPosition(960,0);
-    
-    unique_ptr<Floor> temp1 = make_unique<Floor>(0,710,0,0,"resources/floor2.png");
+
+    // Setting up testing for enemy hp
+    enemy_health.setFont(arial);
+    enemy_health.setCharacterSize(30);
+    enemy_health.setStyle(sf::Text::Bold);
+    enemy_health.setColor(sf::Color(255, 255, 255));
+    enemy_health.setPosition(400,400);
+
+    unique_ptr<Floor> temp1 = make_unique<Floor>(0,400,0,0,"resources/floor2.png");
     map.get_environments().push_back(move(temp1));
     unique_ptr<Floor> temp2 = make_unique<Floor>(0,710,0,0,"resources/floor2.png");
     map.get_environments().push_back(move(temp2));
@@ -59,6 +66,9 @@ Game::Game()
 
     unique_ptr<Enemy> temp5 = make_unique<Enemy>(200,200,0,0,"resources/enemy.png");
     enemies.push_back(move(temp5));
+    
+    enemies.front()->set_vitality(10);
+    enemies.front()->set_current_health(10);
     
 }
 
@@ -78,14 +88,15 @@ void Game::add_enemy(unique_ptr<Enemy>& e)
 }
 
 void Game::run(string user_choice)
-{   
-  if ( user_choice == "Start game" )
+{
+    if ( user_choice == "Start game" )
     {
-      while (window.isOpen())
+	clock.restart(); // restart clock
+	while (window.isOpen())
 	{
-	  process_events();
-	  update();
-	  render();
+	    process_events();
+	    update();
+	    render();
 	}   
     }
 
@@ -151,6 +162,15 @@ void Game::process_events()
 
 void Game::update()
 {
+    //cout << clock.getElapsedTime().asSeconds() << endl;
+    if(clock.getElapsedTime().asSeconds() >= 1)
+    {
+	if(player.attack_counter <= 0)
+	    player.attack_counter++;
+	    
+	clock.restart();
+    }
+    
     if(move_left)
 	movement = "left";
     else if(move_right)
@@ -216,26 +236,12 @@ void Game::render()
 			  if (dynamic_cast<Floor*> ((*it2).get()) != nullptr) // Checks if the other object is a Floor
 			    {
 			      //----------Colliding with both a Floor and a Wall----------
-			      if ((*enemyit)->get_facing_right()) //Checks from what direction the character is colliding with the wall
-				{
-				  (*enemyit)->set_x_pos((*enemyit)->get_x_pos() - 5); //This value has to be >= the character's x-velocity.
-				}
-			      else
-				{
-				  (*enemyit)->set_x_pos((*enemyit)->get_x_pos() + 5); //This value has to be >= the character's x-velocity.
-				}
+				(*enemyit)->is_colliding("wall");
 			    }
 			  else
 			    {
 			      //----------Colliding with a Wall----------
-			      if ((*enemyit)->get_facing_right()) //Checks from what direction the character is colliding with the wall
-				{
-				  (*enemyit)->set_x_pos((*enemyit)->get_x_pos() - 5); //This value has to be >= the character's x-velocity.
-				}
-			      else
-				{
-				  (*enemyit)->set_x_pos((*enemyit)->get_x_pos() + 5); //This value has to be >= the character's x-velocity.
-				}
+				(*enemyit)->is_colliding("wall");
 			    }
 			}
 		    }
@@ -243,13 +249,27 @@ void Game::render()
 	      else
 		{
 		  //----------Colliding with a Floor----------
-		  (*enemyit)->set_y_velocity(-0.1);
+		    (*enemyit)->is_colliding("floor");
 		}
 	    }
 	}
     }
-    
-    
+  
+  if(attacking) //fulhax extravaganza (kollar om fiende kolliderar med players attack)
+  {
+      if(player.attack_counter > 0)
+      {
+	  if (Collision::BoundingBoxTest(player.attack(), enemies.front()->draw_this()))
+	  {
+	      //enemies.front()->set_y_velocity(enemies.front()->get_y_velocity() + -0.5);
+	      enemies.front()->set_current_health(enemies.front()->get_current_health() - 
+						  player.get_strength());
+	  }
+	  player.attack_counter--;
+	    
+      }
+ }
+  
     window.clear(sf::Color(10,110,191));
     window.draw(player.draw_this());
     for (auto it = enemies.begin(); it != enemies.end(); it++)
@@ -260,9 +280,14 @@ void Game::render()
     {
 	window.draw((*it) -> draw_this());
     }
+
+    if(attacking)
+	if(player.attack_counter > 0)
+	    window.draw(player.attack());
     window.draw(draw_player_health());
     window.draw(draw_player_attack());
-
+    window.draw(draw_enemy_health());
+    window.draw(enemy_health);
     window.display();
     //cout << "Graphics updated" << endl;
 }
@@ -277,6 +302,26 @@ void Game::handle_player_input(sf::Keyboard::Key key, bool is_pressed)
     {
 	if(is_pressed)
 	    player.jump();
+    } else if (key == sf::Keyboard::W)
+    {
+	// 	cout << clock.getElapsedTime().asSeconds() << endl;
+	// 	if(is_pressed){
+	// 	    cout << "Magic Missile!" << endl; // player.
+	// 	    if(clock.getElapsedTime().asSeconds() >= 1.0)
+	// 	    {
+	// 		cout << "attacking" << endl;
+	// 	        attacking = true;
+	// 		clock.restart();
+	// 	    } else
+	// 		attacking = false;
+	    
+	// 	} else
+	// 	    attacking = false;
+	// }
+	//if(is_pressed){
+	//    cout << "Magic Missile!" << endl;
+	//}
+	attacking = is_pressed;
     }
 }
 
@@ -297,4 +342,15 @@ sf::Text Game::draw_player_attack()
     player_attack.setString(ss.str());
 
     return player_attack;
+}
+
+sf::Text Game::draw_enemy_health()
+{
+    stringstream ss;
+    ss << enemies.front()->get_current_health() << "/" << enemies.front()->get_vitality();
+    enemy_health.setString(ss.str());
+    enemy_health.setPosition(enemies.front()->get_x_pos() - 30, enemies.front()->get_y_pos() - 40);
+    
+    return player_health;
+
 }

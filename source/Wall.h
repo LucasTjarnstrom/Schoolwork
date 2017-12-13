@@ -14,7 +14,7 @@ public:
     Wall(double,double,double,double, std::string);
 
     sf::Sprite draw_this() override;
-    void is_colliding() override;
+    void is_colliding(std::string) override;
 
 };
 

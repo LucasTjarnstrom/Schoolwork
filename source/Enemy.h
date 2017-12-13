@@ -16,10 +16,10 @@ public:
     sf::Sprite draw_this() override;
 
     void jump() override;
-    //void attack() override;
+    sf::Sprite attack() override;
     void move(std::string const &) override;
     //void take_damage(int) override;
-    void is_colliding() override;
+    void is_colliding(std::string) override;
 };
 
 #endif 
