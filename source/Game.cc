@@ -48,15 +48,17 @@ Game::Game()
     player_attack.setColor(sf::Color(255, 255, 255));
     player_attack.setPosition(960,0);
     
-    unique_ptr<Floor> temp1 = make_unique<Floor>(0,400,0,0,"resources/floor2.png");
+    unique_ptr<Floor> temp1 = make_unique<Floor>(0,710,0,0,"resources/floor2.png");
     map.get_environments().push_back(move(temp1));
-    unique_ptr<Wall> temp2 = make_unique<Wall>(0,-100,0,0,"resources/wall2.png");
+    unique_ptr<Floor> temp2 = make_unique<Floor>(0,710,0,0,"resources/floor2.png");
     map.get_environments().push_back(move(temp2));
-    unique_ptr<Wall> temp3 = make_unique<Wall>(500,-100,0,0,"resources/wall2.png");
+    unique_ptr<Wall> temp3 = make_unique<Wall>(0,210,0,0,"resources/wall2.png");
     map.get_environments().push_back(move(temp3));
+    unique_ptr<Wall> temp4 = make_unique<Wall>(500,-100,0,0,"resources/wall2.png");
+    map.get_environments().push_back(move(temp4));
 
-    unique_ptr<Enemy> temp4 = make_unique<Enemy>(200,200,0,0,"resources/enemy.png");
-    enemies.push_back(move(temp4));
+    unique_ptr<Enemy> temp5 = make_unique<Enemy>(200,200,0,0,"resources/enemy.png");
+    enemies.push_back(move(temp5));
     
 }
 
