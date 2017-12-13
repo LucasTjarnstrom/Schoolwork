@@ -18,7 +18,7 @@ sf::Sprite Ceiling::draw_this()
     return sprite;
 }
 
-void Ceiling::is_colliding()
+void Ceiling::is_colliding(string)
 {
     return;
 }
