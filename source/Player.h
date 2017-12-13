@@ -22,14 +22,14 @@ public:
     int get_weapon_damage() const;
 
     void jump() override;
-    void attack() override;
-    sf::Sprite attack(int);
+    sf::Sprite attack() override;
     void move(std::string const &) override;
     //void take_damage(int) override;
     void is_colliding(std::string) override;
 
 //private:
     int jump_counter {1}; // får ändras senare
+    int attack_counter {1};
     int weapon_damage {};
     Player_Attack attack_ {};
 };

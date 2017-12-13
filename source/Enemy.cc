@@ -64,7 +64,7 @@ void Enemy::is_colliding(string arg)
 	    x_pos += 5;
 }
 
-void Enemy::attack()
+sf::Sprite Enemy::attack()
 {
-    return;
+    return sprite;
 }

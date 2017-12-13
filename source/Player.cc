@@ -95,17 +95,12 @@ void Player::is_colliding(string arg)
 	    x_pos += 5;
 }
 
-void Player::attack()
-{
-    cout << "Fel attack!" << endl;
-}
-
-sf::Sprite Player::attack(int)
+sf::Sprite Player::attack()
 {
     if(facing_right)
 	attack_.get_sprite().setPosition(x_pos + 50, y_pos+25);
     else
 	attack_.get_sprite().setPosition(x_pos - 100, y_pos+25);
-
+    
     return attack_.get_sprite();
 }

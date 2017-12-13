@@ -29,14 +29,17 @@ private:
     void handle_player_input(sf::Keyboard::Key key, bool is_pressed);
     sf::Text draw_player_health();
     sf::Text draw_player_attack();
+    sf::Text draw_enemy_health();
 
     sf::RenderWindow window {};
+    sf::Clock clock {};
     Player player {};
     Map map {};
     std::vector<std::unique_ptr<Enemy>> enemies {};
 
     sf::Text player_health {};
     sf::Text player_attack {};
+    sf::Text enemy_health {};
     sf::Font arial {};
     
     std::string movement {};
