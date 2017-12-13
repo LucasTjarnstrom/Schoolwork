@@ -15,6 +15,7 @@
 #include "Map.h"
 #include "Floor.h"
 #include "Wall.h"
+#include "Ceiling.h"
 #include "Collision.h"
 #include "High_Score_List.h"
 #include "Enemy.h"
@@ -23,7 +24,7 @@ using namespace std;
 
 Game::Game()
     : window(sf::VideoMode(1280, 720), "SFML works!"),
-      player{Player(200,150,0,0,"resources/player.png")}
+      player{Player(200,550,0,0,"resources/player.png")}
 
 {
     player.set_vitality(10);
@@ -54,22 +55,32 @@ Game::Game()
     enemy_health.setStyle(sf::Text::Bold);
     enemy_health.setColor(sf::Color(255, 255, 255));
     enemy_health.setPosition(400,400);
-
-    unique_ptr<Floor> temp1 = make_unique<Floor>(0,400,0,0,"resources/floor2.png");
-    map.get_environments().push_back(move(temp1));
-    unique_ptr<Floor> temp2 = make_unique<Floor>(0,710,0,0,"resources/floor2.png");
-    map.get_environments().push_back(move(temp2));
-    unique_ptr<Wall> temp3 = make_unique<Wall>(0,210,0,0,"resources/wall2.png");
-    map.get_environments().push_back(move(temp3));
-    unique_ptr<Wall> temp4 = make_unique<Wall>(500,-100,0,0,"resources/wall2.png");
-    map.get_environments().push_back(move(temp4));
-
-    unique_ptr<Enemy> temp5 = make_unique<Enemy>(200,200,0,0,"resources/enemy.png");
-    enemies.push_back(move(temp5));
     
+    map.create_environment("floor",0,710,0,0);
+    map.create_environment("floor",500,710,0,0);
+    map.create_environment("floor",1000,710,0,0);
+    map.create_environment("wall",1270,210,0,0);
+    map.create_environment("wall",0,210,0,0);
+    map.create_environment("ceiling",0,500,0,0);	
+
+    create_enemy("ghoul",200,550,0,0);
+
     enemies.front()->set_vitality(10);
     enemies.front()->set_current_health(10);
     
+}
+
+void Game::create_enemy(std::string type, int xp, int yp, int xs, int ys)
+{
+  if (type == "ghoul")
+    {
+      unique_ptr<Enemy> temp = make_unique<Enemy>(xp,yp,xs,ys,"resources/enemy.png");
+      add_enemy(move(temp));
+    }
+  else
+    {
+      throw logic_error("trying to create Enemy of invalid type");
+    }
 }
 
 vector<unique_ptr<Enemy>>& Game::get_enemies()
@@ -82,7 +93,7 @@ void Game::set_enemies(vector<unique_ptr<Enemy>>& other)
   enemies = move(other);
 }
 
-void Game::add_enemy(unique_ptr<Enemy>& e)
+void Game::add_enemy(unique_ptr<Enemy> e)
 {
   enemies.push_back(move(e));
 }
@@ -201,22 +212,26 @@ void Game::render()
 		    {
 		      if (dynamic_cast<Floor*> ((*it2).get()) != nullptr) // Checks if the other object is a Floor
 			{
-			    //----------Colliding with both a Floor and a Wall----------
-			    player.is_colliding("floor_wall");
+			  //----------Colliding with both a Floor and a Wall----------
+			  player.is_colliding("floor_wall");
 			}
 		      else
-		      {
+			{
 			  //----------Colliding with a Wall----------
 			  player.is_colliding("wall");	  
-		      }
+			}
 		    }
 		}
 	    }
+	  else if (dynamic_cast<Ceiling*> ((*it).get()) != nullptr) //Checks if player is colliding with a Ceiling
+	    {
+	      player.is_colliding("ceiling");
+	    }
 	  else
-	  {
+	    {
 	      //----------Colliding with a Floor----------
 	      player.is_colliding("floor");	      
-	  }
+	    }
 	}
     }
 

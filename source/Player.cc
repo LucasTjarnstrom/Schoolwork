@@ -79,20 +79,30 @@ int Player::get_weapon_damage() const
 
 void Player::is_colliding(string arg)
 {
-    if(arg == "floor")
+  if(arg == "floor")
     {
-	y_velocity = -0.1;
-	jump_counter = 1;
-    } else if(arg =="wall"){
-	if(facing_right)
-	    x_pos -= 5;
-	else
-	    x_pos += 5;
-    } else if(arg == "floor_wall")
-	if(facing_right)
-	    x_pos -= 5;
-	else
-	    x_pos += 5;
+      y_velocity = -0.1;
+      jump_counter = 1;
+    }
+  else if(arg == "wall")
+    {
+      if(facing_right)
+	x_pos -= 5;
+      else
+	x_pos += 5;
+    }
+  else if(arg == "floor_wall")
+    {
+      if(facing_right)
+	x_pos -= 5;
+      else
+	x_pos += 5;
+    }
+  else if(arg == "ceiling")
+    {
+      y_pos += 5;
+      y_velocity = 1;
+    }
 }
 
 sf::Sprite Player::attack()
