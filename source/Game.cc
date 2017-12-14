@@ -66,27 +66,20 @@ Game::Game()
     create_enemy("ghoul",200,550,0,0);
     create_enemy("ghoul",300,550,0,0);
 
-    enemies.front()->set_vitality(10);
+    // for testing
     enemies.front()->set_current_health(1);
     enemies.back()->set_current_health(1);
-    enemies.back()->set_vitality(10);
-
-    // set enemies' font
-    if(!enemies.empty())
-    {
-      for (auto it = enemies.begin(); it != enemies.end(); it++)
-      {
-	  (*it) -> set_font(arial);
-      }
-    }
-    
 }
 
+// borde uttökas så även vitality och current_health sätts 
 void Game::create_enemy(std::string type, int xp, int yp, int xs, int ys)
 {
   if (type == "ghoul")
     {
       unique_ptr<Enemy> temp = make_unique<Enemy>(xp,yp,xs,ys,"resources/enemy.png");
+      temp->set_font(arial); // enemy's health_text gets its font set
+      temp->set_vitality(10); // a Ghoul has 10 vitality
+      temp->set_current_health(temp->get_vitality()); // a Ghoul has max health when spawned
       add_enemy(move(temp));
     }
   else
