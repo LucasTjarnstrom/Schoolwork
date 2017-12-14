@@ -23,7 +23,7 @@
 using namespace std;
 
 Game::Game()
-    : window(sf::VideoMode(1280, 720), "Snoppenheimer"),
+    : window(sf::VideoMode(1280, 720), "Help Alucard rescue the cat in this gothic adventure"),
       player{Player(200,550,0,0,"resources/player.png")}
 
 {
@@ -61,8 +61,10 @@ Game::Game()
     enemy_health.setPosition(400,400);
     
     map.create_environment("floor_1280px",0,690,0,0);
-    map.create_environment("wall",1270,210,0,0);
-    map.create_environment("wall",0,210,0,0);
+    map.create_environment("wall",0,190,0,0);
+    map.create_environment("wall",0,0,0,0);
+    map.create_environment("wall",1270,190,0,0);
+    map.create_environment("wall",1270,0,0,0);
 
     map.create_environment("wall_100px",600,620,0,0);
     map.create_environment("floor_100px",600,615,0,0);
@@ -75,12 +77,21 @@ Game::Game()
     map.create_environment("floor",300,360,0,0);
     map.create_environment("ceiling",300,370,0,0);
     map.create_environment("wall_20px",290,360,0,0);
+    map.create_environment("wall_20px",800,360,0,0);
 
     map.create_environment("wall_100px",190,450,0,0);
     map.create_environment("floor_100px",10,440,0,0);
     map.create_environment("floor_100px",100,440,0,0);
 
+    map.create_environment("wall",690,270,0,0);
+    map.create_environment("wall",700,270,0,0);
+    map.create_environment("floor",690,260,0,0);
+    map.create_environment("ceiling",690,270,0,0);
+    map.create_environment("wall_20px",1190,260,0,0);
+	
     create_enemy("ghoul",200,600,0,0);
+    create_enemy("ghoul",750,600,0,0);
+    create_enemy("ghoul",1100,600,0,0);
 
     enemies.front()->set_vitality(10);
     enemies.front()->set_current_health(10);
