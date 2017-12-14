@@ -47,7 +47,7 @@ Game::Game()
     player_attack.setCharacterSize(30);
     player_attack.setStyle(sf::Text::Bold);
     player_attack.setColor(sf::Color(255, 255, 255));
-    player_attack.setPosition(960,0);
+    player_attack.setPosition(1050,0);
 
     // Environment object
     map.create_environment("floor",0,710,0,0);
@@ -364,7 +364,7 @@ sf::Text Game::draw_player_health()
 sf::Text Game::draw_player_attack()
 {
     stringstream ss;
-    ss << "Your attack is: " << player.get_strength() << " + " << player.get_weapon_damage();
+    ss << "Attack: " << player.get_strength() << " + " << player.get_weapon_damage();
     player_attack.setString(ss.str());
 
     return player_attack;
