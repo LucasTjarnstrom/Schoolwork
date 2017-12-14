@@ -23,9 +23,9 @@ public:
     sf::Text health_to_text();
     void set_font(sf::Font);
 
-//private:
     sf::Text health_text {};
-
+    void set_facing_right(bool b);
+    bool get_facing_right();
 };
 
 #endif 

@@ -92,7 +92,7 @@ Game::Game()
 	
     // Enemy objects
     create_enemy("ghoul",200,600,0,0);
-    create_enemy("ghoul",750,600,0,0);
+    create_enemy("ghoul",850,600,0,0);
     create_enemy("ghoul",1100,600,0,0);
 
     // for testing
@@ -227,22 +227,29 @@ void Game::update()
     else if(move_right)
 	movement = "right";
     else
-	movement = "nothing";
+      movement = "nothing";
   
     player.move(movement);
 
     // check if any enemies have died and moves enemies
     if(!enemies.empty())
-    {
+      {
 	auto it = enemies.begin();
 	while(it != enemies.end()){
-	    (*it)->move("nothing");
-	    if((*it)->get_current_health() <= 0){
-		it = enemies.erase(it);
-	    }else
-		it++;
+	  if ((*it)->get_facing_right())
+	    {
+	      (*it) -> move("right");
+	    }
+	  else
+	    {
+	      (*it) -> move("left");
+	    }
+	  if((*it)->get_current_health() <= 0){
+	    it = enemies.erase(it);
+	  }else
+	    it++;
 	}
-    }
+      }
 }
 
 void Game::render()
