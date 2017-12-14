@@ -53,6 +53,13 @@ Game::Game()
     player_attack.setColor(sf::Color(255, 255, 255));
     player_attack.setPosition(960,0);
 
+    // Setting up GUI for displaying player's score
+    player_score.setFont(arial);
+    player_score.setCharacterSize(30);
+    player_score.setStyle(sf::Text::Bold);
+    player_score.setColor(sf::Color(255, 255, 255));
+    player_score.setPosition(960,40);
+    
     // Setting up testing for enemy hp
     enemy_health.setFont(arial);
     enemy_health.setCharacterSize(30);
@@ -322,7 +329,7 @@ void Game::render()
     window.draw(draw_player_health());
     window.draw(draw_player_attack());
     window.draw(draw_enemy_health());
-    window.draw(enemy_health);
+    window.draw(draw_player_score());
     window.display();
     //cout << "Graphics updated" << endl;
 }
@@ -386,6 +393,15 @@ sf::Text Game::draw_enemy_health()
     enemy_health.setString(ss.str());
     enemy_health.setPosition(enemies.front()->get_x_pos() - 30, enemies.front()->get_y_pos() - 40);
     
-    return player_health;
+    return enemy_health;
 
+}
+
+sf::Text Game::draw_player_score()
+{
+    stringstream ss;
+    ss << "Your score is: " << player.get_score() << endl; 
+    player_score.setString(ss.str());
+
+    return player_score;
 }

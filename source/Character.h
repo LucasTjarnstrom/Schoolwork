@@ -17,11 +17,6 @@ public:
     Character(double,double,double,double,std::string);
     virtual ~Character() = default; // destructor
 
-    //Character(Character const& it); // copy constructor
-    //Character(Character && it); // move constructor
-    //Character& operator=(Character const& it); // copy assignment
-    //Character& operator=(Character && it); // move assignment
-
     // Setters and getters
     virtual void set_vitality(int);
     virtual int get_vitality() const;
@@ -35,11 +30,13 @@ public:
     virtual void set_strength(int);
     virtual int get_strength() const;
 
+    virtual void set_score(int);
+    virtual int get_score() const;
+
     // "Player operations" are pure virtual because the method implementation will not be uniform across subclasses
     virtual void jump() = 0; 
     virtual sf::Sprite attack() = 0;
     virtual void move(std::string const &) = 0;
-    //virtual void take_damage(int) = 0;
 
 protected:
     int strength {};
@@ -47,6 +44,7 @@ protected:
     int current_health {};
     bool facing_right {};
     bool faced_right {};
+    int score {};
 };
 
 #endif 

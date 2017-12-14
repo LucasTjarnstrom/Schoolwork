@@ -20,7 +20,7 @@ public:
 
     void set_weapon_damage(int);
     int get_weapon_damage() const;
-
+    
     void jump() override;
     sf::Sprite attack() override;
     void move(std::string const &) override;

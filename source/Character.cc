@@ -57,3 +57,13 @@ int Character::get_strength() const
 {
     return strength;
 }
+
+void Character::set_score(int scr)
+{
+    score = scr;
+}
+
+int Character::get_score() const
+{
+    return score;
+}
