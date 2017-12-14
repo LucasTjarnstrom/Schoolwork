@@ -53,20 +53,12 @@ Game::Game()
     player_attack.setColor(sf::Color(255, 255, 255));
     player_attack.setPosition(1050,0);
 
-<<<<<<< HEAD
     // Setting up GUI for displaying player's score
     player_score.setFont(arial);
     player_score.setCharacterSize(30);
     player_score.setStyle(sf::Text::Bold);
     player_score.setColor(sf::Color(255, 255, 255));
-    player_score.setPosition(960,40);
-    
-    // Setting up testing for enemy hp
-    enemy_health.setFont(arial);
-    enemy_health.setCharacterSize(30);
-    enemy_health.setStyle(sf::Text::Bold);
-    enemy_health.setColor(sf::Color(255, 255, 255));
-    enemy_health.setPosition(400,400);
+    player_score.setPosition(1050,40);
     
     // Environment objects
     map.create_environment("floor_1280px",0,690,0,0);
@@ -416,7 +408,7 @@ sf::Text Game::draw_player_attack()
 sf::Text Game::draw_player_score()
 {
     stringstream ss;
-    ss << "Your score is: " << player.get_score() << endl; 
+    ss << "Score: " << player.get_score() << endl; 
     player_score.setString(ss.str());
 
     return player_score;
