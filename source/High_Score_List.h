@@ -14,7 +14,7 @@
 #include <memory>
 #include <vector>
 
-class High_Score_List : public Game
+class High_Score_List : public Game, public Entry
 {
 public:
   High_Score_List(); // constructor
@@ -23,7 +23,7 @@ public:
   void run();
   void show_score();
   void add_entry(std::unique_ptr<Entry>);
-  void save_to_file(std::unique_ptr<Entry>);
+  void save_to_file();
   //void load_to_file(std::string);
 
 protected:

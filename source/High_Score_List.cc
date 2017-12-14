@@ -9,7 +9,6 @@
 #include <vector>
 #include <fstream>
 
-
 using namespace std;
 
 High_Score_List::High_Score_List()
@@ -27,6 +26,9 @@ void High_Score_List::run()
       process_events();
       render();
     }
+
+  sf::Text text;
+  text.setString("Hello world");
 }
 
 void High_Score_List::process_events()
@@ -58,12 +60,6 @@ void High_Score_List::process_events()
 		    Game game {};
 		    game.run(user_choice);
 		  }
-
-		else if (sf::Mouse::getPosition(window).x > 560 && sf::Mouse::getPosition(window).x < 880 &&
-		   sf::Mouse::getPosition(window).y > 300 && sf::Mouse::getPosition(window).y < 539)
-		  {
-		    show_score();
-		  }
 	      }
 	  break;
 	  }
@@ -80,31 +76,67 @@ void High_Score_List::render()
   window.clear(sf::Color(10,110,191));
   window.draw(splash_screen.get_sprite());
   window.draw(return_button.get_sprite());
+  window.draw(text);
   window.display();
 }
 
 
 void High_Score_List::add_entry(unique_ptr<Entry> entry)
 {
+  int score = entry->get_score();
 
-  entries.push_back(move(entry));
+  for(unsigned i{} ; i < entries.size() ; i++)
+    {
+      int current_score {};
+      current_score = entries.at(i)->get_score();
+      if(score > current_score)
+	{
+	  entries.insert(entries.begin()+i, move(entry));
+	  if(entries.size() > 10) 
+	    {
+	      entries.pop_back();
+	    }
+	}
+    }
 }
 
 void High_Score_List::show_score()
 {
-
+  save_to_file();
   ifstream infile;
+  string line;
   infile.open("resources/Highscorelist.txt");
-  cout << "Hallåj" << endl;
-
+  getline(infile,line);
+  cout << line << endl;
+  /*
+  for( unsigned i{} ; i < entries.size() ; i++ )
+    {
+      if(infile.is_open())
+	{
+	  getline(infile,line);
+	  cout << line << endl;
+	}
+    }
+  */
+  infile.close();
 }
 
-void High_Score_List::save_to_file(unique_ptr<Entry> entry)
+void High_Score_List::save_to_file()
 {
-  string new_entry = entry->to_string();
+  for(unsigned i{} ; i < entries.size() ; i++)
+    {
+      string new_entry = entries.at(i)->to_string();
+      ofstream outfile;
+      outfile.open("resources/Highscorelist.txt");
+      outfile << new_entry;
+      outfile.close();
+    }
 
+  // For testing purposes
   ofstream outfile;
   outfile.open("resources/Highscorelist.txt");
-  outfile << new_entry;
+  string test = to_string();
+  outfile << test;
+  outfile.close();
 }
 

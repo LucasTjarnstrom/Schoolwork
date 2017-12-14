@@ -14,7 +14,6 @@ Entry::Entry()
 {
 }
 
-
 string Entry::return_time()
 {
   time_t t = time(0);
@@ -32,5 +31,7 @@ string Entry::to_string()
   return ss.str();
 }
 
-
-
+int Entry::get_score()
+{
+  return score;
+}
