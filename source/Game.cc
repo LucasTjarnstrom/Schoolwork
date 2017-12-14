@@ -97,7 +97,7 @@ Game::Game()
     map.create_environment("wall_20px",1190,260,0,0);
 	
     create_enemy("ghoul",200,600,0,0);
-    create_enemy("ghoul",750,600,0,0);
+    create_enemy("ghoul",850,600,0,0);
     create_enemy("ghoul",1100,600,0,0);
 
     enemies.front()->set_vitality(10);
@@ -222,13 +222,20 @@ void Game::update()
     else if(move_right)
 	movement = "right";
     else
-	movement = "nothing";
+      movement = "nothing";
   
     player.move(movement);
 
     for (auto it = enemies.begin(); it != enemies.end(); it++)
       {
-	(*it) -> move("nothing");
+	if ((*it)->get_facing_right())
+	  {
+	    (*it) -> move("right");
+	  }
+	else
+	  {
+	    (*it) -> move("left");
+	  }
       }
 }
 

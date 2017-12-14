@@ -16,7 +16,14 @@ Enemy::Enemy(double xp, double yp, double xs, double ys, string file_name)
 
 sf::Sprite Enemy::draw_this()
 {
-    sprite.setPosition(x_pos, y_pos);   
+    sprite.setPosition(x_pos, y_pos);
+    
+    if(faced_right != facing_right) 
+    	sprite.scale(-1.f,1.f);   
+    else
+	sprite.scale(1.f,1.f);
+    faced_right = facing_right;
+    
     return sprite;
 }
 
@@ -24,12 +31,12 @@ void Enemy::move(std::string const & movement)
 {
     if (movement == "left")
     {
-	x_velocity = -5;
+	x_velocity = -1;
 	facing_right = false;
     }
     else if (movement == "right")
     {
-	x_velocity = 5;
+	x_velocity = 1;
 	facing_right = true;
     }
     else if (movement == "nothing")
@@ -53,18 +60,41 @@ void Enemy::is_colliding(string arg)
     {
 	y_velocity = -0.2;
     } else if(arg == "wall"){
-	if(facing_right)
+      if(get_facing_right())
+	  {
 	    x_pos -= 5;
+	    set_facing_right(false);
+	  }
 	else
+	  {
 	    x_pos += 5;
+	    set_facing_right(true);
+	  }
     } else if(arg == "floor_wall")
-	if(facing_right)
+      if(get_facing_right())
+	  {
 	    x_pos -= 5;
+	    set_facing_right(false);
+	  }
 	else
+	  {
 	    x_pos += 5;
+	    set_facing_right(true);
+	  }
 }
 
 sf::Sprite Enemy::attack()
 {
     return sprite;
+}
+
+void Enemy::set_facing_right(bool b)
+{
+  facing_right = b;
+  return;
+}
+
+bool Enemy::get_facing_right()
+{
+  return facing_right;
 }

@@ -20,6 +20,8 @@ public:
     void move(std::string const &) override;
     //void take_damage(int) override;
     void is_colliding(std::string) override;
+    void set_facing_right(bool b);
+    bool get_facing_right();
 };
 
 #endif 
