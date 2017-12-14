@@ -89,7 +89,32 @@ Game::Game()
     map.create_environment("floor",690,260,0,0);
     map.create_environment("ceiling",690,270,0,0);
     map.create_environment("wall_20px",1190,260,0,0);
-	
+
+
+    map.create_environment("floor_filler",10,450,0,0);
+    map.create_environment("floor_filler",50,450,0,0);
+    map.create_environment("floor_filler",90,450,0,0);
+    map.create_environment("floor_filler",130,450,0,0);
+    map.create_environment("floor_filler",150,450,0,0);
+    map.create_environment("floor_filler",10,490,0,0);
+    map.create_environment("floor_filler",50,490,0,0);
+    map.create_environment("floor_filler",90,490,0,0);
+    map.create_environment("floor_filler",130,490,0,0);
+    map.create_environment("floor_filler",150,490,0,0);
+    map.create_environment("floor_filler",10,500,0,0);
+    map.create_environment("floor_filler",50,500,0,0);
+    map.create_environment("floor_filler",90,500,0,0);
+    map.create_environment("floor_filler",130,500,0,0);
+    map.create_environment("floor_filler",150,500,0,0);
+
+    map.create_environment("floor_filler",610,625,0,0);
+    map.create_environment("floor_filler",650,625,0,0);
+    map.create_environment("floor_filler",610,665,0,0);
+    map.create_environment("floor_filler",650,665,0,0);
+    map.create_environment("floor_filler",610,705,0,0);
+    map.create_environment("floor_filler",650,705,0,0);
+
+
     // Enemy objects
     create_enemy("ghoul",200,600,0,0);
     create_enemy("ghoul",850,600,0,0);
