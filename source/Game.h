@@ -30,7 +30,6 @@ private:
     sf::Text draw_player_health();
     sf::Text draw_player_attack();
     sf::Text draw_player_score();
-    sf::Text draw_enemy_health();
     
     sf::RenderWindow window {};
     sf::Clock clock {};
@@ -41,12 +40,12 @@ private:
     sf::Text player_health {};
     sf::Text player_attack {};
     sf::Text player_score {};
-    sf::Text enemy_health {};
+    sf::Text health_text {};
     sf::Font arial {};
 
     sf::Texture bgtexture;
     sf::Sprite bgsprite;
-    
+
     std::string movement {};
     bool move_left {false};
     bool move_right {false};

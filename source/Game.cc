@@ -51,8 +51,9 @@ Game::Game()
     player_attack.setCharacterSize(30);
     player_attack.setStyle(sf::Text::Bold);
     player_attack.setColor(sf::Color(255, 255, 255));
-    player_attack.setPosition(960,0);
+    player_attack.setPosition(1050,0);
 
+<<<<<<< HEAD
     // Setting up GUI for displaying player's score
     player_score.setFont(arial);
     player_score.setCharacterSize(30);
@@ -67,6 +68,7 @@ Game::Game()
     enemy_health.setColor(sf::Color(255, 255, 255));
     enemy_health.setPosition(400,400);
     
+    // Environment objects
     map.create_environment("floor_1280px",0,690,0,0);
     map.create_environment("wall",0,190,0,0);
     map.create_environment("wall",0,0,0,0);
@@ -96,20 +98,31 @@ Game::Game()
     map.create_environment("ceiling",690,270,0,0);
     map.create_environment("wall_20px",1190,260,0,0);
 	
+    // Enemy objects
     create_enemy("ghoul",200,600,0,0);
     create_enemy("ghoul",750,600,0,0);
     create_enemy("ghoul",1100,600,0,0);
 
-    enemies.front()->set_vitality(10);
-    enemies.front()->set_current_health(10);
-    
+    // for testing
+    enemies.front()->set_current_health(1);
+    enemies.back()->set_current_health(1);
+    health_text.setCharacterSize(30);
+    health_text.setStyle(sf::Text::Bold);
+    health_text.setColor(sf::Color(255, 255, 255));
+    health_text.setString("hello");
+    health_text.setFont(arial);
+
 }
 
+// borde uttökas så även vitality och current_health sätts 
 void Game::create_enemy(std::string type, int xp, int yp, int xs, int ys)
 {
   if (type == "ghoul")
     {
       unique_ptr<Enemy> temp = make_unique<Enemy>(xp,yp,xs,ys,"resources/enemy.png");
+      temp->set_font(arial); // enemy's health_text gets its font set
+      temp->set_vitality(10); // a Ghoul has 10 vitality
+      temp->set_current_health(temp->get_vitality()); // a Ghoul has max health when spawned
       add_enemy(move(temp));
     }
   else
@@ -208,11 +221,11 @@ void Game::process_events()
 
 void Game::update()
 {
-    //cout << clock.getElapsedTime().asSeconds() << endl;
     if(clock.getElapsedTime().asSeconds() >= 1)
     {
-	if(player.attack_counter <= 0)
-	    player.attack_counter++;
+	// if(player.attack_counter <= 0)
+	//     player.attack_counter++;
+	player.attack_counter = 1; // kolla på detta
 	    
 	clock.restart();
     }
@@ -226,10 +239,18 @@ void Game::update()
   
     player.move(movement);
 
-    for (auto it = enemies.begin(); it != enemies.end(); it++)
-      {
-	(*it) -> move("nothing");
-      }
+    // check if any enemies have died and moves enemies
+    if(!enemies.empty())
+    {
+	auto it = enemies.begin();
+	while(it != enemies.end()){
+	    (*it)->move("nothing");
+	    if((*it)->get_current_health() <= 0){
+		it = enemies.erase(it);
+	    }else
+		it++;
+	}
+    }
 }
 
 void Game::render()
@@ -271,78 +292,92 @@ void Game::render()
     }
 
   //----------ENEMY COLLISION WITH ENVIRONMENT----------
-  for (auto enemyit = enemies.begin(); enemyit != enemies.end(); enemyit++)
-    {
-      for (auto it = map.get_environments().begin(); it != map.get_environments().end(); it++)
-	{
-	  if (Collision::BoundingBoxTest((*enemyit)->draw_this(), (*it)->draw_this())) //Checks if the enemy is colliding with anything
-	    {
-	      if (dynamic_cast<Wall*> ((*it).get()) != nullptr) // Checks if the enemy is colliding with a Wall
-		{
-		  for (auto it2 = map.get_environments().begin(); it2 != map.get_environments().end(); it2++)
-		    {
-		      if (Collision::BoundingBoxTest((*enemyit)->draw_this(), (*it2)->draw_this())) //Checks if the enemy is colliding with another object
-			{
-			  if (dynamic_cast<Floor*> ((*it2).get()) != nullptr) // Checks if the other object is a Floor
-			    {
-			      //----------Colliding with both a Floor and a Wall----------
-				(*enemyit)->is_colliding("wall");
-			    }
-			  else
-			    {
-			      //----------Colliding with a Wall----------
-				(*enemyit)->is_colliding("wall");
-			    }
-			}
-		    }
-		}
-	      else
-		{
-		  //----------Colliding with a Floor----------
-		    (*enemyit)->is_colliding("floor");
-		}
-	    }
-	}
-    }
+  if(!enemies.empty()){
+      for (auto enemyit = enemies.begin(); enemyit != enemies.end(); enemyit++)
+      {
+	  for (auto it = map.get_environments().begin(); it != map.get_environments().end(); it++)
+	  {
+	      if (Collision::BoundingBoxTest((*enemyit)->draw_this(), (*it)->draw_this())) //Checks if the enemy is colliding with anything
+	      {
+		  if (dynamic_cast<Wall*> ((*it).get()) != nullptr) // Checks if the enemy is colliding with a Wall
+		  {
+		      for (auto it2 = map.get_environments().begin(); it2 != map.get_environments().end(); it2++)
+		      {
+			  if (Collision::BoundingBoxTest((*enemyit)->draw_this(), (*it2)->draw_this())) //Checks if the enemy is colliding with another object
+			  {
+			      if (dynamic_cast<Floor*> ((*it2).get()) != nullptr) // Checks if the other object is a Floor
+			      {
+				  //----------Colliding with both a Floor and a Wall----------
+				  (*enemyit)->is_colliding("wall");
+			      }
+			      else
+			      {
+				  //----------Colliding with a Wall----------
+				  (*enemyit)->is_colliding("wall");
+			      }
+			  }
+		      }
+		  }
+		  else
+		  {
+		      //----------Colliding with a Floor----------
+		      (*enemyit)->is_colliding("floor");
+		  }
+	      }
+	  }
+      }
+  }
   
-  if(attacking) //fulhax extravaganza (kollar om fiende kolliderar med players attack)
+  // ------ Collision with Player's Attack and enemies -------
+  if(attacking)
   {
       if(player.attack_counter > 0)
       {
-	  if (Collision::BoundingBoxTest(player.attack(), enemies.front()->draw_this()))
+	  if(!enemies.empty())
 	  {
-	      //enemies.front()->set_y_velocity(enemies.front()->get_y_velocity() + -0.5);
-	      enemies.front()->set_current_health(enemies.front()->get_current_health() - 
-						  player.get_strength());
+	      for (auto enemyit = enemies.begin(); enemyit != enemies.end(); enemyit++)
+	      {
+		  if (Collision::BoundingBoxTest(player.attack(), (*enemyit)->draw_this()))
+		  {
+		      (*enemyit)->set_current_health(enemies.front()->get_current_health() - 
+						     player.get_strength());
+		  }
+	      }
 	  }
-	  player.attack_counter--;
-	    
+	  player.attack_counter--;  
       }
- }
+  }
+  
   
   window.clear();
-
-    window.draw(bgsprite);
+  window.draw(bgsprite);
   
-    window.draw(player.draw_this());
-    for (auto it = enemies.begin(); it != enemies.end(); it++)
+  window.draw(player.draw_this());
+  
+  if(!enemies.empty()) // Draws enemies and their health_text
+  {
+      for (auto it = enemies.begin(); it != enemies.end(); it++)
       {
-	window.draw((*it) -> draw_this());
+	  window.draw((*it) -> draw_this());
+	  //window.draw((*it) -> health_to_text()); // ger seg. fault
       }
-    for (auto it = map.get_environments().begin(); it != map.get_environments().end(); it++)
-    {
-	window.draw((*it) -> draw_this());
-    }
-
-    if(attacking)
-	if(player.attack_counter > 0)
-	    window.draw(player.attack());
-    window.draw(draw_player_health());
-    window.draw(draw_player_attack());
-    window.draw(draw_enemy_health());
-    window.draw(draw_player_score());
-    window.display();
-    //cout << "Graphics updated" << endl;
+  }
+    
+  for (auto it = map.get_environments().begin(); it != map.get_environments().end(); it++)
+  {
+      window.draw((*it) -> draw_this());
+  }
+  
+  if(attacking)
+      if(player.attack_counter > 0)
+	  window.draw(player.attack());
+  window.draw(draw_player_health());
+  window.draw(draw_player_attack());
+  window.draw(draw_player_score());
+  window.draw(health_text);
+  //window.draw(enemies.front()->health_text);
+  window.display();
+  //cout << "Graphics updated" << endl;
 }
 
 void Game::handle_player_input(sf::Keyboard::Key key, bool is_pressed)
@@ -356,26 +391,7 @@ void Game::handle_player_input(sf::Keyboard::Key key, bool is_pressed)
 	if(is_pressed)
 	    player.jump();
     } else if (key == sf::Keyboard::W)
-    {
-	// 	cout << clock.getElapsedTime().asSeconds() << endl;
-	// 	if(is_pressed){
-	// 	    cout << "Magic Missile!" << endl; // player.
-	// 	    if(clock.getElapsedTime().asSeconds() >= 1.0)
-	// 	    {
-	// 		cout << "attacking" << endl;
-	// 	        attacking = true;
-	// 		clock.restart();
-	// 	    } else
-	// 		attacking = false;
-	    
-	// 	} else
-	// 	    attacking = false;
-	// }
-	//if(is_pressed){
-	//    cout << "Magic Missile!" << endl;
-	//}
 	attacking = is_pressed;
-    }
 }
 
 sf::Text Game::draw_player_health()
@@ -391,21 +407,10 @@ sf::Text Game::draw_player_health()
 sf::Text Game::draw_player_attack()
 {
     stringstream ss;
-    ss << "Your attack is: " << player.get_strength() << " + " << player.get_weapon_damage();
+    ss << "Attack: " << player.get_strength() << " + " << player.get_weapon_damage();
     player_attack.setString(ss.str());
 
     return player_attack;
-}
-
-sf::Text Game::draw_enemy_health()
-{
-    stringstream ss;
-    ss << enemies.front()->get_current_health() << "/" << enemies.front()->get_vitality();
-    enemy_health.setString(ss.str());
-    enemy_health.setPosition(enemies.front()->get_x_pos() - 30, enemies.front()->get_y_pos() - 40);
-    
-    return enemy_health;
-
 }
 
 sf::Text Game::draw_player_score()
