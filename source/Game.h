@@ -29,10 +29,7 @@ private:
     void handle_player_input(sf::Keyboard::Key key, bool is_pressed);
     sf::Text draw_player_health();
     sf::Text draw_player_attack();
-  
-    //sf::Text draw_enemy_health();
-    void draw_enemy_health();
-    
+
     sf::RenderWindow window {};
     sf::Clock clock {};
     Player player {};
@@ -41,8 +38,8 @@ private:
 
     sf::Text player_health {};
     sf::Text player_attack {};
-    //sf::Text enemy_health {};
     sf::Font arial {};
+    sf::Text health_text {};
     
     std::string movement {};
     bool move_left {false};

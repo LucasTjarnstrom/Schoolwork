@@ -49,13 +49,7 @@ Game::Game()
     player_attack.setColor(sf::Color(255, 255, 255));
     player_attack.setPosition(960,0);
 
-    // Setting up testing for enemy hp
-    // enemy_health.setFont(arial);
-    // enemy_health.setCharacterSize(30);
-    // enemy_health.setStyle(sf::Text::Bold);
-    // enemy_health.setColor(sf::Color(255, 255, 255));
-    // enemy_health.setPosition(400,400);
-    
+    // Environment object
     map.create_environment("floor",0,710,0,0);
     map.create_environment("floor",500,710,0,0);
     map.create_environment("floor",1000,710,0,0);
@@ -63,12 +57,22 @@ Game::Game()
     map.create_environment("wall",0,210,0,0);
     map.create_environment("ceiling",0,500,0,0);	
 
+    // Enemy objects
     create_enemy("ghoul",200,550,0,0);
     create_enemy("ghoul",300,550,0,0);
 
     // for testing
     enemies.front()->set_current_health(1);
     enemies.back()->set_current_health(1);
+
+   
+    health_text.setCharacterSize(30);
+    health_text.setStyle(sf::Text::Bold);
+    health_text.setColor(sf::Color(255, 255, 255));
+    health_text.setString("hello");
+    health_text.setFont(arial);
+ 
+
 }
 
 // borde uttökas så även vitality och current_health sätts 
@@ -180,8 +184,9 @@ void Game::update()
 {
     if(clock.getElapsedTime().asSeconds() >= 1)
     {
-	if(player.attack_counter <= 0)
-	    player.attack_counter++;
+	// if(player.attack_counter <= 0)
+	//     player.attack_counter++;
+	player.attack_counter = 1; // kolla på detta
 	    
 	clock.restart();
     }
@@ -306,11 +311,13 @@ void Game::render()
   
   window.clear(sf::Color(10,110,191));
   window.draw(player.draw_this());
-  if(!enemies.empty())
+  
+  if(!enemies.empty()) // Draws enemies and their health_text
   {
       for (auto it = enemies.begin(); it != enemies.end(); it++)
       {
 	  window.draw((*it) -> draw_this());
+	  //window.draw((*it) -> health_to_text()); // ger seg. fault
       }
   }
     
@@ -324,7 +331,8 @@ void Game::render()
 	  window.draw(player.attack());
   window.draw(draw_player_health());
   window.draw(draw_player_attack());
-  draw_enemy_health();
+  window.draw(health_text);
+  //window.draw(enemies.front()->health_text);
   window.display();
   //cout << "Graphics updated" << endl;
 }
@@ -340,9 +348,7 @@ void Game::handle_player_input(sf::Keyboard::Key key, bool is_pressed)
 	if(is_pressed)
 	    player.jump();
     } else if (key == sf::Keyboard::W)
-    {
 	attacking = is_pressed;
-    }
 }
 
 sf::Text Game::draw_player_health()
@@ -362,17 +368,4 @@ sf::Text Game::draw_player_attack()
     player_attack.setString(ss.str());
 
     return player_attack;
-}
-
-void Game::draw_enemy_health()
-{
-    // if(!enemies.empty())
-    // 	for (auto it = enemies.begin(); it != enemies.end(); it++)
-    // 	{
-    // 	    window.draw((*it) -> health_to_text());
-    // 	}
-
-    // if(!enemies.empty())
-    //     window.draw(enemies.front()->health_to_text());
-
 }
