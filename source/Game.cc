@@ -16,6 +16,7 @@
 #include "Floor.h"
 #include "Wall.h"
 #include "Ceiling.h"
+#include "Coin.h"
 #include "Collision.h"
 #include "High_Score_List.h"
 #include "Enemy.h"
@@ -114,6 +115,11 @@ Game::Game()
     map.create_environment("floor_filler",610,705,0,0);
     map.create_environment("floor_filler",650,705,0,0);
 
+    map.create_environment("coin", 350,327,0,0);
+    map.create_environment("coin", 450,327,0,0);
+    map.create_environment("coin", 400,327,0,0);
+    map.create_environment("coin", 950,227,0,0);
+    map.create_environment("coin", 790,325,0,0);
 
     // Enemy objects
     create_enemy("ghoul",200,600,0,0);
@@ -309,6 +315,12 @@ void Game::render()
 	    {
 	      player.is_colliding("ceiling");
 	    }
+	  else if (dynamic_cast<Coin*> ((*it).get()) != nullptr) // checks if player is colliding with a Coin
+	  {
+	      player.is_colliding("coin");
+	      it = map.get_environments().erase(it);
+	      
+	  }
 	  else
 	    {
 	      //----------Colliding with a Floor----------

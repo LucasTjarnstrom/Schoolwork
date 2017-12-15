@@ -101,6 +101,10 @@ void Player::is_colliding(string arg)
       y_pos += 5;
       y_velocity = 1;
     }
+  else if(arg == "coin")
+  {
+      score += 100;
+  }
 }
 
 sf::Sprite Player::attack()
