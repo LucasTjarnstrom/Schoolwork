@@ -27,10 +27,10 @@ private:
     void update();
     void render();
     void handle_player_input(sf::Keyboard::Key key, bool is_pressed);
-    void game_over();
     sf::Text draw_player_health();
     sf::Text draw_player_attack();
     sf::Text draw_player_score();
+    sf::Text draw_name_entry();
     
     sf::RenderWindow window {};
     sf::Clock clock {};
@@ -42,6 +42,8 @@ private:
     sf::Text player_attack {};
     sf::Text player_score {};
     sf::Text health_text {};
+    sf::Text enter_your_name {};
+    sf::Text name_entry {};
     sf::Font arial {};
     sf::Texture bgtexture;
     sf::Sprite bgsprite;
