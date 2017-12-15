@@ -381,8 +381,7 @@ void Game::render()
 						     player.get_strength());
 		  }
 	      }
-	  }
-	  player.attack_counter--;  
+	  } 
       }
   }
   
@@ -407,14 +406,16 @@ void Game::render()
   }
   
   if(attacking)
+  {
       if(player.attack_counter > 0)
       {
 	  window.draw(player.attack());
+	  player.attack_counter--; 
       }
+  }
   window.draw(draw_player_health());
   window.draw(draw_player_attack());
   window.draw(draw_player_score());
-  window.draw(player.attack());
   //window.draw(health_text);
   //window.draw(enemies.front()->health_text);
   window.display();
