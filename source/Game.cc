@@ -29,7 +29,7 @@ Game::Game()
 {
     player.set_vitality(10);
     player.set_current_health(player.get_vitality());
-    player.set_strength(1);
+    player.set_strength(2);
 
     window.setFramerateLimit(60); // FPS set to 60
 
@@ -51,14 +51,14 @@ Game::Game()
     player_attack.setCharacterSize(30);
     player_attack.setStyle(sf::Text::Bold);
     player_attack.setColor(sf::Color(255, 255, 255));
-    player_attack.setPosition(1050,0);
+    player_attack.setPosition(20,0);
 
     // Setting up GUI for displaying player's score
     player_score.setFont(arial);
     player_score.setCharacterSize(30);
     player_score.setStyle(sf::Text::Bold);
     player_score.setColor(sf::Color(255, 255, 255));
-    player_score.setPosition(1050,40);
+    player_score.setPosition(20,40);
     
     // Environment objects
     map.create_environment("floor_1280px",0,690,0,0);
@@ -121,8 +121,8 @@ Game::Game()
     create_enemy("ghoul",1100,600,0,0);
 
     // for testing
-    enemies.front()->set_current_health(1);
-    enemies.back()->set_current_health(1);
+    //enemies.front()->set_current_health(1);
+    //enemies.back()->set_current_health(1);
     health_text.setCharacterSize(30);
     health_text.setStyle(sf::Text::Bold);
     health_text.setColor(sf::Color(255, 255, 255));
@@ -138,8 +138,9 @@ void Game::create_enemy(std::string type, int xp, int yp, int xs, int ys)
     {
       unique_ptr<Enemy> temp = make_unique<Enemy>(xp,yp,xs,ys,"resources/enemy.png");
       temp->set_font(arial); // enemy's health_text gets its font set
-      temp->set_vitality(10); // a Ghoul has 10 vitality
+      temp->set_vitality(4); // a Ghoul has 4 vitality
       temp->set_current_health(temp->get_vitality()); // a Ghoul has max health when spawned
+      temp->set_score(200); // a Ghoul has 200 score
       add_enemy(move(temp));
     }
   else
@@ -270,7 +271,8 @@ void Game::update()
 	      (*it) -> move("left");
 	    }
 	  if((*it)->get_current_health() <= 0){
-	    it = enemies.erase(it);
+	      player.set_score(player.get_score() + (*it)->get_score());
+	      it = enemies.erase(it);
 	  }else
 	    it++;
 	}
@@ -398,7 +400,7 @@ void Game::render()
   window.draw(draw_player_health());
   window.draw(draw_player_attack());
   window.draw(draw_player_score());
-  window.draw(health_text);
+  //window.draw(health_text);
   //window.draw(enemies.front()->health_text);
   window.display();
   //cout << "Graphics updated" << endl;
