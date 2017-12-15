@@ -35,31 +35,31 @@ Game::Game()
     window.setFramerateLimit(60); // FPS set to 60
 
     // Font
-    arial.loadFromFile("resources/arial.ttf");
+    old_london.loadFromFile("resources/OldLondon.ttf");
 
     //Background
     bgtexture.loadFromFile("resources/background.png");
     bgsprite.setTexture(bgtexture);
     
     // Setting up GUI for displaying player's health
-    player_health.setFont(arial);
+    player_health.setFont(old_london);
     player_health.setCharacterSize(30);
-    player_health.setStyle(sf::Text::Bold);
-    player_health.setColor(sf::Color(255, 255, 255));
+    //player_health.setStyle(sf::Text::Bold);
+    player_health.setColor(sf::Color(249, 72, 59));
 
     // Setting up GUI for displaying player's strength + weapon damage
-    player_attack.setFont(arial);
+    player_attack.setFont(old_london);
     player_attack.setCharacterSize(30);
     player_attack.setStyle(sf::Text::Bold);
-    player_attack.setColor(sf::Color(255, 255, 255));
+    player_attack.setColor(sf::Color(249, 72, 59));
     player_attack.setPosition(20,0);
 
     // Setting up GUI for displaying player's score
-    player_score.setFont(arial);
+    player_score.setFont(old_london);
     player_score.setCharacterSize(30);
     player_score.setStyle(sf::Text::Bold);
-    player_score.setColor(sf::Color(255, 255, 255));
-    player_score.setPosition(20,40);
+    player_score.setColor(sf::Color(249, 72, 59));
+    player_score.setPosition(20,30);
     
     // Environment objects
     map.create_environment("floor_1280px",0,690,0,0);
@@ -115,11 +115,11 @@ Game::Game()
     map.create_environment("floor_filler",610,705,0,0);
     map.create_environment("floor_filler",650,705,0,0);
 
-    map.create_environment("coin", 350,327,0,0);
-    map.create_environment("coin", 450,327,0,0);
-    map.create_environment("coin", 400,327,0,0);
-    map.create_environment("coin", 950,227,0,0);
-    map.create_environment("coin", 790,325,0,0);
+    map.create_environment("coin", 350,330,0,0);
+    map.create_environment("coin", 450,330,0,0);
+    map.create_environment("coin", 400,330,0,0);
+    map.create_environment("coin", 950,230,0,0);
+    map.create_environment("coin", 790,328,0,0);
 
     // Enemy objects
     create_enemy("ghoul",200,600,0,0);
@@ -133,7 +133,7 @@ Game::Game()
     health_text.setStyle(sf::Text::Bold);
     health_text.setColor(sf::Color(255, 255, 255));
     health_text.setString("hello");
-    health_text.setFont(arial);
+    health_text.setFont(old_london);
 
 }
 
@@ -143,7 +143,7 @@ void Game::create_enemy(std::string type, int xp, int yp, int xs, int ys)
   if (type == "ghoul")
     {
       unique_ptr<Enemy> temp = make_unique<Enemy>(xp,yp,xs,ys,"resources/enemy.png");
-      temp->set_font(arial); // enemy's health_text gets its font set
+      temp->set_font(old_london); // enemy's health_text gets its font set
       temp->set_vitality(4); // a Ghoul has 4 vitality
       temp->set_current_health(temp->get_vitality()); // a Ghoul has max health when spawned
       temp->set_score(200); // a Ghoul has 200 score
@@ -408,10 +408,13 @@ void Game::render()
   
   if(attacking)
       if(player.attack_counter > 0)
+      {
 	  window.draw(player.attack());
+      }
   window.draw(draw_player_health());
   window.draw(draw_player_attack());
   window.draw(draw_player_score());
+  window.draw(player.attack());
   //window.draw(health_text);
   //window.draw(enemies.front()->health_text);
   window.display();
@@ -437,7 +440,7 @@ sf::Text Game::draw_player_health()
     stringstream ss;
     ss << player.get_current_health() << "/" << player.get_vitality();
     player_health.setString(ss.str());
-    player_health.setPosition(player.get_x_pos() - 40, player.get_y_pos() - 40);
+    player_health.setPosition(player.get_x_pos() - 28, player.get_y_pos() - 40);
 
     return player_health;
 }

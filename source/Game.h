@@ -41,7 +41,7 @@ private:
     sf::Text player_attack {};
     sf::Text player_score {};
     sf::Text health_text {};
-    sf::Font arial {};
+    sf::Font old_london {};
 
     sf::Texture bgtexture;
     sf::Sprite bgsprite;

@@ -25,8 +25,8 @@ sf::Sprite Player::draw_this()
 {
     sprite.setPosition(x_pos, y_pos);
     
-    if(faced_right != facing_right) 
-    	sprite.scale(-1.f,1.f);   
+    if(faced_right != facing_right)
+    	sprite.scale(-1.f,1.f);
     else
 	sprite.scale(1.f,1.f);
     faced_right = facing_right;
@@ -110,9 +110,9 @@ void Player::is_colliding(string arg)
 sf::Sprite Player::attack()
 {
     if(facing_right)
-	attack_.get_sprite().setPosition(x_pos + 50, y_pos+25);
+	attack_.get_sprite().setPosition(x_pos + 20, y_pos-7);
     else
-	attack_.get_sprite().setPosition(x_pos - 100, y_pos+25);
-    
+	attack_.get_sprite().setPosition(x_pos - 70, y_pos-7);
+  
     return attack_.get_sprite();
 }
