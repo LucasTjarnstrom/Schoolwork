@@ -6,6 +6,7 @@
 #include "Floor.h"
 #include "Wall.h"
 #include "Ceiling.h"
+#include "Goal.h"
 #include <vector>
 #include <memory>
 
@@ -56,6 +57,11 @@ void Map::create_environment(std::string type, int xp, int yp, int xs, int ys)
   else if (type == "ceiling")
     {
       unique_ptr<Ceiling> temp = make_unique<Ceiling> (xp,yp,xs,ys,"resources/floor2.png");
+      add_environment(move(temp)); 
+    }
+  else if (type == "goal")
+    {
+      unique_ptr<Goal> temp = make_unique<Goal> (xp,yp,xs,ys,"resources/goal.png");
       add_environment(move(temp)); 
     }
   else

@@ -27,6 +27,7 @@ private:
     void update();
     void render();
     void handle_player_input(sf::Keyboard::Key key, bool is_pressed);
+    void game_over();
     sf::Text draw_player_health();
     sf::Text draw_player_attack();
     sf::Text draw_player_score();
@@ -42,7 +43,6 @@ private:
     sf::Text player_score {};
     sf::Text health_text {};
     sf::Font arial {};
-
     sf::Texture bgtexture;
     sf::Sprite bgsprite;
 
@@ -51,7 +51,7 @@ private:
     bool move_right {false};
     bool jump {false};
     bool attacking {false};
-    
+    bool game_won {false};
 };
 
 #endif

@@ -19,6 +19,7 @@
 #include "Collision.h"
 #include "High_Score_List.h"
 #include "Enemy.h"
+#include "Goal.h"
 
 using namespace std;
 
@@ -90,6 +91,7 @@ Game::Game()
     map.create_environment("ceiling",690,270,0,0);
     map.create_environment("wall_20px",1190,260,0,0);
 
+    map.create_environment("goal",400,500,0,0);
 
     map.create_environment("floor_filler",10,450,0,0);
     map.create_environment("floor_filler",50,450,0,0);
@@ -168,12 +170,16 @@ void Game::run(string user_choice)
     if ( user_choice == "Start game" )
     {
 	clock.restart(); // restart clock
-	while (window.isOpen())
+	while (window.isOpen() && !game_won)
 	{
 	    process_events();
 	    update();
 	    render();
-	}   
+	}
+	if (game_won)
+	  {
+	    game_over();
+	  }
     }
 
   else if ( user_choice == "Continue" )
@@ -298,7 +304,7 @@ void Game::render()
 		      else
 			{
 			  //----------Colliding with a Wall----------
-			  player.is_colliding("wall");	  
+			  player.is_colliding("wall");
 			}
 		    }
 		}
@@ -306,6 +312,10 @@ void Game::render()
 	  else if (dynamic_cast<Ceiling*> ((*it).get()) != nullptr) //Checks if player is colliding with a Ceiling
 	    {
 	      player.is_colliding("ceiling");
+	    }
+	  else if (dynamic_cast<Goal*> ((*it).get()) != nullptr) //Checks if player is colliding with a Goal
+	    {
+	      game_won = true;
 	    }
 	  else
 	    {
@@ -444,4 +454,9 @@ sf::Text Game::draw_player_score()
     player_score.setString(ss.str());
 
     return player_score;
+}
+
+void Game::game_over()
+{
+  cout << "You win!" << endl;
 }
