@@ -25,7 +25,7 @@ using namespace std;
 
 Game::Game()
     : window(sf::VideoMode(1280, 720), "Help Alucard rescue the cat in this gothic adventure"),
-      player{Player(200,550,0,0,"resources/player.png")}
+      player{Player(650,430,0,0,"resources/player.png")}
 
 {
     player.set_vitality(10);
