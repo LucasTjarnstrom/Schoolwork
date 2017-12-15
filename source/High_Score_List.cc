@@ -17,6 +17,14 @@ High_Score_List::High_Score_List()
   return_button{Button(12,12,0,0,"resources/button_quit.png")} // Placeholder icon for "Return"
 {
   window.setFramerateLimit(60);
+
+  arial.loadFromFile("resources/arial.ttf");
+  score_text.setFont(arial);
+  score_text.setCharacterSize(30);
+  score_text.setStyle(sf::Text::Bold);
+  score_text.setColor(sf::Color(255,255,255));
+  score_text.setPosition(400,0);
+  score_text.setString("Hello world");
 }
 
 void High_Score_List::run()
@@ -68,13 +76,6 @@ void High_Score_List::process_events()
 
 void High_Score_List::render()
 {
-
-  arial.loadFromFile("resources/arial.ttf");
-  score_text.setFont(arial);
-  score_text.setCharacterSize(30);
-  score_text.setStyle(sf::Text::Bold);
-  score_text.setColor(sf::Color(255,255,255));
-  score_text.setString("Hello world");
 
   splash_screen.get_sprite().setPosition(560,300);
   return_button.get_sprite().setPosition(1,1);
