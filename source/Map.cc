@@ -7,6 +7,7 @@
 #include "Wall.h"
 #include "Ceiling.h"
 #include "Coin.h"
+#include "Weapon.h"
 #include <vector>
 #include <memory>
 
@@ -62,6 +63,11 @@ void Map::create_environment(std::string type, int xp, int yp, int xs, int ys)
     else if (type == "coin")
     {
 	unique_ptr<Coin> temp = make_unique<Coin> (xp,yp,xs,ys,"resources/coin.png");
+	add_environment(move(temp));  
+    }
+    else if (type == "weapon")
+    {
+	unique_ptr<Weapon> temp = make_unique<Weapon> (xp,yp,xs,ys,"resources/weapon.png");
 	add_environment(move(temp));  
     }
     else
