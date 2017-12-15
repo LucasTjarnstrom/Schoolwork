@@ -26,7 +26,7 @@ public:
   void save_to_file();
   //void load_to_file(std::string);
 
-protected:
+  protected:
   std::vector<std::unique_ptr<Entry>> entries;
 
   sf::RenderWindow window{};
@@ -36,8 +36,9 @@ protected:
   void render();
   void process_events();
 
-  sf::Font arial {};
+  sf::Font caviar {};
   sf::Text score_text {};
+  sf::Text score_text2 {};
 
 };
 
