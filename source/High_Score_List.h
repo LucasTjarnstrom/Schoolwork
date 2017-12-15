@@ -36,6 +36,9 @@ protected:
   void render();
   void process_events();
 
+  sf::Font arial {};
+  sf::Text score_text {};
+
 };
 
 #endif 

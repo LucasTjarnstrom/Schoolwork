@@ -26,9 +26,6 @@ void High_Score_List::run()
       process_events();
       render();
     }
-
-  sf::Text text;
-  text.setString("Hello world");
 }
 
 void High_Score_List::process_events()
@@ -71,12 +68,20 @@ void High_Score_List::process_events()
 
 void High_Score_List::render()
 {
+
+  arial.loadFromFile("resources/arial.ttf");
+  score_text.setFont(arial);
+  score_text.setCharacterSize(30);
+  score_text.setStyle(sf::Text::Bold);
+  score_text.setColor(sf::Color(255,255,255));
+  score_text.setString("Hello world");
+
   splash_screen.get_sprite().setPosition(560,300);
   return_button.get_sprite().setPosition(1,1);
   window.clear(sf::Color(10,110,191));
   window.draw(splash_screen.get_sprite());
   window.draw(return_button.get_sprite());
-  window.draw(text);
+  window.draw(score_text);
   window.display();
 }
 
