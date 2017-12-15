@@ -30,6 +30,7 @@ private:
     sf::Text draw_player_health();
     sf::Text draw_player_attack();
     sf::Text draw_player_score();
+    sf::Text draw_name_entry();
     
     sf::RenderWindow window {};
     sf::Clock clock {};
@@ -42,7 +43,9 @@ private:
     sf::Text player_score {};
     sf::Text health_text {};
     sf::Font old_london {};
-
+    sf::Text enter_your_name {};
+    sf::Text name_entry {};
+    sf::Font arial {};
     sf::Texture bgtexture;
     sf::Sprite bgsprite;
 
@@ -51,7 +54,7 @@ private:
     bool move_right {false};
     bool jump {false};
     bool attacking {false};
-    
+    bool game_won {false};
 };
 
 #endif
