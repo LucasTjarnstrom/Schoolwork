@@ -447,7 +447,6 @@ void Game::render()
 	  player.attack_counter--; 
 	}
     }
-  window.draw(draw_player_health());
   if (!game_won)
     window.draw(draw_player_health());
   else
