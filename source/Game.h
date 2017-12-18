@@ -46,8 +46,8 @@ private:
     sf::Text enter_your_name {};
     sf::Text name_entry {};
     sf::Font arial {};
-    sf::Texture bgtexture;
-    sf::Sprite bgsprite;
+    sf::Texture bgtexture {};
+    sf::Sprite bgsprite {};
 
     std::string movement {};
     bool move_left {false};

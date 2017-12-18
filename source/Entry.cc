@@ -10,7 +10,6 @@
 using namespace std;
 
 Entry::Entry()
-  : score{}, name{}, date{}
 {
 }
 

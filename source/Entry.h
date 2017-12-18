@@ -9,19 +9,19 @@
 
 class Entry
 {
- public:
-  Entry();
+public:
+    Entry();
 
-  std::string name {};
-  std::string date {};
-  int score {};
+    std::string name {};
+    std::string date {};
+    int score {};
 
-  std::string return_time();
+    std::string return_time();
 
-  int get_score();
-  std::string to_string();
+    int get_score();
+    std::string to_string();
 
- protected:
+protected:
 
 };
 
