@@ -165,6 +165,7 @@ void Game::create_enemy(std::string type, int xp, int yp, int xs, int ys)
       temp->set_vitality(4); // a Ghoul has 4 vitality
       temp->set_current_health(temp->get_vitality()); // a Ghoul has max health when spawned
       temp->set_score(200); // a Ghoul has 200 score
+      temp->set_strength(1); // a Ghoul has 1 strength
       add_enemy(move(temp));
     }
   else
@@ -269,6 +270,7 @@ void Game::update()
 	// if(player.attack_counter <= 0)
 	//     player.attack_counter++;
 	player.attack_counter = 1; // kolla på detta
+	player_recently_hit = false;
 	    
 	clock.restart();
     }
@@ -302,6 +304,14 @@ void Game::update()
 	    it++;
 	}
       }
+    
+    // Check if player has died
+    if(player.get_current_health() <= 0)
+    {
+        player_dead = true;
+	player.set_y_pos(2000);
+    }
+
 }
 
 void Game::render()
@@ -343,13 +353,12 @@ void Game::render()
 	  else if (dynamic_cast<Goal*> ((*it).get()) != nullptr) //Checks if player is colliding with a Goal
 	    {
 	      game_won = true;
+	      player.set_y_pos(2000);
 	    }
-	  else if (dynamic_cast<Weapon*> ((*it).get()) != nullptr) // checks if player is colliding with a Coin
+	  else if (dynamic_cast<Weapon*> ((*it).get()) != nullptr) // checks if player is colliding with a Weapon
 	  {
 	      player.set_weapon_damage(player.get_weapon_damage() + 2);
-//player.is_colliding("coin");
 	      it = map.get_environments().erase(it);
-	      
 	  }
 	  else
 	  {
@@ -407,21 +416,35 @@ void Game::render()
 	      {
 		  if (Collision::BoundingBoxTest(player.attack(), (*enemyit)->draw_this()))
 		  {
-		      (*enemyit)->set_current_health(enemies.front()->get_current_health() - 
-						     player.get_strength() - player.get_weapon_damage());
+		      (*enemyit)->set_current_health((*enemyit)->get_current_health() - 
+						     player.get_strength() - player.get_weapon_damage());    
 		  }
 	      }
 	  } 
       }
   }
   
-  
+  // ----- Collision with Player and Enemy -----
+  if(!enemies.empty())
+  {      
+      for (auto enemyit = enemies.begin(); enemyit != enemies.end(); enemyit++)
+      {
+	  if (Collision::BoundingBoxTest(player.draw_this(), (*enemyit)->draw_this()))
+	  {
+	      if(!player_recently_hit)
+	      {
+		  player.set_current_health(player.get_current_health() - (*enemyit)->get_strength());
+		  cout << "Taking damage" << endl;
+		  player_recently_hit = true;
+	      }
+	      
+	  }
+      }
+  }
+
   window.clear();
   window.draw(bgsprite);
-  
-  if (!game_won)
-  window.draw(player.draw_this());
-  
+ 
   if(!enemies.empty()) // Draws enemies and their health_text
   {
       for (auto it = enemies.begin(); it != enemies.end(); it++)
@@ -444,24 +467,25 @@ void Game::render()
 	  player.attack_counter--; 
 	}
     }
-  if (!game_won)
-    window.draw(draw_player_health());
-  else
-    {
+  window.draw(player.draw_this());
+  window.draw(draw_player_health());
+  if(game_won || player_dead)
+  {
       window.draw(enter_your_name);
       window.draw(name_entry);
-    }
+  }
   window.draw(draw_player_attack());
   window.draw(draw_player_score());
   //window.draw(health_text);
   //window.draw(enemies.front()->health_text);
   window.display();
   //cout << "Graphics updated" << endl;
+
 }
 
 void Game::handle_player_input(sf::Keyboard::Key key, bool is_pressed)
 {
-  if (!game_won)
+  if (!game_won && !player_dead)
     {
       if (key == sf::Keyboard::A)
 	move_left = is_pressed;

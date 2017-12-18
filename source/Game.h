@@ -55,6 +55,8 @@ private:
     bool jump {false};
     bool attacking {false};
     bool game_won {false};
+    bool player_dead {false};
+    bool player_recently_hit {false};
 };
 
 #endif
