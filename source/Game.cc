@@ -20,7 +20,6 @@
 #include "Collision.h"
 #include "High_Score_List.h"
 #include "Enemy.h"
-#include "Goal.h"
 
 using namespace std;
 
@@ -61,21 +60,6 @@ Game::Game()
     player_score.setStyle(sf::Text::Bold);
     player_score.setColor(sf::Color(249, 72, 59));
     player_score.setPosition(20,30);
-    player_score.setColor(sf::Color(255, 255, 255));
-    player_score.setPosition(1050,40);
-
-    enter_your_name.setFont(old_london);
-    enter_your_name.setCharacterSize(30);
-    enter_your_name.setStyle(sf::Text::Bold);
-    enter_your_name.setColor(sf::Color(255, 255, 255));
-    enter_your_name.setPosition(500,400);
-    enter_your_name.setString("Enter your name:");
-
-    name_entry.setFont(old_london);
-    name_entry.setCharacterSize(30);
-    name_entry.setStyle(sf::Text::Bold);
-    name_entry.setColor(sf::Color(255, 255, 255));
-    name_entry.setPosition(500,440);
     
     // Environment objects
     map.create_environment("floor_1280px",0,690,0,0);
@@ -107,7 +91,6 @@ Game::Game()
     map.create_environment("ceiling",690,270,0,0);
     map.create_environment("wall_20px",1190,260,0,0);
 
-    map.create_environment("goal",710,600,0,0);
 
     map.create_environment("floor_filler",10,450,0,0);
     map.create_environment("floor_filler",50,450,0,0);
@@ -197,7 +180,7 @@ void Game::run(string user_choice)
 	    process_events();
 	    update();
 	    render();
-	}
+	}   
     }
 
   else if ( user_choice == "Continue" )
@@ -239,8 +222,7 @@ void Game::process_events()
 	    if (event.key.code == sf::Keyboard::Escape) //press escape -> close window
 	    {
 	    	window.close();
-	    }
-	    else
+	    } else
 		handle_player_input(event.key.code, true);
 	    break;
 	    
@@ -324,7 +306,7 @@ void Game::render()
 		      else
 			{
 			  //----------Colliding with a Wall----------
-			  player.is_colliding("wall");
+			  player.is_colliding("wall");	  
 			}
 		    }
 		}
@@ -339,10 +321,6 @@ void Game::render()
 	      it = map.get_environments().erase(it);
 	      
 	  }
-	  else if (dynamic_cast<Goal*> ((*it).get()) != nullptr) //Checks if player is colliding with a Goal
-	    {
-	      game_won = true;
-	    }
 	  else
 	    {
 	      //----------Colliding with a Floor----------
@@ -411,7 +389,6 @@ void Game::render()
   window.clear();
   window.draw(bgsprite);
   
-  if (!game_won)
   window.draw(player.draw_this());
   
   if(!enemies.empty()) // Draws enemies and their health_text
@@ -424,26 +401,19 @@ void Game::render()
   }
     
   for (auto it = map.get_environments().begin(); it != map.get_environments().end(); it++)
-    {
+  {
       window.draw((*it) -> draw_this());
-    }
+  }
   
   if(attacking)
-    {
+  {
       if(player.attack_counter > 0)
-	{
+      {
 	  window.draw(player.attack());
 	  player.attack_counter--; 
-	}
-    }
+      }
+  }
   window.draw(draw_player_health());
-  if (!game_won)
-    window.draw(draw_player_health());
-  else
-    {
-      window.draw(enter_your_name);
-      window.draw(name_entry);
-    }
   window.draw(draw_player_attack());
   window.draw(draw_player_score());
   //window.draw(health_text);
@@ -454,82 +424,16 @@ void Game::render()
 
 void Game::handle_player_input(sf::Keyboard::Key key, bool is_pressed)
 {
-  if (!game_won)
-    {
-      if (key == sf::Keyboard::A)
+    if (key == sf::Keyboard::A)
 	move_left = is_pressed;
-      else if (key == sf::Keyboard::D)
+    else if (key == sf::Keyboard::D)
 	move_right = is_pressed;
-      else if (key == sf::Keyboard::Space)
-	{
-	  if(is_pressed)
-	    player.jump();
-	}
-      else if (key == sf::Keyboard::W)
-	attacking = is_pressed;
-    }
-  else
+    else if (key == sf::Keyboard::Space)
     {
-      if(is_pressed)
-	{
-	  stringstream ss;
-	  string temp = name_entry.getString().toAnsiString();
-	  if (key == sf::Keyboard::A) //friday afternoon code, pls don't judge
-	    temp.append("A");
-	  else if (key == sf::Keyboard::B)
-	    temp.append("B");
-	  else if (key == sf::Keyboard::C)
-	    temp.append("C");
-	  else if (key == sf::Keyboard::D)
-	    temp.append("D");
-	  else if (key == sf::Keyboard::E)
-	    temp.append("E");
-	  else if (key == sf::Keyboard::F)
-	    temp.append("F");
-	  else if (key == sf::Keyboard::G)
-	    temp.append("G");
-	  else if (key == sf::Keyboard::H)
-	    temp.append("H");
-	  else if (key == sf::Keyboard::I)
-	    temp.append("I");
-	  else if (key == sf::Keyboard::J)
-	    temp.append("J");
-	  else if (key == sf::Keyboard::K)
-	    temp.append("K");
-	  else if (key == sf::Keyboard::L)
-	    temp.append("L");
-	  else if (key == sf::Keyboard::M)
-	    temp.append("M");
-	  else if (key == sf::Keyboard::N)
-	    temp.append("N");
-	  else if (key == sf::Keyboard::O)
-	    temp.append("O");
-	  else if (key == sf::Keyboard::P)
-	    temp.append("P");
-	  else if (key == sf::Keyboard::Q)
-	    temp.append("Q");
-	  else if (key == sf::Keyboard::R)
-	    temp.append("R");
-	  else if (key == sf::Keyboard::S)
-	    temp.append("S");
-	  else if (key == sf::Keyboard::T)
-	    temp.append("T");
-	  else if (key == sf::Keyboard::U)
-	    temp.append("U");
-	  else if (key == sf::Keyboard::V)
-	    temp.append("V");
-	  else if (key == sf::Keyboard::W)
-	    temp.append("W");
-	  else if (key == sf::Keyboard::X)
-	    temp.append("X");
-	  else if (key == sf::Keyboard::Y)
-	    temp.append("Y");
-	  else if (key == sf::Keyboard::Z)
-	    temp.append("Z");
-
-	  name_entry.setString(temp);
-	}
-    }
+	if(is_pressed)
+	    player.jump();
+    } else if (key == sf::Keyboard::W)
+	attacking = is_pressed;
 }
 
 sf::Text Game::draw_player_health()
