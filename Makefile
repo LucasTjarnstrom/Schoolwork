@@ -13,12 +13,11 @@ CCFLAGS = -std=c++17 -Wpedantic -Wall -Wextra -Weffc++ -I$(SFML_ROOT)/include
 SFMLFLAGS = -L$(SFML_ROOT)/lib -lsfml-graphics -lsfml-window -lsfml-system
 
 #Objektmoduler
-OBJECTS = build/main.o build/Drawable.o build/Character.o build/Player.o build/Button.o build/Level.o build/Game.o build/Start_Menu.o build/Environment.o build/Floor.o build/Wall.o build/Ceiling.o build/Map.o build/Collision.o build/High_Score_List.o build/Enemy.o build/Attack.o build/Player_Attack.o build/Goal.o build/Coin.o build/Weapon.o build/Entry.o
+OBJECTS = build/main.o build/Drawable.o build/Character.o build/Player.o build/Button.o build/Level.o build/Game.o build/Start_Menu.o build/Environment.o build/Floor.o build/Wall.o build/Ceiling.o build/Map.o build/Collision.o build/High_Score_List.o build/Enemy.o build/Attack.o build/Player_Attack.o build/Goal.o build/Coin.o build/Entry.o
 
 # Huvudmål
 main: $(OBJECTS)
-	$(CCC) build/main.o build/Drawable.o build/Character.o build/Player.o build/Button.o build/Game.o build/Start_Menu.o build/Environment.o build/Floor.o build/Wall.o build/Ceiling.o build/Map.o build/Collision.o build/High_Score_List.o build/Enemy.o build/Attack.o build/Player_Attack.o build/Goal.o build/Coin.o build/Weapon.o build/Entry.o -o main $(SFMLFLAGS)
->>>>>>> weapon
+	$(CCC) build/main.o build/Drawable.o build/Character.o build/Player.o build/Button.o build/Game.o build/Start_Menu.o build/Environment.o build/Floor.o build/Wall.o build/Ceiling.o build/Map.o build/Collision.o build/High_Score_List.o build/Enemy.o build/Attack.o build/Player_Attack.o build/Goal.o build/Coin.o build/Entry.o -o main $(SFMLFLAGS)
 
 # Delmål
 build/main.o: $(SOURCE)/main.cc
@@ -83,9 +82,6 @@ build/Coin.o : $(SOURCE)/Coin.h $(SOURCE)/Coin.cc
 
 build/Entry.o : $(SOURCE)/Entry.h $(SOURCE)/Entry.cc
 	$(CCC) $(CCFLAGS) -c $(SOURCE)/Entry.cc -o build/Entry.o
-
-build/Weapon.o : $(SOURCE)/Weapon.h $(SOURCE)/Weapon.cc
-	$(CCC) $(CCFLAGS) -c $(SOURCE)/Weapon.cc -o build/Weapon.o
 
 .PHONY : clean
 clean:

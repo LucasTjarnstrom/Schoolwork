@@ -6,16 +6,24 @@
 #define WEAPON_H
 
 #include <string>
-#include "Environment.h"
 
-class Weapon : public Environment
+class Weapon : public Item
 {
 public:
-    Weapon(double,double,double,double, std::string);
-    
-    sf::Sprite draw_this() override;
-    void is_colliding(std::string) override;
-    
-};
+    Weapon() = default;                     // default constructor
+    Weapon(std::string,                     // constructor
+	   int,int,int,int,sprite);                  
+    Weapon(Item const & it)                 // copy constructor
+    Weapon(Weapon && it);                   // move constructor
+    Weapon& operator= (Weapon const & it);  // copy assignment
+    Weapon& operator= (Weapon && it);       // move assignment
+
+    std::string get_name() const; // same functionality as get_name in Item
+    void set_name(std::string);   // same functionality as set_name in Item
+    void activate() const override;  
+
+protected:
+    std::string name {};
+}
 
 #endif
