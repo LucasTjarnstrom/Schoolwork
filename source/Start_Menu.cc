@@ -7,11 +7,26 @@ using namespace std;
 Start_Menu::Start_Menu()
     : window(sf::VideoMode(1280, 720), "Start menu"),
     start_button{Button(12,12,0,0,"resources/button_start-game.png")},
-    continue_button{Button(12,12,0,0,"resources/button_continue.png")},
     high_score_button{Button(12,12,0,0,"resources/button_high-scores.png")},
     quit_button{Button(12,12,0,0,"resources/button_quit.png")}
 {
-    window.setFramerateLimit(60);    
+    window.setFramerateLimit(60);
+
+    // Background
+    background_texture.loadFromFile("resources/background.png");
+    background_sprite.setTexture(background_texture);
+
+    // Font
+    font.loadFromFile("resources/OldLondon.ttf");
+
+    // Title
+    title.setFont(font);
+    title.setCharacterSize(180);
+    title.setStyle(sf::Text::Bold);
+    title.setColor(sf::Color(255,255,255));
+    title.setPosition(170,40);
+    title.setString("Lorem Ipsum");
+
 }
 
 string Start_Menu::run()
@@ -52,23 +67,18 @@ string Start_Menu::process_events()
 	  {
 	    if (event.mouseButton.button == sf::Mouse::Left)
 	      {
-		if(sf::Mouse::getPosition(window).x > 560 && sf::Mouse::getPosition(window).x < 720 &&
-		   sf::Mouse::getPosition(window).y > 300 && sf::Mouse::getPosition(window).y < 350)
+		if(sf::Mouse::getPosition(window).x > 490 && sf::Mouse::getPosition(window).x < 790 &&
+		   sf::Mouse::getPosition(window).y > 270 && sf::Mouse::getPosition(window).y < 390)
 		  {
 		    return "Start game";
 		  }
-		else if (sf::Mouse::getPosition(window).x > 560 && sf::Mouse::getPosition(window).x < 720 &&
-			 sf::Mouse::getPosition(window).y > 360 && sf::Mouse::getPosition(window).y < 410)
-		  {
-		    return "Continue";
-		  }
-		else if (sf::Mouse::getPosition(window).x > 560 && sf::Mouse::getPosition(window).x < 720 &&
-			 sf::Mouse::getPosition(window).y > 420 && sf::Mouse::getPosition(window).y < 470)
+		else if (sf::Mouse::getPosition(window).x > 490 && sf::Mouse::getPosition(window).x < 790 &&
+			 sf::Mouse::getPosition(window).y > 400 && sf::Mouse::getPosition(window).y < 520)
 		  {
 		    return "Show high scores";
 		  }
-		else if (sf::Mouse::getPosition(window).x > 560 && sf::Mouse::getPosition(window).x < 720 &&
-			 sf::Mouse::getPosition(window).y > 480 && sf::Mouse::getPosition(window).y < 530)
+		else if (sf::Mouse::getPosition(window).x > 490 && sf::Mouse::getPosition(window).x < 790 &&
+			 sf::Mouse::getPosition(window).y > 530 && sf::Mouse::getPosition(window).y < 650)
 		  {
 		    return "Quit";
 		  }
@@ -84,14 +94,13 @@ string Start_Menu::process_events()
 
 void Start_Menu::render()
 {
-  start_button.get_sprite().setPosition(560,300);
-  continue_button.get_sprite().setPosition(560,360);
-  high_score_button.get_sprite().setPosition(560,420);
-  quit_button.get_sprite().setPosition(560,480);
+  start_button.get_sprite().setPosition(490,270);
+  high_score_button.get_sprite().setPosition(490,400);
+  quit_button.get_sprite().setPosition(490,530);
   window.clear(sf::Color(10,110,191));
-  //window.draw(background);
+  window.draw(background_sprite);
+  window.draw(title);
   window.draw(start_button.get_sprite());
-  window.draw(continue_button.get_sprite());
   window.draw(high_score_button.get_sprite());
   window.draw(quit_button.get_sprite());
   window.display();

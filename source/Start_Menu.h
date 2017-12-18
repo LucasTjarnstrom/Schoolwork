@@ -22,9 +22,13 @@ private:
 
     sf::RenderWindow window {};
     Button start_button {};
-    Button continue_button {};
     Button high_score_button {};
     Button quit_button {};
+
+    sf::Texture background_texture {};
+    sf::Sprite background_sprite {};
+    sf::Text title {};
+    sf::Font font {};
 
 };
 
