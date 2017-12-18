@@ -46,7 +46,6 @@ Game::Game()
     // Setting up GUI for displaying player's health
     player_health.setFont(old_london);
     player_health.setCharacterSize(30);
-    //player_health.setStyle(sf::Text::Bold);
     player_health.setColor(sf::Color(249, 72, 59));
 
     // Setting up GUI for displaying player's strength + weapon damage
@@ -62,8 +61,6 @@ Game::Game()
     player_score.setStyle(sf::Text::Bold);
     player_score.setColor(sf::Color(249, 72, 59));
     player_score.setPosition(20,30);
-    player_score.setColor(sf::Color(255, 255, 255));
-    player_score.setPosition(1050,40);
 
     enter_your_name.setFont(old_london);
     enter_your_name.setCharacterSize(30);

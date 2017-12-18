@@ -18,7 +18,6 @@ OBJECTS = build/main.o build/Drawable.o build/Character.o build/Player.o build/B
 # Huvudmål
 main: $(OBJECTS)
 	$(CCC) build/main.o build/Drawable.o build/Character.o build/Player.o build/Button.o build/Game.o build/Start_Menu.o build/Environment.o build/Floor.o build/Wall.o build/Ceiling.o build/Map.o build/Collision.o build/High_Score_List.o build/Enemy.o build/Attack.o build/Player_Attack.o build/Goal.o build/Coin.o build/Weapon.o build/Entry.o -o main $(SFMLFLAGS)
->>>>>>> weapon
 
 # Delmål
 build/main.o: $(SOURCE)/main.cc
