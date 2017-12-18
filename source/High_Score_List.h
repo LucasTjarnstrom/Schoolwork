@@ -35,19 +35,18 @@ protected:
     void render();
     void process_events();
 
-  sf::Font caviar {};
-  sf::Text highscore_text {};
-  sf::Text score_text1 {};
-  sf::Text score_text2 {};
-  sf::Text score_text3 {};
-  sf::Text score_text4 {};
-  sf::Text score_text5 {};
-  sf::Text score_text6 {};
-  sf::Text score_text7 {};
-  sf::Text score_text8 {};
-  sf::Text score_text9 {};
-  sf::Text score_text10 {};
-
+    sf::Font caviar {};
+    sf::Text highscore_text {};
+    sf::Text score_text1 {};
+    sf::Text score_text2 {};
+    sf::Text score_text3 {};
+    sf::Text score_text4 {};
+    sf::Text score_text5 {};
+    sf::Text score_text6 {};
+    sf::Text score_text7 {};
+    sf::Text score_text8 {};
+    sf::Text score_text9 {};
+    sf::Text score_text10 {};
 };
 
 #endif 

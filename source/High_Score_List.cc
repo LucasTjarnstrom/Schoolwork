@@ -121,6 +121,8 @@ void High_Score_List::process_events()
 		if(sf::Mouse::getPosition(window).x > 1 && sf::Mouse::getPosition(window).x < 100 &&
 		   sf::Mouse::getPosition(window).y > 0 && sf::Mouse::getPosition(window).y < 100)
 		  {
+		    // Måste åtgärdas! Går man från Highscorelistan till Menyn kan man inte spara sin
+		    // spelomgång efteråt
 		    window.close();
 		    Start_Menu start_menu {};
 		    string user_choice = start_menu.run();
@@ -159,10 +161,17 @@ void High_Score_List::render()
 
 void High_Score_List::add_entry(unique_ptr<Entry> entry)
 {
+  cout << "Kommer hit!!!!" << endl;
   int score = entry->get_score();
 
-  for(unsigned i{} ; i < entries.size() ; i++)
+  if( entries.size() == 0 )
     {
+      entries.push_back(move(entry));
+    }
+  
+  for(unsigned i{} ; i != entries.size() ; i++)
+    {
+      cout << "Add entry" << endl;
       int current_score {};
       current_score = entries.at(i)->get_score();
       if(score > current_score)
@@ -174,48 +183,62 @@ void High_Score_List::add_entry(unique_ptr<Entry> entry)
 	    }
 	}
     }
+
+  save_to_file();
 }
 
 void High_Score_List::show_score()
 {
-  save_to_file();
   ifstream infile;
-  string line;
+  string line1;
+  string line2;
+  string line3;
+  string line4;
+  string line5;
+  string line6;
+  string line7;
+  string line8;
+  string line9;
+  string line10;
   infile.open("resources/Highscorelist.txt");
-  getline(infile,line);
-  score_text1.setString(line);
-  getline(infile,line);
-  score_text2.setString(line);
-  getline(infile,line);
-  score_text3.setString(line);
-  getline(infile,line);
-  score_text4.setString(line);
-  getline(infile,line);
-  score_text5.setString(line);
-  getline(infile,line);
-  score_text6.setString(line);
-  getline(infile,line);
-  score_text7.setString(line);
-  getline(infile,line);
-  score_text8.setString(line);
-  getline(infile,line);
-  score_text9.setString(line);
-  getline(infile,line);
-  score_text10.setString(line);
+  getline(infile,line1);
+  score_text1.setString(line1);
+  getline(infile,line2);
+  score_text2.setString(line2);
+  getline(infile,line3);
+  score_text3.setString(line3);
+  getline(infile,line4);
+  score_text4.setString(line4);
+  getline(infile,line5);
+  score_text5.setString(line5);
+  getline(infile,line6);
+  score_text6.setString(line6);
+  getline(infile,line7);
+  score_text7.setString(line7);
+  getline(infile,line8);
+  score_text8.setString(line8);
+  getline(infile,line9);
+  score_text9.setString(line9);
+  getline(infile,line10);
+  score_text10.setString(line10);
   infile.close();
 }
 
 void High_Score_List::save_to_file()
 {
-  for(unsigned i{} ; i < entries.size() ; i++)
+  // Fungerar inte som tänkt eftersom spelet avslutas. Vektorn entries får max 1 element
+  cout << entries.size() << endl;
+  for(unsigned i{} ; i != entries.size() ; i++)
     {
       string new_entry = entries.at(i)->to_string();
       ofstream outfile;
       outfile.open("resources/Highscorelist.txt");
-      outfile << new_entry;
+      outfile << new_entry << '\n' << endl;
+      cout << new_entry << endl;
       outfile.close();
     }
 
+  /*
   // For testing purposes
   ofstream outfile;
   outfile.open("resources/Highscorelist.txt");
@@ -240,5 +263,6 @@ void High_Score_List::save_to_file()
   string test10 = "CoolKille2 Technodancer -4 2017-12-30";
   outfile << test10 << endl;
   outfile.close();
+  */
 }
 
