@@ -15,7 +15,7 @@ class Game
 {
 public:
     Game();
-    std::string run(std::string user_choice);
+    std::pair<std::string,int> run(std::string user_choice);
  
     void create_enemy(std::string type, int xp, int yp, int xs, int ys);
     std::vector<std::unique_ptr<Enemy>>& get_enemies();

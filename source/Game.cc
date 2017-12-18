@@ -188,7 +188,7 @@ void Game::add_enemy(unique_ptr<Enemy> e)
   enemies.push_back(move(e));
 }
 
-string Game::run(string user_choice)
+std::pair<string,int> Game::run(string user_choice)
 {
     if ( user_choice == "Start game" )
     {
@@ -200,13 +200,13 @@ string Game::run(string user_choice)
 	    update();
 	    render();
 	}
-	return player_name;
+	return make_pair(player_name,player.get_score());
     }
 
   else if ( user_choice == "Continue" )
     {
       cout << "Continue game" << endl;
-      return "";
+      return make_pair("",0);
     }
 
   else if ( user_choice == "Show high scores" )
@@ -214,17 +214,17 @@ string Game::run(string user_choice)
       window.close();
       High_Score_List high_score_list {};
       high_score_list.run();
-      return "";
+      return make_pair("",0);
     }
   
   else if(user_choice == "Quit" )
     {
-      return "";
+      return make_pair("",0);
     }
   else
     {
 	throw logic_error("Start_Menu returns invalid string! Try make clean.");
-      return "";
+      return make_pair("",0);
     }
 }
 
