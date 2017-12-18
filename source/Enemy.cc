@@ -77,17 +77,20 @@ void Enemy::is_colliding(string arg)
 	    x_pos += 5;
 	    set_facing_right(true);
 	  }
-    } else if(arg == "floor_wall")
-      if(get_facing_right())
-	  {
+    } else if(arg == "floor_wall"){
+	if(get_facing_right())
+	{
 	    x_pos -= 5;
 	    set_facing_right(false);
-	  }
+	}
 	else
-	  {
+	{
 	    x_pos += 5;
 	    set_facing_right(true);
-	  }
+	}
+    } else
+	throw logic_error("Invalid collision!");
+
 }
 
 sf::Sprite Enemy::attack()
