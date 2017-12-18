@@ -5,32 +5,29 @@
 #ifndef HIGH_SCORE_LIST_H
 #define HIGH_SCORE_LIST_H
 
+#include <SFML/Graphics.hpp>
 #include "Game.h"
 #include "Start_Menu.h"
 #include "Button.h"
+#include "Entry.h"
 #include <string>
 #include <memory>
+#include <vector>
 
-class High_Score_List : public Game
+class High_Score_List : public Game, public Entry
 {
 public:
-  High_Score_List(); // default constructor
+  High_Score_List(); // constructor
   //High_Score_List(std::unique_ptr<vector<Entry>>); // constructor
 
   void run();
-
-  // High_Score_List(High_Score_List const& it); // copy constructor
-  // High_Score_List(High_Score_List && it); // move constructor
-  // High_Score_List& operator=(High_Score_List const& it); // copy assignment
-  // High_Score_List& operator=(High_Score_List && it); // move assignment
-
-  //void show_score();
-  //void add_entry(std::unique_ptr<Entry>);
-  //void save_to_file(std::string);
+  void show_score();
+  void add_entry(std::unique_ptr<Entry>);
+  void save_to_file();
   //void load_to_file(std::string);
 
-protected:
-  //entries vector<std::unique_ptr<Entry>>;
+  protected:
+  std::vector<std::unique_ptr<Entry>> entries;
 
   sf::RenderWindow window{};
   Button splash_screen {};
@@ -38,6 +35,11 @@ protected:
 
   void render();
   void process_events();
+
+  sf::Font caviar {};
+  sf::Text score_text {};
+  sf::Text score_text2 {};
+
 };
 
 #endif 
