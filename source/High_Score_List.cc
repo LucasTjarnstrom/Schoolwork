@@ -116,26 +116,26 @@ void High_Score_List::show_score()
 {
   save_to_file();
   ifstream infile;
-  string line;
-  string line2;
   int n{100};
   infile.open("resources/Highscorelist.txt");
-  getline(infile,line);
-  score_text.setString(line);
-  getline(infile,line);
-  score_text2.setString(line);
-  infile.close();
-
-  /*
   for( unsigned i{} ; i < 3 ; i++ )
     {
       n = n+100;
-      getline(infile,line).good();
-      score_text.setPosition(400,n);
-      score_text.setString(line);
+      create_text(n);
     }
   infile.close();
-  */
+}
+
+void High_Score_List::create_text(int n)
+{
+  ifstream infile;
+  string line;
+  infile.open("resources/Highscorelist.txt");
+  getline(infile,line);
+  score_text.setPosition(400,n);
+  score_text.setString(line);
+  infile.close();
+  
 }
 
 void High_Score_List::save_to_file()

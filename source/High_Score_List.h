@@ -24,6 +24,7 @@ public:
   void show_score();
   void add_entry(std::unique_ptr<Entry>);
   void save_to_file();
+  void create_text(int n);
   //void load_to_file(std::string);
 
   protected:
