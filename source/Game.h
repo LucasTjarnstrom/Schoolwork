@@ -15,7 +15,7 @@ class Game
 {
 public:
     Game();
-    void run(std::string user_choice);
+    std::string run(std::string user_choice);
  
     void create_enemy(std::string type, int xp, int yp, int xs, int ys);
     std::vector<std::unique_ptr<Enemy>>& get_enemies();
@@ -23,10 +23,10 @@ public:
     void add_enemy(std::unique_ptr<Enemy>);
 
 private:
-    void process_events();
+    std::string process_events();
     void update();
     void render();
-    void handle_player_input(sf::Keyboard::Key key, bool is_pressed);
+    std::string handle_player_input(sf::Keyboard::Key key, bool is_pressed);
     sf::Text draw_player_health();
     sf::Text draw_player_attack();
     sf::Text draw_player_score();

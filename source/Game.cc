@@ -188,23 +188,25 @@ void Game::add_enemy(unique_ptr<Enemy> e)
   enemies.push_back(move(e));
 }
 
-void Game::run(string user_choice)
+string Game::run(string user_choice)
 {
     if ( user_choice == "Start game" )
     {
 	clock.restart(); // restart clock
-	while (window.isOpen())
+	string player_name{};
+	while (window.isOpen() && player_name == "")
 	{
-	    process_events();
+	    player_name = process_events();
 	    update();
 	    render();
 	}
+	return player_name;
     }
 
   else if ( user_choice == "Continue" )
     {
       cout << "Continue game" << endl;
-      return;
+      return "";
     }
 
   else if ( user_choice == "Show high scores" )
@@ -212,20 +214,21 @@ void Game::run(string user_choice)
       window.close();
       High_Score_List high_score_list {};
       high_score_list.run();
+      return "";
     }
   
   else if(user_choice == "Quit" )
     {
-      return;
+      return "";
     }
   else
     {
-	throw logic_error("Start_Menu returns invalid string!");
-      return;
+	throw logic_error("Start_Menu returns invalid string! Try make clean.");
+      return "";
     }
 }
 
-void Game::process_events()
+string Game::process_events()
 {
     sf::Event event;
     while (window.pollEvent(event))
@@ -242,8 +245,10 @@ void Game::process_events()
 	    	window.close();
 	    }
 	    else
-		handle_player_input(event.key.code, true);
-	    break;
+	      {
+		return handle_player_input(event.key.code, true);
+		break;
+	      }
 	    
 	case sf::Event::KeyReleased:
 	    handle_player_input(event.key.code, false);
@@ -259,6 +264,7 @@ void Game::process_events()
 	    break;	
 	}
     }
+    return "";
     
 }
 
@@ -459,7 +465,7 @@ void Game::render()
   //cout << "Graphics updated" << endl;
 }
 
-void Game::handle_player_input(sf::Keyboard::Key key, bool is_pressed)
+string Game::handle_player_input(sf::Keyboard::Key key, bool is_pressed)
 {
   if (!game_won)
     {
@@ -533,10 +539,13 @@ void Game::handle_player_input(sf::Keyboard::Key key, bool is_pressed)
 	    temp.append("Y");
 	  else if (key == sf::Keyboard::Z)
 	    temp.append("Z");
+	  else if (key == sf::Keyboard::Return)
+	    return name_entry.getString().toAnsiString();
 
 	  name_entry.setString(temp);
 	}
     }
+  return "";
 }
 
 sf::Text Game::draw_player_health()

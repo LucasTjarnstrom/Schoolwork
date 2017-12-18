@@ -10,6 +10,6 @@ int main()
   Start_Menu start_menu {};
   string user_choice = start_menu.run();
   Game game {};
-  game.run(user_choice);
+  string player_name = game.run(user_choice);
   return 0;
 }
