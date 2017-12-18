@@ -42,6 +42,11 @@ Game::Game()
     //Background
     bgtexture.loadFromFile("resources/background.png");
     bgsprite.setTexture(bgtexture);
+
+    // Endgame background
+    endgametexture.loadFromFile("resources/endgame.png");
+    endgamesprite.setTexture(endgametexture);
+    endgamesprite.setPosition(300,185);
     
     // Setting up GUI for displaying player's health
     player_health.setFont(old_london);
@@ -63,17 +68,33 @@ Game::Game()
     player_score.setPosition(20,30);
 
     enter_your_name.setFont(old_london);
-    enter_your_name.setCharacterSize(30);
+    enter_your_name.setCharacterSize(50);
     enter_your_name.setStyle(sf::Text::Bold);
     enter_your_name.setColor(sf::Color(255, 255, 255));
-    enter_your_name.setPosition(500,400);
+    enter_your_name.setPosition(480,400);
     enter_your_name.setString("Enter your name:");
 
     name_entry.setFont(old_london);
     name_entry.setCharacterSize(30);
     name_entry.setStyle(sf::Text::Bold);
     name_entry.setColor(sf::Color(255, 255, 255));
-    name_entry.setPosition(500,440);
+    name_entry.setPosition(480,470);
+
+    // Game lost text
+    game_lost_text.setFont(old_london);
+    game_lost_text.setCharacterSize(130);
+    game_lost_text.setStyle(sf::Text::Bold);
+    game_lost_text.setColor(sf::Color(255, 255, 255));
+    game_lost_text.setPosition(420,240);
+    game_lost_text.setString("You Died");
+    
+    // Game won text
+    game_won_text.setFont(old_london);
+    game_won_text.setCharacterSize(130);
+    game_won_text.setStyle(sf::Text::Bold);
+    game_won_text.setColor(sf::Color(255, 255, 255));
+    game_won_text.setPosition(420,240);
+    game_won_text.setString("You Won");
     
     // Environment objects
     map.create_environment("floor_1280px",0,690,0,0);
@@ -471,6 +492,12 @@ void Game::render()
   window.draw(draw_player_health());
   if(game_won || player_dead)
   {
+      window.draw(endgamesprite);
+      if(game_won)
+	  window.draw(game_won_text);
+      else
+	  window.draw(game_lost_text);
+
       window.draw(enter_your_name);
       window.draw(name_entry);
   }

@@ -45,10 +45,15 @@ private:
     sf::Font old_london {};
     sf::Text enter_your_name {};
     sf::Text name_entry {};
+    sf::Text game_lost_text {};
+    sf::Text game_won_text {};
     sf::Font arial {};
+    
     sf::Texture bgtexture {};
     sf::Sprite bgsprite {};
-
+    sf::Texture endgametexture {};
+    sf::Sprite endgamesprite {};
+    
     std::string movement {};
     bool move_left {false};
     bool move_right {false};
