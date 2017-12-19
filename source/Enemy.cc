@@ -16,7 +16,7 @@ Enemy::Enemy(double xp, double yp, double xs, double ys, string file_name)
 
     health_text.setCharacterSize(30);
     health_text.setStyle(sf::Text::Bold);
-    health_text.setColor(sf::Color(255, 255, 255));
+    health_text.setFillColor(sf::Color(255, 255, 255));
     health_text.setPosition(400,400);
     health_text.setString("world");
 }

@@ -51,40 +51,40 @@ Game::Game()
     // Setting up GUI for displaying player's health
     player_health.setFont(old_london);
     player_health.setCharacterSize(30);
-    player_health.setColor(sf::Color(249, 72, 59));
+    player_health.setFillColor(sf::Color(249, 72, 59));
 
     // Setting up GUI for displaying player's strength + weapon damage
     player_attack.setFont(old_london);
     player_attack.setCharacterSize(30);
     player_attack.setStyle(sf::Text::Bold);
-    player_attack.setColor(sf::Color(249, 72, 59));
+    player_attack.setFillColor(sf::Color(249, 72, 59));
     player_attack.setPosition(20,0);
 
     // Setting up GUI for displaying player's score
     player_score.setFont(old_london);
     player_score.setCharacterSize(30);
     player_score.setStyle(sf::Text::Bold);
-    player_score.setColor(sf::Color(249, 72, 59));
+    player_score.setFillColor(sf::Color(249, 72, 59));
     player_score.setPosition(20,30);
 
     enter_your_name.setFont(old_london);
     enter_your_name.setCharacterSize(50);
     enter_your_name.setStyle(sf::Text::Bold);
-    enter_your_name.setColor(sf::Color(255, 255, 255));
+    enter_your_name.setFillColor(sf::Color(255, 255, 255));
     enter_your_name.setPosition(480,400);
     enter_your_name.setString("Enter your name:");
 
     name_entry.setFont(old_london);
     name_entry.setCharacterSize(30);
     name_entry.setStyle(sf::Text::Bold);
-    name_entry.setColor(sf::Color(255, 255, 255));
+    name_entry.setFillColor(sf::Color(255, 255, 255));
     name_entry.setPosition(480,470);
 
     // Game lost text
     game_lost_text.setFont(old_london);
     game_lost_text.setCharacterSize(130);
     game_lost_text.setStyle(sf::Text::Bold);
-    game_lost_text.setColor(sf::Color(255, 255, 255));
+    game_lost_text.setFillColor(sf::Color(255, 255, 255));
     game_lost_text.setPosition(420,240);
     game_lost_text.setString("You Died");
     
@@ -92,7 +92,7 @@ Game::Game()
     game_won_text.setFont(old_london);
     game_won_text.setCharacterSize(130);
     game_won_text.setStyle(sf::Text::Bold);
-    game_won_text.setColor(sf::Color(255, 255, 255));
+    game_won_text.setFillColor(sf::Color(255, 255, 255));
     game_won_text.setPosition(420,240);
     game_won_text.setString("You Won");
     
@@ -170,7 +170,7 @@ Game::Game()
     //enemies.back()->set_current_health(1);
     health_text.setCharacterSize(30);
     health_text.setStyle(sf::Text::Bold);
-    health_text.setColor(sf::Color(255, 255, 255));
+    health_text.setFillColor(sf::Color(255, 255, 255));
     health_text.setString("hello");
     health_text.setFont(old_london);
 

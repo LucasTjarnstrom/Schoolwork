@@ -7,7 +7,7 @@ SOURCE = source
 CCC = g++
 
 # Kompilatorflaggor
-CCFLAGS = -std=c++17 -Wpedantic -Wall -Wextra -Weffc++ -I$(SFML_ROOT)/include
+CCFLAGS = -std=c++17 -Wpedantic -Wall -Wextra -Weffc++ -Werror -I$(SFML_ROOT)/include
 
 #SFML-flaggor
 SFMLFLAGS = -L$(SFML_ROOT)/lib -lsfml-graphics -lsfml-window -lsfml-system

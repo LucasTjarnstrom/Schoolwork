@@ -11,7 +11,7 @@ namespace Collision
 	class BitmaskManager
 	{
 	public:
-		~BitmaskManager() {
+	    ~BitmaskManager() {
 			std::map<const sf::Texture*, sf::Uint8*>::const_iterator end = Bitmasks.end();
 			for (std::map<const sf::Texture*, sf::Uint8*>::const_iterator iter = Bitmasks.begin(); iter!=end; iter++)
 				delete [] iter->second;
@@ -52,10 +52,10 @@ namespace Collision
 			return mask;
 		}
 	private:
-		std::map<const sf::Texture*, sf::Uint8*> Bitmasks;
+	    std::map<const sf::Texture*, sf::Uint8*> Bitmasks {};
 	};
 	
-	BitmaskManager Bitmasks;
+    BitmaskManager Bitmasks {};
  
 	bool PixelPerfectTest(const sf::Sprite& Object1, const sf::Sprite& Object2, sf::Uint8 AlphaLimit) {
 		sf::FloatRect Intersection; 

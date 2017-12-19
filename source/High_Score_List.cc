@@ -22,68 +22,68 @@ High_Score_List::High_Score_List()
   highscore_text.setFont(caviar);
   highscore_text.setCharacterSize(35);
   highscore_text.setStyle(sf::Text::Bold);
-  highscore_text.setColor(sf::Color(255,255,255));
+  highscore_text.setFillColor(sf::Color(255,255,255));
   highscore_text.setPosition(450,50);
   highscore_text.setString("!!! Highscore List !!!");
 
   score_text1.setFont(caviar);
   score_text1.setCharacterSize(20);
   score_text1.setStyle(sf::Text::Bold);
-  score_text1.setColor(sf::Color(255,255,255));
+  score_text1.setFillColor(sf::Color(255,255,255));
   score_text1.setPosition(400,150);
 
   score_text2.setFont(caviar);
   score_text2.setCharacterSize(20);
   score_text2.setStyle(sf::Text::Bold);
-  score_text2.setColor(sf::Color(255,255,255));
+  score_text2.setFillColor(sf::Color(255,255,255));
   score_text2.setPosition(400,200);
 
   score_text3.setFont(caviar);
   score_text3.setCharacterSize(20);
   score_text3.setStyle(sf::Text::Bold);
-  score_text3.setColor(sf::Color(255,255,255));
+  score_text3.setFillColor(sf::Color(255,255,255));
   score_text3.setPosition(400,250);
 
   score_text4.setFont(caviar);
   score_text4.setCharacterSize(20);
   score_text4.setStyle(sf::Text::Bold);
-  score_text4.setColor(sf::Color(255,255,255));
+  score_text4.setFillColor(sf::Color(255,255,255));
   score_text4.setPosition(400,300);
 
   score_text5.setFont(caviar);
   score_text5.setCharacterSize(20);
   score_text5.setStyle(sf::Text::Bold);
-  score_text5.setColor(sf::Color(255,255,255));
+  score_text5.setFillColor(sf::Color(255,255,255));
   score_text5.setPosition(400,350);
 
   score_text6.setFont(caviar);
   score_text6.setCharacterSize(20);
   score_text6.setStyle(sf::Text::Bold);
-  score_text6.setColor(sf::Color(255,255,255));
+  score_text6.setFillColor(sf::Color(255,255,255));
   score_text6.setPosition(400,400);
 
   score_text7.setFont(caviar);
   score_text7.setCharacterSize(20);
   score_text7.setStyle(sf::Text::Bold);
-  score_text7.setColor(sf::Color(255,255,255));
+  score_text7.setFillColor(sf::Color(255,255,255));
   score_text7.setPosition(400,450);
 
   score_text8.setFont(caviar);
   score_text8.setCharacterSize(20);
   score_text8.setStyle(sf::Text::Bold);
-  score_text8.setColor(sf::Color(255,255,255));
+  score_text8.setFillColor(sf::Color(255,255,255));
   score_text8.setPosition(400,500);
 
   score_text9.setFont(caviar);
   score_text9.setCharacterSize(20);
   score_text9.setStyle(sf::Text::Bold);
-  score_text9.setColor(sf::Color(255,255,255));
+  score_text9.setFillColor(sf::Color(255,255,255));
   score_text9.setPosition(400,550);
 
   score_text10.setFont(caviar);
   score_text10.setCharacterSize(20);
   score_text10.setStyle(sf::Text::Bold);
-  score_text10.setColor(sf::Color(255,255,255));
+  score_text10.setFillColor(sf::Color(255,255,255));
   score_text10.setPosition(400,600);
 
   show_score();

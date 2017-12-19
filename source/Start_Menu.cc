@@ -23,7 +23,7 @@ Start_Menu::Start_Menu()
     title.setFont(font);
     title.setCharacterSize(180);
     title.setStyle(sf::Text::Bold);
-    title.setColor(sf::Color(255,255,255));
+    title.setFillColor(sf::Color(255,255,255));
     title.setPosition(170,40);
     title.setString("Lorem Ipsum");
 
