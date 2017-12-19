@@ -33,7 +33,7 @@ public:
     virtual void set_score(int);
     virtual int get_score() const;
 
-    // "Player operations" are pure virtual because the method implementation will not be uniform across subclasses
+    // "Player operations" are pure virtual because the method implementation is not uniform across subclasses
     virtual void jump() = 0; 
     virtual sf::Sprite attack() = 0;
     virtual void move(std::string const &) = 0;

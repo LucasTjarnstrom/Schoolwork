@@ -9,8 +9,11 @@ using namespace std;
 
 int main()
 {
+  //Pairs to handle return data from Start_Menu::run and Game::run
   pair <string,bool> user_choice_and_quit{};
   pair <string,int> name_and_score{};
+
+  //Keeps returning user to start menu until quit (or escape) is pressed
   while(!user_choice_and_quit.second)
     {
       Start_Menu start_menu {};
@@ -19,6 +22,7 @@ int main()
       name_and_score = game.run(user_choice_and_quit.first);
       if (name_and_score.second != 0 && name_and_score.first != "")
 	{
+	  //Saves a new score
 	  Entry entry {};
 	  entry.name = name_and_score.first;
 	  entry.score = name_and_score.second;

@@ -25,6 +25,7 @@ sf::Sprite Player::draw_this()
 {
     sprite.setPosition(x_pos, y_pos);
     
+    //faced_right stores the direction the PC was facing the last time this was called
     if(faced_right != facing_right)
     	sprite.scale(-1.f,1.f);
     else
@@ -34,6 +35,7 @@ sf::Sprite Player::draw_this()
     return sprite;
 }
 
+//Handles movement of PC
 void Player::move(std::string const & movement)
 {
     if (movement == "left")
@@ -75,6 +77,7 @@ int Player::get_weapon_damage() const
     return weapon_damage;
 }
 
+//Decides what happens when the PC collides with different object types
 void Player::is_colliding(string arg)
 {
   if(arg == "floor")

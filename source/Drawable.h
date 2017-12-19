@@ -36,6 +36,8 @@ public:
     virtual sf::Sprite& get_sprite();
 
     virtual sf::Sprite draw_this() = 0;
+
+    //Determines what happens when the object collides with another object
     virtual void is_colliding(std::string) = 0;
 
 protected:
@@ -43,11 +45,11 @@ protected:
     double y_pos {};
     double x_velocity {0};
     double y_velocity {0};
-    double y_acc {0.2}; // där g ska vara tyngdkonstanten av något slag i negativ y, fys. kord.p.
+    double y_acc {0.2}; //gravity
     double x_size {};
     double y_size {};
     sf::Texture texture {};
-    sf::Sprite sprite {}; // en datamedlem av typen sprite som heter sprite
+    sf::Sprite sprite {};
 };
 
 #endif

@@ -18,5 +18,4 @@ public:
     void is_colliding(std::string) override;
 };
 
-
 #endif

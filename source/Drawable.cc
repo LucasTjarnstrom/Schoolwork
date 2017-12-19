@@ -9,6 +9,7 @@
 
 using namespace std;
 
+//Constructor - sets values, loads texture
 Drawable::Drawable(double xp, double yp, double xs, double ys, string file_name)
     : x_pos{xp}, y_pos{yp}, x_size{xs}, y_size{ys}
 {

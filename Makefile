@@ -13,7 +13,7 @@ CCFLAGS = -std=c++17 -Wpedantic -Wall -Wextra -Weffc++ -I$(SFML_ROOT)/include
 SFMLFLAGS = -L$(SFML_ROOT)/lib -lsfml-graphics -lsfml-window -lsfml-system
 
 #Objektmoduler
-OBJECTS = build/main.o build/Drawable.o build/Character.o build/Player.o build/Button.o build/Level.o build/Game.o build/Start_Menu.o build/Environment.o build/Floor.o build/Wall.o build/Ceiling.o build/Map.o build/Collision.o build/High_Score_List.o build/Enemy.o build/Attack.o build/Player_Attack.o build/Goal.o build/Coin.o build/Weapon.o build/Entry.o
+OBJECTS = build/main.o build/Drawable.o build/Character.o build/Player.o build/Button.o build/Game.o build/Start_Menu.o build/Environment.o build/Floor.o build/Wall.o build/Ceiling.o build/Map.o build/Collision.o build/High_Score_List.o build/Enemy.o build/Attack.o build/Player_Attack.o build/Goal.o build/Coin.o build/Weapon.o build/Entry.o
 
 # Huvudmål
 main: $(OBJECTS)
@@ -34,9 +34,6 @@ build/Character.o : $(SOURCE)/Character.h $(SOURCE)/Character.cc
 
 build/Drawable.o : $(SOURCE)/Drawable.h $(SOURCE)/Drawable.cc
 	$(CCC) $(CCFLAGS) -c $(SOURCE)/Drawable.cc -o build/Drawable.o
-
-build/Level.o : $(SOURCE)/Level.h $(SOURCE)/Level.cc
-	$(CCC) $(CCFLAGS) -c $(SOURCE)/Level.cc -o build/Level.o
 
 build/Game.o : $(SOURCE)/Game.h $(SOURCE)/Game.cc
 	$(CCC) $(CCFLAGS) -c $(SOURCE)/Game.cc -o build/Game.o

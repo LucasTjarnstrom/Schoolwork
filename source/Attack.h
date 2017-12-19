@@ -13,9 +13,6 @@ class Attack : public Drawable
 public:
     Attack() = default;
     Attack(double,double,double,double, std::string);
-
-    //sf::Sprite draw_this() override;
-
 };
 
 #endif

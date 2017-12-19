@@ -19,6 +19,7 @@ Map::Map(vector<std::unique_ptr<Environment>>& ve)
 {
 } 
 
+//Creates a new object of any subclass to Environment and adds it to the environments vector to be drawn.
 void Map::create_environment(std::string type, int xp, int yp, int xs, int ys)
 {
     if (type == "floor")
@@ -91,8 +92,9 @@ void Map::set_environments(std::vector<std::unique_ptr<Environment>>& other)
 {
     environments = move(other);
 }
+
+//Adds an object to the environments vector to be drawn.
 void Map::add_environment(std::unique_ptr<Environment> e)
 {
     environments.push_back(move(e));
 }
-
