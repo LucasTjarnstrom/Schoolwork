@@ -9,16 +9,15 @@ using namespace std;
 
 int main()
 {
-  string user_choice{};
+  pair <string,bool> user_choice_and_quit{};
   pair <string,int> name_and_score{};
-  bool quit{false};
-  while(!quit)
+  while(!user_choice_and_quit.second)
     {
       Start_Menu start_menu {};
-      user_choice = start_menu.run();
+      user_choice_and_quit = start_menu.run();
       Game game {};
-      name_and_score = game.run(user_choice);
-      if (name_and_score.second != 0)
+      name_and_score = game.run(user_choice_and_quit.first);
+      if (name_and_score.second != 0 && name_and_score.first != "")
 	{
 	  Entry entry {};
 	  entry.name = name_and_score.first;
