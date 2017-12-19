@@ -41,7 +41,6 @@ private:
     sf::Text player_health {};
     sf::Text player_attack {};
     sf::Text player_score {};
-    sf::Text health_text {};
     sf::Font old_london {};
     sf::Text enter_your_name {};
     sf::Text name_entry {};

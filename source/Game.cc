@@ -30,7 +30,7 @@ Game::Game()
       player{Player(650,430,0,0,"resources/player.png")}
 
 {
-    player.set_vitality(10);
+    player.set_vitality(3);
     player.set_current_health(player.get_vitality());
     player.set_strength(2);
 
@@ -38,6 +38,7 @@ Game::Game()
 
     // Font
     old_london.loadFromFile("resources/OldLondon.ttf");
+    arial.loadFromFile("resources/arial.ttf");
 
     //Background
     bgtexture.loadFromFile("resources/background.png");
@@ -66,7 +67,8 @@ Game::Game()
     player_score.setStyle(sf::Text::Bold);
     player_score.setFillColor(sf::Color(249, 72, 59));
     player_score.setPosition(20,30);
-
+    
+    // Text that prompts player to enter their name
     enter_your_name.setFont(old_london);
     enter_your_name.setCharacterSize(50);
     enter_your_name.setStyle(sf::Text::Bold);
@@ -74,7 +76,8 @@ Game::Game()
     enter_your_name.setPosition(480,400);
     enter_your_name.setString("Enter your name:");
 
-    name_entry.setFont(old_london);
+    // Text for name entry
+    name_entry.setFont(arial);
     name_entry.setCharacterSize(30);
     name_entry.setStyle(sf::Text::Bold);
     name_entry.setFillColor(sf::Color(255, 255, 255));
@@ -165,18 +168,9 @@ Game::Game()
     create_enemy("ghoul",850,600,0,0);
     create_enemy("ghoul",1100,600,0,0);
 
-    // for testing
-    //enemies.front()->set_current_health(1);
-    //enemies.back()->set_current_health(1);
-    health_text.setCharacterSize(30);
-    health_text.setStyle(sf::Text::Bold);
-    health_text.setFillColor(sf::Color(255, 255, 255));
-    health_text.setString("hello");
-    health_text.setFont(old_london);
-
 }
 
-// borde uttökas så även vitality och current_health sätts 
+//Creates an enemy and adds it to the vector "enemies".
 void Game::create_enemy(std::string type, int xp, int yp, int xs, int ys)
 {
   if (type == "ghoul")
@@ -185,7 +179,7 @@ void Game::create_enemy(std::string type, int xp, int yp, int xs, int ys)
       temp->set_font(old_london); // enemy's health_text gets its font set
       temp->set_vitality(4); // a Ghoul has 4 vitality
       temp->set_current_health(temp->get_vitality()); // a Ghoul has max health when spawned
-      temp->set_score(200); // a Ghoul has 200 score
+      temp->set_score(200); // a Ghoul has 200 score (gives 200 score on death)
       temp->set_strength(1); // a Ghoul has 1 strength
       add_enemy(move(temp));
     }
@@ -210,6 +204,7 @@ void Game::add_enemy(unique_ptr<Enemy> e)
   enemies.push_back(move(e));
 }
 
+//Starts game and loops necessary functions
 std::pair<string,int> Game::run(string user_choice)
 {
     if ( user_choice == "Start game" )
@@ -250,6 +245,7 @@ std::pair<string,int> Game::run(string user_choice)
     }
 }
 
+//Handles user input
 string Game::process_events()
 {
     sf::Event event;
@@ -257,7 +253,6 @@ string Game::process_events()
     {
 	switch(event.type)
 	{
-	    //windows closed
 	case sf::Event::Closed:
 	    window.close();
 	    
@@ -273,23 +268,20 @@ string Game::process_events()
 	      }
 	    
 	case sf::Event::KeyReleased:
+	  {
 	    handle_player_input(event.key.code, false);
 	    break;
-	    	    
-	case sf::Event::MouseMoved:
-	{
-	    //std::cout << "new mouse x: " << event.mouseMove.x << std::endl;
-	    //std::cout << "new mouse y: " << event.mouseMove.y << std::endl;
-	    break;
-	}
+	  }
+	    
 	default:
-	    break;	
+	  break;	
 	}
     }
     return "";
     
 }
 
+//Handles physics
 void Game::update()
 {
     if(clock.getElapsedTime().asSeconds() >= 1)
@@ -341,6 +333,7 @@ void Game::update()
 
 }
 
+//Handles graphics
 void Game::render()
 {
   //----------PLAYER COLLISION WITH ENVIRONMENT----------
@@ -472,7 +465,7 @@ void Game::render()
   window.clear();
   window.draw(bgsprite);
  
-  if(!enemies.empty()) // Draws enemies and their health_text
+  if(!enemies.empty()) // Draws enemies (and their health_text)
   {
       for (auto it = enemies.begin(); it != enemies.end(); it++)
       {
@@ -509,13 +502,12 @@ void Game::render()
   }
   window.draw(draw_player_attack());
   window.draw(draw_player_score());
-  //window.draw(health_text);
   //window.draw(enemies.front()->health_text);
   window.display();
-  //cout << "Graphics updated" << endl;
 
 }
 
+//Handles keypresses
 string Game::handle_player_input(sf::Keyboard::Key key, bool is_pressed)
 {
   if (!game_won && !player_dead)
@@ -599,6 +591,7 @@ string Game::handle_player_input(sf::Keyboard::Key key, bool is_pressed)
   return "";
 }
 
+//Draws player health
 sf::Text Game::draw_player_health()
 {
     stringstream ss;
@@ -609,6 +602,7 @@ sf::Text Game::draw_player_health()
     return player_health;
 }
 
+//Draws player's current attack, including any modifiers
 sf::Text Game::draw_player_attack()
 {
     stringstream ss;
@@ -618,6 +612,7 @@ sf::Text Game::draw_player_attack()
     return player_attack;
 }
 
+//Draws current score
 sf::Text Game::draw_player_score()
 {
     stringstream ss;
