@@ -520,7 +520,7 @@ string Game::handle_player_input(sf::Keyboard::Key key, bool is_pressed)
 	  if(is_pressed)
 	    player.jump();
 	}
-      else if (key == sf::Keyboard::S)
+      else if (key == sf::Keyboard::S || key == sf::Keyboard::W)
 	attacking = is_pressed;
     }
   else
