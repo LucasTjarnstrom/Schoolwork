@@ -10,7 +10,8 @@
 class Entry
 {
 public:
-    Entry();
+  Entry() = default;
+    Entry(std::string, int, std::string);
 
     std::string name {};
     std::string date {};

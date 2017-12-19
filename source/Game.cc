@@ -30,7 +30,7 @@ Game::Game()
       player{Player(650,430,0,0,"resources/player.png")}
 
 {
-    player.set_vitality(10);
+    player.set_vitality(1);
     player.set_current_health(player.get_vitality());
     player.set_strength(2);
 

@@ -9,7 +9,8 @@
 
 using namespace std;
 
-Entry::Entry()
+Entry::Entry(string na, int sc, string da)
+  : name {na}, score{sc}, date{da}
 {
 }
 

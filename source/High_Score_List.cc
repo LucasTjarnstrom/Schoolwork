@@ -158,32 +158,39 @@ void High_Score_List::render()
   window.display();
 }
 
-
+//Sorted insertion
 void High_Score_List::add_entry(unique_ptr<Entry> entry)
 {
-  cout << "Kommer hit!!!!" << endl;
-  int score = entry->get_score();
-
-  if( entries.size() == 0 )
+  ifstream infile;
+  infile.open("resources/Highscorelist.txt");
+  string name{};
+  int score{};
+  string date{};
+  while(infile >> name)
+    {
+      infile >> score;
+      infile >> date;
+      entries.push_back(make_unique<Entry>(name, score, date));
+    }
+  if (entries.empty())
     {
       entries.push_back(move(entry));
     }
-  
-  for(unsigned i{} ; i != entries.size() ; i++)
+  else
     {
-      cout << "Add entry" << endl;
-      int current_score {};
-      current_score = entries.at(i)->get_score();
-      if(score > current_score)
+      bool inserted{false};
+      for(unsigned i{}; i != entries.size(); i++)
 	{
-	  entries.insert(entries.begin()+i, move(entry));
-	  if(entries.size() > 10) 
+	  if(entries.at(i)->get_score() < entry->get_score())
 	    {
-	      entries.pop_back();
+	      entries.insert(entries.begin() + i, move(entry));
+	      inserted = true;
+	      break;
 	    }
 	}
+      if (!inserted)
+	entries.push_back(move(entry));
     }
-
   save_to_file();
 }
 
@@ -226,43 +233,15 @@ void High_Score_List::show_score()
 
 void High_Score_List::save_to_file()
 {
-  // Fungerar inte som tänkt eftersom spelet avslutas. Vektorn entries får max 1 element
   cout << entries.size() << endl;
+  ofstream outfile;
+  outfile.open("resources/Highscorelist.txt", ios_base::trunc);
   for(unsigned i{} ; i != entries.size() ; i++)
     {
       string new_entry = entries.at(i)->to_string();
-      ofstream outfile;
-      outfile.open("resources/Highscorelist.txt");
-      outfile << new_entry << '\n' << endl;
+      outfile << new_entry << endl;
       cout << new_entry << endl;
-      outfile.close();
     }
-
-  /*
-  // For testing purposes
-  ofstream outfile;
-  outfile.open("resources/Highscorelist.txt");
-  string test = to_string();
-  outfile << test << endl;
-  string test2 = "CoolKille2 Technodancer -4 2017-12-12";
-  outfile << test2 << endl;
-  string test3 = "CoolKille2 Technodancer -4 2017-12-01";
-  outfile << test3 << endl;
-  string test4 = "CoolKille2 Technodancer -4 2017-12-10";
-  outfile << test4 << endl;
-  string test5 = "CoolKille2 Technodancer 6 2017-12-13";
-  outfile << test5 << endl;
-  string test6 = "CoolKille2 Technodancer 1 2017-12-18";
-  outfile << test6 << endl;
-  string test7 = "CoolKille2 Technodancer -8 2017-12-19";
-  outfile << test7 << endl;
-  string test8 = "Hejsvejsmannen Technodancer -4 2017-12-24";
-  outfile << test8 << endl;
-  string test9 = "CoolKille3 Technodancer -4 2017-12-31";
-  outfile << test9 << endl;
-  string test10 = "CoolKille2 Technodancer -4 2017-12-30";
-  outfile << test10 << endl;
   outfile.close();
-  */
 }
 
