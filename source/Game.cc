@@ -454,7 +454,6 @@ void Game::render()
 	      if(!player_recently_hit)
 	      {
 		  player.set_current_health(player.get_current_health() - (*enemyit)->get_strength());
-		  cout << "Taking damage" << endl;
 		  player_recently_hit = true;
 	      }
 	      

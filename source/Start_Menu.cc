@@ -16,16 +16,6 @@ Start_Menu::Start_Menu()
     background_texture.loadFromFile("resources/menubackground.png");
     background_sprite.setTexture(background_texture);
 
-    // Font
-    font.loadFromFile("resources/OldLondon.ttf");
-/*
-    // Title
-    title.setFont(font);
-    title.setCharacterSize(180);
-    title.setStyle(sf::Text::Bold);
-    title.setFillColor(sf::Color(255,255,255));
-    title.setPosition(170,40);
-    title.setString("Lorem Ipsum"); */
 }
 
 pair <string,bool> Start_Menu::run()
@@ -101,7 +91,6 @@ void Start_Menu::render()
   quit_button.get_sprite().setPosition(490,530);
   window.clear(sf::Color(10,110,191));
   window.draw(background_sprite);
-  window.draw(title);
   window.draw(start_button.get_sprite());
   window.draw(high_score_button.get_sprite());
   window.draw(quit_button.get_sprite());

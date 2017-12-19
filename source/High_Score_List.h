@@ -29,14 +29,12 @@ protected:
     std::vector<std::unique_ptr<Entry>> entries {};
 
     sf::RenderWindow window{};
-    Button splash_screen {};
     Button return_button {};
 
     void render();
     void process_events();
 
-    sf::Font caviar {};
-    sf::Text highscore_text {};
+    sf::Font font {};
     sf::Text score_text1 {};
     sf::Text score_text2 {};
     sf::Text score_text3 {};
@@ -47,6 +45,10 @@ protected:
     sf::Text score_text8 {};
     sf::Text score_text9 {};
     sf::Text score_text10 {};
+
+    sf::Texture background_texture {};
+    sf::Sprite background_sprite {};
+
 };
 
 #endif 
