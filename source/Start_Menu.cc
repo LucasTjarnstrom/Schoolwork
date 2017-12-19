@@ -1,3 +1,8 @@
+/*
+ * Start_Menu.cc
+ This class handles the start menu.
+ */
+
 #include <SFML/Graphics.hpp>
 #include "Start_Menu.h"
 #include <iostream>
@@ -12,12 +17,11 @@ Start_Menu::Start_Menu()
 {
     window.setFramerateLimit(60);
 
-    // Background
     background_texture.loadFromFile("resources/menubackground.png");
     background_sprite.setTexture(background_texture);
-
 }
 
+// Returns a string to indicate which menu button was pressed, and a bool to indicate quit.
 pair <string,bool> Start_Menu::run()
 {
   string user_choice{};
