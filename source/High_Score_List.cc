@@ -20,7 +20,7 @@ High_Score_List::High_Score_List()
     return_button.get_sprite().setPosition(0,0);
 
     // Background
-    background_texture.loadFromFile("resources/menubackground.png");
+    background_texture.loadFromFile("resources/highscorebackground.png");
     background_sprite.setTexture(background_texture);
 
     font.loadFromFile("resources/arial.ttf");
