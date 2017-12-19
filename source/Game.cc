@@ -512,16 +512,16 @@ string Game::handle_player_input(sf::Keyboard::Key key, bool is_pressed)
 {
   if (!game_won && !player_dead)
     {
-      if (key == sf::Keyboard::A)
+	if (key == sf::Keyboard::A || key == sf::Keyboard::Left)
 	move_left = is_pressed;
-      else if (key == sf::Keyboard::D)
+      else if (key == sf::Keyboard::D || key == sf::Keyboard::Right)
 	move_right = is_pressed;
       else if (key == sf::Keyboard::Space)
 	{
 	  if(is_pressed)
 	    player.jump();
 	}
-      else if (key == sf::Keyboard::W)
+      else if (key == sf::Keyboard::S)
 	attacking = is_pressed;
     }
   else
