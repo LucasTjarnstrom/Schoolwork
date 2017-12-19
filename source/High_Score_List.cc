@@ -1,5 +1,6 @@
 /*
  * High_Score_List.cc
+ This class handles player entries and display of the high score list.
  */
 
 #include <SFML/Graphics.hpp>
@@ -13,11 +14,11 @@ using namespace std;
 
 High_Score_List::High_Score_List()
   : window(sf::VideoMode(1280, 720), "Highscore List"),
-  return_button{Button(12,12,0,0,"resources/button_quit.png")} // Placeholder icon for "Return"
+    return_button{Button(12,12,0,0,"resources/button_back.png")}
 {
   window.setFramerateLimit(60);
 
-  caviar.loadFromFile("resources/CaviarDreams.ttf");
+  caviar.loadFromFile("resources/arial.ttf");
 
   highscore_text.setFont(caviar);
   highscore_text.setCharacterSize(35);
@@ -118,8 +119,8 @@ void High_Score_List::process_events()
 	  {
 	    if (event.mouseButton.button == sf::Mouse::Left)
 	      {
-		if(sf::Mouse::getPosition(window).x > 1 && sf::Mouse::getPosition(window).x < 100 &&
-		   sf::Mouse::getPosition(window).y > 0 && sf::Mouse::getPosition(window).y < 100)
+		if(sf::Mouse::getPosition(window).x > 1 && sf::Mouse::getPosition(window).x < 300 &&
+		   sf::Mouse::getPosition(window).y > 1 && sf::Mouse::getPosition(window).y < 120)
 		  {
 		    window.close();
 		  }
@@ -152,7 +153,7 @@ void High_Score_List::render()
   window.display();
 }
 
-//Sorted insertion
+// Sorted insertion of entry pointers to the entries vector
 void High_Score_List::add_entry(unique_ptr<Entry> entry)
 {
   ifstream infile;
@@ -188,6 +189,7 @@ void High_Score_List::add_entry(unique_ptr<Entry> entry)
   save_to_file();
 }
 
+// Retrieves text from Highscorelist.txt and displays it in the window
 void High_Score_List::show_score()
 {
   ifstream infile;
@@ -225,16 +227,15 @@ void High_Score_List::show_score()
   infile.close();
 }
 
+// Writes the contents of the entries vector to the file Highscorelist.txt
 void High_Score_List::save_to_file()
 {
-  cout << entries.size() << endl;
   ofstream outfile;
   outfile.open("resources/Highscorelist.txt", ios_base::trunc);
   for(unsigned i{} ; i != entries.size() ; i++)
     {
       string new_entry = entries.at(i)->to_string();
       outfile << new_entry << endl;
-      cout << new_entry << endl;
     }
   outfile.close();
 }

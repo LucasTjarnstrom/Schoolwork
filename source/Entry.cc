@@ -1,5 +1,6 @@
 /*
  * Entry.cc
+ This class handles the entries to the highscore list.
  */
 
 #include <SFML/Graphics.hpp>
@@ -14,6 +15,7 @@ Entry::Entry(string na, int sc, string da)
 {
 }
 
+// Returns the current date
 string Entry::return_time()
 {
   time_t t = time(0);
@@ -23,6 +25,7 @@ string Entry::return_time()
   return ss.str();
 }
 
+// Reformats name, score and time variables into a single string
 string Entry::to_string()
 {
   stringstream ss;
