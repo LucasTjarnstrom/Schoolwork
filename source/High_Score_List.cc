@@ -121,13 +121,7 @@ void High_Score_List::process_events()
 		if(sf::Mouse::getPosition(window).x > 1 && sf::Mouse::getPosition(window).x < 100 &&
 		   sf::Mouse::getPosition(window).y > 0 && sf::Mouse::getPosition(window).y < 100)
 		  {
-		    // Måste åtgärdas! Går man från Highscorelistan till Menyn kan man inte spara sin
-		    // spelomgång efteråt
 		    window.close();
-		    Start_Menu start_menu {};
-		    string user_choice = start_menu.run();
-		    Game game {};
-		    game.run(user_choice);
 		  }
 	      }
 	  break;

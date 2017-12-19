@@ -9,18 +9,24 @@ using namespace std;
 
 int main()
 {
-  Start_Menu start_menu {};
-  string user_choice = start_menu.run();
-  Game game {};
-  pair <string,int> name_and_score = game.run(user_choice);
-  if (name_and_score.second != 0)
+  string user_choice{};
+  pair <string,int> name_and_score{};
+  bool quit{false};
+  while(!quit)
     {
-      Entry entry {};
-      entry.name = name_and_score.first;
-      entry.score = name_and_score.second;
-      unique_ptr<Entry> temp = make_unique<Entry>(entry);
-      High_Score_List highscore_list {};
-      highscore_list.add_entry(move(temp));
+      Start_Menu start_menu {};
+      user_choice = start_menu.run();
+      Game game {};
+      name_and_score = game.run(user_choice);
+      if (name_and_score.second != 0)
+	{
+	  Entry entry {};
+	  entry.name = name_and_score.first;
+	  entry.score = name_and_score.second;
+	  unique_ptr<Entry> temp = make_unique<Entry>(entry);
+	  High_Score_List highscore_list {};
+	  highscore_list.add_entry(move(temp));
+	}
     }
   return 0;
 }
