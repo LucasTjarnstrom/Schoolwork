@@ -27,9 +27,6 @@ private:
 
     sf::Texture background_texture {};
     sf::Sprite background_sprite {};
-    sf::Text title {};
-    sf::Font font {};
-
 };
 
 #endif
