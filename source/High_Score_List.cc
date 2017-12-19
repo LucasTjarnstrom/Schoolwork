@@ -13,7 +13,6 @@
 using namespace std;
 
 High_Score_List::High_Score_List()
-<<<<<<< HEAD
     : window(sf::VideoMode(1280, 720), "Highscore List"),
       return_button{Button(12,12,0,0,"resources/button_back.png")}
 {
