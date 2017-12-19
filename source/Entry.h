@@ -14,9 +14,9 @@ public:
     Entry(std::string, int, std::string);
 
     std::string name {};
-    std::string date {};
     int score {};
-
+    std::string date {};
+    
     std::string return_time();
 
     int get_score();
