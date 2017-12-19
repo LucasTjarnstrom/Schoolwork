@@ -13,19 +13,19 @@ Start_Menu::Start_Menu()
     window.setFramerateLimit(60);
 
     // Background
-    background_texture.loadFromFile("resources/background.png");
+    background_texture.loadFromFile("resources/menubackground.png");
     background_sprite.setTexture(background_texture);
 
     // Font
     font.loadFromFile("resources/OldLondon.ttf");
-
+/*
     // Title
     title.setFont(font);
     title.setCharacterSize(180);
     title.setStyle(sf::Text::Bold);
     title.setFillColor(sf::Color(255,255,255));
     title.setPosition(170,40);
-    title.setString("Lorem Ipsum");
+    title.setString("Lorem Ipsum"); */
 }
 
 pair <string,bool> Start_Menu::run()
