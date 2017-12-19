@@ -122,10 +122,6 @@ void High_Score_List::process_events()
 		   sf::Mouse::getPosition(window).y > 0 && sf::Mouse::getPosition(window).y < 100)
 		  {
 		    window.close();
-		    Start_Menu start_menu {};
-		    string user_choice = start_menu.run();
-		    Game game {};
-		    game.run(user_choice);
 		  }
 	      }
 	  break;
@@ -156,89 +152,90 @@ void High_Score_List::render()
   window.display();
 }
 
-
+//Sorted insertion
 void High_Score_List::add_entry(unique_ptr<Entry> entry)
 {
-  int score = entry->get_score();
-
-  for(unsigned i{} ; i < entries.size() ; i++)
+  ifstream infile;
+  infile.open("resources/Highscorelist.txt");
+  string name{};
+  int score{};
+  string date{};
+  while(infile >> name)
     {
-      int current_score {};
-      current_score = entries.at(i)->get_score();
-      if(score > current_score)
+      infile >> score;
+      infile >> date;
+      entries.push_back(make_unique<Entry>(name, score, date));
+    }
+  if (entries.empty())
+    {
+      entries.push_back(move(entry));
+    }
+  else
+    {
+      bool inserted{false};
+      for(unsigned i{}; i != entries.size(); i++)
 	{
-	  entries.insert(entries.begin()+i, move(entry));
-	  if(entries.size() > 10) 
+	  if(entries.at(i)->get_score() < entry->get_score())
 	    {
-	      entries.pop_back();
+	      entries.insert(entries.begin() + i, move(entry));
+	      inserted = true;
+	      break;
 	    }
 	}
+      if (!inserted)
+	entries.push_back(move(entry));
     }
+  save_to_file();
 }
 
 void High_Score_List::show_score()
 {
-  save_to_file();
   ifstream infile;
-  string line;
+  string line1;
+  string line2;
+  string line3;
+  string line4;
+  string line5;
+  string line6;
+  string line7;
+  string line8;
+  string line9;
+  string line10;
   infile.open("resources/Highscorelist.txt");
-  getline(infile,line);
-  score_text1.setString(line);
-  getline(infile,line);
-  score_text2.setString(line);
-  getline(infile,line);
-  score_text3.setString(line);
-  getline(infile,line);
-  score_text4.setString(line);
-  getline(infile,line);
-  score_text5.setString(line);
-  getline(infile,line);
-  score_text6.setString(line);
-  getline(infile,line);
-  score_text7.setString(line);
-  getline(infile,line);
-  score_text8.setString(line);
-  getline(infile,line);
-  score_text9.setString(line);
-  getline(infile,line);
-  score_text10.setString(line);
+  getline(infile,line1);
+  score_text1.setString(line1);
+  getline(infile,line2);
+  score_text2.setString(line2);
+  getline(infile,line3);
+  score_text3.setString(line3);
+  getline(infile,line4);
+  score_text4.setString(line4);
+  getline(infile,line5);
+  score_text5.setString(line5);
+  getline(infile,line6);
+  score_text6.setString(line6);
+  getline(infile,line7);
+  score_text7.setString(line7);
+  getline(infile,line8);
+  score_text8.setString(line8);
+  getline(infile,line9);
+  score_text9.setString(line9);
+  getline(infile,line10);
+  score_text10.setString(line10);
   infile.close();
 }
 
 void High_Score_List::save_to_file()
 {
-  for(unsigned i{} ; i < entries.size() ; i++)
+  cout << entries.size() << endl;
+  ofstream outfile;
+  outfile.open("resources/Highscorelist.txt", ios_base::trunc);
+  for(unsigned i{} ; i != entries.size() ; i++)
     {
       string new_entry = entries.at(i)->to_string();
-      ofstream outfile;
-      outfile.open("resources/Highscorelist.txt");
-      outfile << new_entry;
-      outfile.close();
+      outfile << new_entry << endl;
+      cout << new_entry << endl;
     }
-
-  // For testing purposes
-  ofstream outfile;
-  outfile.open("resources/Highscorelist.txt");
-  string test = to_string();
-  outfile << test << endl;
-  string test2 = "CoolKille2 Technodancer -4 2017-12-12";
-  outfile << test2 << endl;
-  string test3 = "CoolKille2 Technodancer -4 2017-12-01";
-  outfile << test3 << endl;
-  string test4 = "CoolKille2 Technodancer -4 2017-12-10";
-  outfile << test4 << endl;
-  string test5 = "CoolKille2 Technodancer 6 2017-12-13";
-  outfile << test5 << endl;
-  string test6 = "CoolKille2 Technodancer 1 2017-12-18";
-  outfile << test6 << endl;
-  string test7 = "CoolKille2 Technodancer -8 2017-12-19";
-  outfile << test7 << endl;
-  string test8 = "Hejsvejsmannen Technodancer -4 2017-12-24";
-  outfile << test8 << endl;
-  string test9 = "CoolKille3 Technodancer -4 2017-12-31";
-  outfile << test9 << endl;
-  string test10 = "CoolKille2 Technodancer -4 2017-12-30";
-  outfile << test10 << endl;
   outfile.close();
 }
 

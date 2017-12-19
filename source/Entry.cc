@@ -9,7 +9,8 @@
 
 using namespace std;
 
-Entry::Entry()
+Entry::Entry(string na, int sc, string da)
+  : name {na}, score{sc}, date{da}
 {
 }
 
@@ -25,8 +26,7 @@ string Entry::return_time()
 string Entry::to_string()
 {
   stringstream ss;
-  ss << "CoolKille" << " " << "Technomancer" << " " << "-3" << " " << return_time();
-  //ss << name << " " << score << " " << return_time();
+  ss << name << " " << score << " " << return_time();
   return ss.str();
 }
 

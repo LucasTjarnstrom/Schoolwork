@@ -13,7 +13,7 @@ class Start_Menu
 {
 public:
     Start_Menu();
-    std::string run();
+    std::pair <std::string,bool> run();
 
 private:
     std::string process_events();

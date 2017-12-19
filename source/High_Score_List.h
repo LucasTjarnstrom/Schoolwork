@@ -34,6 +34,7 @@ protected:
 
     void render();
     void process_events();
+
     sf::Font caviar {};
     sf::Text highscore_text {};
     sf::Text score_text1 {};
@@ -46,7 +47,6 @@ protected:
     sf::Text score_text8 {};
     sf::Text score_text9 {};
     sf::Text score_text10 {};
-
 };
 
 #endif 

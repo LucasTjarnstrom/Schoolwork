@@ -26,10 +26,9 @@ Start_Menu::Start_Menu()
     title.setFillColor(sf::Color(255,255,255));
     title.setPosition(170,40);
     title.setString("Lorem Ipsum");
-
 }
 
-string Start_Menu::run()
+pair <string,bool> Start_Menu::run()
 {
   string user_choice{};
   process_events();
@@ -39,11 +38,14 @@ string Start_Menu::run()
       if (user_choice != "")
 	{
 	  window.close();
-	  return user_choice;
+	  if (user_choice == "Quit")
+	    return make_pair(user_choice,true);
+	  else
+	    return make_pair(user_choice,false);
 	}
       render();
     }
-  return "";
+  return make_pair("",false);
 }
 
 string Start_Menu::process_events()
@@ -58,11 +60,11 @@ string Start_Menu::process_events()
 	    return "Quit";
 	  }
 	case sf::Event::KeyPressed:
-	    if (event.key.code == sf::Keyboard::Escape) //press escape -> close window
+	  if (event.key.code == sf::Keyboard::Escape) //press escape -> close window
 	    {
-	    	return "Quit";
+	      return "Quit";
 	    } else if (event.key.code == sf::Keyboard::Return)
-		return "Start game";
+	    return "Start game";
 	case sf::Event::MouseButtonPressed:
 	  {
 	    if (event.mouseButton.button == sf::Mouse::Left)
