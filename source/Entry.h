@@ -1,5 +1,6 @@
 /*
  * Entry.h
+ This class handles the entries to the highscore list.
  */
 
 #ifndef ENTRY_H
@@ -9,21 +10,19 @@
 
 class Entry
 {
-public:
+ public:
   Entry() = default;
-    Entry(std::string, int, std::string);
+  Entry(std::string, int, std::string);
 
-    std::string name {};
-    int score {};
-    std::string date {};
-    
-    std::string return_time();
-
-    int get_score();
-    std::string to_string();
-
-protected:
-
+  int get_score();
+  std::string to_string();
+  std::string name {};
+  int score {};
+  
+ protected:
+  std::string date {};
+  std::string return_time();
+  
 };
 
 #endif
