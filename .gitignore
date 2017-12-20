@@ -32,6 +32,3 @@
 *.app
 main
 player-test
-
-# Text files
-resources/*.txt

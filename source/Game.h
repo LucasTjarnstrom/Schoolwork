@@ -30,6 +30,7 @@ private:
     sf::Text draw_player_health();
     sf::Text draw_player_attack();
     sf::Text draw_player_score();
+    sf::Text draw_player_experience();
     sf::Text draw_name_entry();
     
     sf::RenderWindow window {};
@@ -41,6 +42,7 @@ private:
     sf::Text player_health {};
     sf::Text player_attack {};
     sf::Text player_score {};
+    sf::Text player_experience {};
     sf::Font old_london {};
     sf::Text enter_your_name {};
     sf::Text name_entry {};

@@ -6,6 +6,7 @@
 #include <string>
 #include <exception>
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -75,6 +76,16 @@ int Player::get_weapon_damage() const
     return weapon_damage;
 }
 
+void Player::set_experience(int exp)
+{
+    experience = exp;
+}
+
+int Player::get_experience() const
+{
+    return experience;
+}
+
 void Player::is_colliding(string arg)
 {
   if(arg == "floor")
@@ -104,6 +115,7 @@ void Player::is_colliding(string arg)
   else if(arg == "coin")
   {
       score += 100;
+      experience += 100;
   }
   else if(arg == "health_orb")
   {
@@ -119,4 +131,18 @@ sf::Sprite Player::attack()
 	attack_.get_sprite().setPosition(x_pos - 70, y_pos-7);
   
     return attack_.get_sprite();
+}
+
+void Player::save_experience()
+{
+    ofstream outfile;
+    outfile.open("resources/experience.txt", ios_base::trunc);
+    outfile << experience;
+}
+
+void Player::load_experience()
+{
+    ifstream infile;
+    infile.open("resources/experience.txt");
+    infile >> experience;
 }

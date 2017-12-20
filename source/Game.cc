@@ -62,6 +62,13 @@ Game::Game()
     player_attack.setFillColor(sf::Color(249, 72, 59));
     player_attack.setPosition(20,0);
 
+    // Setting up GUI for displaying player's experience
+    player_experience.setFont(old_london);
+    player_experience.setCharacterSize(30);
+    player_experience.setStyle(sf::Text::Bold);
+    player_experience.setFillColor(sf::Color(249, 72, 59));
+    player_experience.setPosition(20,60);
+   
     // Setting up GUI for displaying player's score
     player_score.setFont(old_london);
     player_score.setCharacterSize(30);
@@ -212,6 +219,7 @@ std::pair<string,int> Game::run(string user_choice)
 {
     if ( user_choice == "Start game" )
     {
+	player.load_experience();
 	clock.restart(); // restart clock
 	string player_name{};
 	while (window.isOpen() && player_name == "")
@@ -220,6 +228,7 @@ std::pair<string,int> Game::run(string user_choice)
 	    update();
 	    render();
 	}
+	player.save_experience();
 	return make_pair(player_name,player.get_score());
     }
 
@@ -321,6 +330,7 @@ void Game::update()
 	    }
 	  if((*it)->get_current_health() <= 0){
 	      player.set_score(player.get_score() + (*it)->get_score());
+	      player.set_experience(player.get_experience() + (*it)->get_score());
 	      it = enemies.erase(it);
 	  }else
 	    it++;
@@ -512,6 +522,7 @@ void Game::render()
   }
   window.draw(draw_player_attack());
   window.draw(draw_player_score());
+  window.draw(draw_player_experience());
   //window.draw(enemies.front()->health_text);
   window.display();
 
@@ -622,6 +633,16 @@ sf::Text Game::draw_player_attack()
     return player_attack;
 }
 
+// Draws player's current experience
+sf::Text Game::draw_player_experience()
+{
+    stringstream ss;
+    ss << "Experience: " << player.get_experience();
+    player_experience.setString(ss.str());
+
+    return player_experience;
+}
+
 //Draws current score
 sf::Text Game::draw_player_score()
 {
@@ -631,3 +652,4 @@ sf::Text Game::draw_player_score()
 
     return player_score;
 }
+
