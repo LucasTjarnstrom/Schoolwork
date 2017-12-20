@@ -25,6 +25,7 @@ High_Score_List::High_Score_List()
 
     font.loadFromFile("resources/arial.ttf");
 
+    // Setup for displaying high scores
     score_text1.setFont(font);
     score_text1.setCharacterSize(20);
     score_text1.setStyle(sf::Text::Bold);
