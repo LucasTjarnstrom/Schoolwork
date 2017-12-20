@@ -9,6 +9,7 @@
 #include "Coin.h"
 #include "Goal.h"
 #include "Weapon.h"
+#include "Health_Orb.h"
 #include <vector>
 #include <memory>
 
@@ -75,6 +76,11 @@ void Map::create_environment(std::string type, int xp, int yp, int xs, int ys)
     {
 	unique_ptr<Weapon> temp = make_unique<Weapon> (xp,yp,xs,ys,"resources/weapon.png");
 	add_environment(move(temp));  
+    }
+    else if (type == "health_orb")
+    {
+	unique_ptr<Health_Orb> temp = make_unique<Health_Orb> (xp,yp,xs,ys,"resources/health_orb.png");
+	add_environment(move(temp));
     }
     else
     {

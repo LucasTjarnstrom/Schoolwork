@@ -105,6 +105,10 @@ void Player::is_colliding(string arg)
   {
       score += 100;
   }
+  else if(arg == "health_orb")
+  {
+      current_health += 1;
+  }
 }
 
 sf::Sprite Player::attack()

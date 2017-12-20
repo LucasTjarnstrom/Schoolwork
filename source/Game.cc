@@ -18,6 +18,7 @@
 #include "Ceiling.h"
 #include "Coin.h"
 #include "Weapon.h"
+#include "Health_Orb.h"
 #include "Collision.h"
 #include "High_Score_List.h"
 #include "Enemy.h"
@@ -161,8 +162,10 @@ Game::Game()
     map.create_environment("coin", 790,328,0,0);
 
     map.create_environment("weapon",150,640,0,0);
-    map.create_environment("weapon",2000,0,0,0);
-
+   
+    map.create_environment("health_orb",1000,230,0,0);
+    map.create_environment("health_orb",2000,0,0,0);
+    
     // Enemy objects
     create_enemy("ghoul",200,600,0,0);
     create_enemy("ghoul",850,600,0,0);
@@ -379,6 +382,14 @@ void Game::render()
 	  {
 	      player.set_weapon_damage(player.get_weapon_damage() + 2);
 	      it = map.get_environments().erase(it);
+	  }
+	  else if (dynamic_cast<Health_Orb*> ((*it).get()) != nullptr) // checks if player is colliding with a Weapon
+	  {
+	      if(player.get_current_health() != player.get_vitality())
+	      {
+		  player.is_colliding("health_orb");
+		  it = map.get_environments().erase(it);
+	      }
 	  }
 	  else
 	  {
