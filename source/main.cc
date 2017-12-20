@@ -7,6 +7,9 @@
 
 using namespace std;
 
+// The "main" game loop. Returns a string to indicate which menu item the user chose.
+// The while loop runs until the user exits through the main menu.
+
 int main()
 {
   pair <string,bool> user_choice_and_quit{};
