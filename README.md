@@ -1,7 +1,7 @@
 2D Plattformsspel // viktor4
 ==============
 
-Detta är andra versionen av en README för projektgruppen viktor4.
+Detta är fjärde versionen av en README för projektgruppen viktor4. För att kompilera systemet måste en map som heter 'build' skapas där mapparna 'source' och 'resources'.
 
 Gällande .gitignore
 --------------
