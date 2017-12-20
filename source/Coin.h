@@ -21,8 +21,6 @@ public:
 
 private:
     int score {};
-
-
 };
 
 #endif

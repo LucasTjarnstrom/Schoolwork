@@ -1,5 +1,4 @@
 /*
-
  * Button.cc
  */
 
@@ -9,13 +8,13 @@
 using namespace std;
 
 Button::Button(double xp, double yp, double xs, double ys, string file_name)
-  : Drawable(xp, yp, xs, ys, file_name)
+    : Drawable(xp, yp, xs, ys, file_name)
 {
 }
 
 sf::Sprite Button::draw_this()
 {
-  return sprite;
+    return sprite;
 }
 
 void Button::is_colliding(string)

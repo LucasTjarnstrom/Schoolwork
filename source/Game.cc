@@ -183,35 +183,35 @@ Game::Game()
 //Creates an enemy and adds it to the vector "enemies".
 void Game::create_enemy(std::string type, int xp, int yp, int xs, int ys)
 {
-  if (type == "ghoul")
+    if (type == "ghoul")
     {
-      unique_ptr<Enemy> temp = make_unique<Enemy>(xp,yp,xs,ys,"resources/enemy.png");
-      temp->set_font(old_london); // enemy's health_text gets its font set
-      temp->set_vitality(4); // a Ghoul has 4 vitality
-      temp->set_current_health(temp->get_vitality()); // a Ghoul has max health when spawned
-      temp->set_score(200); // a Ghoul has 200 score (gives 200 score on death)
-      temp->set_strength(1); // a Ghoul has 1 strength
-      add_enemy(move(temp));
+	unique_ptr<Enemy> temp = make_unique<Enemy>(xp,yp,xs,ys,"resources/enemy.png");
+	temp->set_font(old_london); // enemy's health_text gets its font set
+	temp->set_vitality(4); // a Ghoul has 4 vitality
+	temp->set_current_health(temp->get_vitality()); // a Ghoul has max health when spawned
+	temp->set_score(200); // a Ghoul has 200 score (gives 200 score on death)
+	temp->set_strength(1); // a Ghoul has 1 strength
+	add_enemy(move(temp));
     }
-  else
+    else
     {
-      throw logic_error("trying to create Enemy of invalid type");
+	throw logic_error("trying to create Enemy of invalid type");
     }
 }
 
 vector<unique_ptr<Enemy>>& Game::get_enemies()
 {
-  return enemies;
+    return enemies;
 }
 
 void Game::set_enemies(vector<unique_ptr<Enemy>>& other)
 {
-  enemies = move(other);
+    enemies = move(other);
 }
 
 void Game::add_enemy(unique_ptr<Enemy> e)
 {
-  enemies.push_back(move(e));
+    enemies.push_back(move(e));
 }
 
 //Starts game and loops necessary functions
@@ -232,28 +232,28 @@ std::pair<string,int> Game::run(string user_choice)
 	return make_pair(player_name,player.get_score());
     }
 
-  else if ( user_choice == "Continue" )
+    else if ( user_choice == "Continue" )
     {
-      cout << "Continue game" << endl;
-      return make_pair("",0);
+	cout << "Continue game" << endl;
+	return make_pair("",0);
     }
 
-  else if ( user_choice == "Show high scores" )
+    else if ( user_choice == "Show high scores" )
     {
-      window.close();
-      High_Score_List high_score_list {};
-      high_score_list.run();
-      return make_pair("",0);
+	window.close();
+	High_Score_List high_score_list {};
+	high_score_list.run();
+	return make_pair("",0);
     }
   
-  else if(user_choice == "Quit" )
+    else if(user_choice == "Quit" )
     {
-      return make_pair("",0);
+	return make_pair("",0);
     }
-  else
+    else
     {
 	throw logic_error("Start_Menu returns invalid string! Try make clean.");
-      return make_pair("",0);
+	return make_pair("",0);
     }
 }
 
@@ -274,19 +274,19 @@ string Game::process_events()
 	    	window.close();
 	    }
 	    else
-	      {
+	    {
 		return handle_player_input(event.key.code, true);
 		break;
-	      }
+	    }
 	    
 	case sf::Event::KeyReleased:
-	  {
+	{
 	    handle_player_input(event.key.code, false);
 	    break;
-	  }
+	}
 	    
 	default:
-	  break;	
+	    break;	
 	}
     }
     return "";
@@ -311,31 +311,31 @@ void Game::update()
     else if(move_right)
 	movement = "right";
     else
-      movement = "nothing";
+	movement = "nothing";
   
     player.move(movement);
 
     // check if any enemies have died and moves enemies
     if(!enemies.empty())
-      {
+    {
 	auto it = enemies.begin();
 	while(it != enemies.end()){
-	  if ((*it)->get_facing_right())
+	    if ((*it)->get_facing_right())
 	    {
-	      (*it) -> move("right");
+		(*it) -> move("right");
 	    }
-	  else
+	    else
 	    {
-	      (*it) -> move("left");
+		(*it) -> move("left");
 	    }
-	  if((*it)->get_current_health() <= 0){
-	      player.set_score(player.get_score() + (*it)->get_score());
-	      player.set_experience(player.get_experience() + (*it)->get_score());
-	      it = enemies.erase(it);
-	  }else
-	    it++;
+	    if((*it)->get_current_health() <= 0){
+		player.set_score(player.get_score() + (*it)->get_score());
+		player.set_experience(player.get_experience() + (*it)->get_score());
+		it = enemies.erase(it);
+	    }else
+		it++;
 	}
-      }
+    }
     
     // Check if player has died
     if(player.get_current_health() <= 0)
@@ -349,267 +349,267 @@ void Game::update()
 //Handles graphics
 void Game::render()
 {
-  //----------PLAYER COLLISION WITH ENVIRONMENT----------
-  for (auto it = map.get_environments().begin(); it != map.get_environments().end(); it++)
+    //----------PLAYER COLLISION WITH ENVIRONMENT----------
+    for (auto it = map.get_environments().begin(); it != map.get_environments().end(); it++)
     {
-      if (Collision::BoundingBoxTest(player.draw_this(), (*it)->draw_this())) //Checks if player is colliding with anything
+	if (Collision::BoundingBoxTest(player.draw_this(), (*it)->draw_this())) //Checks if player is colliding with anything
 	{
-	  if (dynamic_cast<Wall*> ((*it).get()) != nullptr) // Checks if player is colliding with a Wall
+	    if (dynamic_cast<Wall*> ((*it).get()) != nullptr) // Checks if player is colliding with a Wall
 	    {
-	      for (auto it2 = map.get_environments().begin(); it2 != map.get_environments().end(); it2++)
+		for (auto it2 = map.get_environments().begin(); it2 != map.get_environments().end(); it2++)
 		{
-		  if (Collision::BoundingBoxTest(player.draw_this(), (*it2)->draw_this())) //Checks if player is colliding with another object
+		    if (Collision::BoundingBoxTest(player.draw_this(), (*it2)->draw_this())) //Checks if player is colliding with another object
 		    {
-		      if (dynamic_cast<Floor*> ((*it2).get()) != nullptr) // Checks if the other object is a Floor
+			if (dynamic_cast<Floor*> ((*it2).get()) != nullptr) // Checks if the other object is a Floor
 			{
-			  //----------Colliding with both a Floor and a Wall----------
-			  player.is_colliding("floor_wall");
+			    //----------Colliding with both a Floor and a Wall----------
+			    player.is_colliding("floor_wall");
 			}
-		      else
+			else
 			{
-			  //----------Colliding with a Wall----------
-			  player.is_colliding("wall");
+			    //----------Colliding with a Wall----------
+			    player.is_colliding("wall");
 			}
 		    }
 		}
 	    }
-	  else if (dynamic_cast<Ceiling*> ((*it).get()) != nullptr) //Checks if player is colliding with a Ceiling
+	    else if (dynamic_cast<Ceiling*> ((*it).get()) != nullptr) //Checks if player is colliding with a Ceiling
 	    {
-	      player.is_colliding("ceiling");
+		player.is_colliding("ceiling");
 	    }
-	  else if (dynamic_cast<Coin*> ((*it).get()) != nullptr) // checks if player is colliding with a Coin
-	  {
-	      player.is_colliding("coin");
-	      it = map.get_environments().erase(it);
+	    else if (dynamic_cast<Coin*> ((*it).get()) != nullptr) // checks if player is colliding with a Coin
+	    {
+		player.is_colliding("coin");
+		it = map.get_environments().erase(it);
 	      
-	  }
-	  else if (dynamic_cast<Goal*> ((*it).get()) != nullptr) //Checks if player is colliding with a Goal
-	    {
-	      game_won = true;
-	      player.set_y_pos(2000);
 	    }
-	  else if (dynamic_cast<Weapon*> ((*it).get()) != nullptr) // checks if player is colliding with a Weapon
-	  {
-	      player.set_weapon_damage(player.get_weapon_damage() + 2);
-	      it = map.get_environments().erase(it);
-	  }
-	  else if (dynamic_cast<Health_Orb*> ((*it).get()) != nullptr) // checks if player is colliding with a Weapon
-	  {
-	      if(player.get_current_health() != player.get_vitality())
-	      {
-		  player.is_colliding("health_orb");
-		  it = map.get_environments().erase(it);
-	      }
-	  }
-	  else
-	  {
-	      //----------Colliding with a Floor----------
-	      player.is_colliding("floor");	      
+	    else if (dynamic_cast<Goal*> ((*it).get()) != nullptr) //Checks if player is colliding with a Goal
+	    {
+		game_won = true;
+		player.set_y_pos(2000);
+	    }
+	    else if (dynamic_cast<Weapon*> ((*it).get()) != nullptr) // checks if player is colliding with a Weapon
+	    {
+		player.set_weapon_damage(player.get_weapon_damage() + 2);
+		it = map.get_environments().erase(it);
+	    }
+	    else if (dynamic_cast<Health_Orb*> ((*it).get()) != nullptr) // checks if player is colliding with a Weapon
+	    {
+		if(player.get_current_health() != player.get_vitality())
+		{
+		    player.is_colliding("health_orb");
+		    it = map.get_environments().erase(it);
+		}
+	    }
+	    else
+	    {
+		//----------Colliding with a Floor----------
+		player.is_colliding("floor");	      
 	    }
 	}
     }
 
-  //----------ENEMY COLLISION WITH ENVIRONMENT----------
-  if(!enemies.empty()){
-      for (auto enemyit = enemies.begin(); enemyit != enemies.end(); enemyit++)
-      {
-	  for (auto it = map.get_environments().begin(); it != map.get_environments().end(); it++)
-	  {
-	      if (Collision::BoundingBoxTest((*enemyit)->draw_this(), (*it)->draw_this())) //Checks if the enemy is colliding with anything
-	      {
-		  if (dynamic_cast<Wall*> ((*it).get()) != nullptr) // Checks if the enemy is colliding with a Wall
-		  {
-		      for (auto it2 = map.get_environments().begin(); it2 != map.get_environments().end(); it2++)
-		      {
-			  if (Collision::BoundingBoxTest((*enemyit)->draw_this(), (*it2)->draw_this())) //Checks if the enemy is colliding with another object
-			  {
-			      if (dynamic_cast<Floor*> ((*it2).get()) != nullptr) // Checks if the other object is a Floor
-			      {
-				  //----------Colliding with both a Floor and a Wall----------
-				  (*enemyit)->is_colliding("wall");
-			      }
-			      else
-			      {
-				  //----------Colliding with a Wall----------
-				  (*enemyit)->is_colliding("wall");
-			      }
-			  }
-		      }
-		  }
-		  else
-		  {
-		      //----------Colliding with a Floor----------
-		      (*enemyit)->is_colliding("floor");
-		  }
-	      }
-	  }
-      }
-  }
-  
-  // ------ Collision with Player's Attack and enemies -------
-  if(attacking)
-  {
-      if(player.attack_counter > 0)
-      {
-	  if(!enemies.empty())
-	  {
-	      for (auto enemyit = enemies.begin(); enemyit != enemies.end(); enemyit++)
-	      {
-		  if (Collision::BoundingBoxTest(player.attack(), (*enemyit)->draw_this()))
-		  {
-		      (*enemyit)->set_current_health((*enemyit)->get_current_health() - 
-						     player.get_strength() - player.get_weapon_damage());    
-		  }
-	      }
-	  } 
-      }
-  }
-  
-  // ----- Collision with Player and Enemy -----
-  if(!enemies.empty())
-  {      
-      for (auto enemyit = enemies.begin(); enemyit != enemies.end(); enemyit++)
-      {
-	  if (Collision::BoundingBoxTest(player.draw_this(), (*enemyit)->draw_this()))
-	  {
-	      if(!player_recently_hit)
-	      {
-		  player.set_current_health(player.get_current_health() - (*enemyit)->get_strength());
-		  player_recently_hit = true;
-	      }
-	      
-	  }
-      }
-  }
-
-  window.clear();
-  window.draw(bgsprite);
- 
-  if(!enemies.empty()) // Draws enemies (and their health_text)
-  {
-      for (auto it = enemies.begin(); it != enemies.end(); it++)
-      {
-	  window.draw((*it) -> draw_this());
-	  //window.draw((*it) -> health_to_text()); // ger seg. fault
-      }
-  }
-    
-  for (auto it = map.get_environments().begin(); it != map.get_environments().end(); it++)
-    {
-      window.draw((*it) -> draw_this());
-    }
-  
-  if(attacking)
-    {
-      if(player.attack_counter > 0)
+    //----------ENEMY COLLISION WITH ENVIRONMENT----------
+    if(!enemies.empty()){
+	for (auto enemyit = enemies.begin(); enemyit != enemies.end(); enemyit++)
 	{
-	  window.draw(player.attack());
-	  player.attack_counter--; 
+	    for (auto it = map.get_environments().begin(); it != map.get_environments().end(); it++)
+	    {
+		if (Collision::BoundingBoxTest((*enemyit)->draw_this(), (*it)->draw_this())) //Checks if the enemy is colliding with anything
+		{
+		    if (dynamic_cast<Wall*> ((*it).get()) != nullptr) // Checks if the enemy is colliding with a Wall
+		    {
+			for (auto it2 = map.get_environments().begin(); it2 != map.get_environments().end(); it2++)
+			{
+			    if (Collision::BoundingBoxTest((*enemyit)->draw_this(), (*it2)->draw_this())) //Checks if the enemy is colliding with another object
+			    {
+				if (dynamic_cast<Floor*> ((*it2).get()) != nullptr) // Checks if the other object is a Floor
+				{
+				    //----------Colliding with both a Floor and a Wall----------
+				    (*enemyit)->is_colliding("wall");
+				}
+				else
+				{
+				    //----------Colliding with a Wall----------
+				    (*enemyit)->is_colliding("wall");
+				}
+			    }
+			}
+		    }
+		    else
+		    {
+			//----------Colliding with a Floor----------
+			(*enemyit)->is_colliding("floor");
+		    }
+		}
+	    }
 	}
     }
-  window.draw(player.draw_this());
-  window.draw(draw_player_health());
-  if(game_won || player_dead)
-  {
-      window.draw(endgamesprite);
-      if(game_won)
-	  window.draw(game_won_text);
-      else
-	  window.draw(game_lost_text);
+  
+    // ------ Collision with Player's Attack and enemies -------
+    if(attacking)
+    {
+	if(player.attack_counter > 0)
+	{
+	    if(!enemies.empty())
+	    {
+		for (auto enemyit = enemies.begin(); enemyit != enemies.end(); enemyit++)
+		{
+		    if (Collision::BoundingBoxTest(player.attack(), (*enemyit)->draw_this()))
+		    {
+			(*enemyit)->set_current_health((*enemyit)->get_current_health() - 
+						       player.get_strength() - player.get_weapon_damage());    
+		    }
+		}
+	    } 
+	}
+    }
+  
+    // ----- Collision with Player and Enemy -----
+    if(!enemies.empty())
+    {      
+	for (auto enemyit = enemies.begin(); enemyit != enemies.end(); enemyit++)
+	{
+	    if (Collision::BoundingBoxTest(player.draw_this(), (*enemyit)->draw_this()))
+	    {
+		if(!player_recently_hit)
+		{
+		    player.set_current_health(player.get_current_health() - (*enemyit)->get_strength());
+		    player_recently_hit = true;
+		}
+	      
+	    }
+	}
+    }
 
-      window.draw(enter_your_name);
-      window.draw(name_entry);
-  }
-  window.draw(draw_player_attack());
-  window.draw(draw_player_score());
-  window.draw(draw_player_experience());
-  //window.draw(enemies.front()->health_text);
-  window.display();
+    window.clear();
+    window.draw(bgsprite);
+ 
+    if(!enemies.empty()) // Draws enemies (and their health_text)
+    {
+	for (auto it = enemies.begin(); it != enemies.end(); it++)
+	{
+	    window.draw((*it) -> draw_this());
+	    //window.draw((*it) -> health_to_text()); // ger seg. fault
+	}
+    }
+    
+    for (auto it = map.get_environments().begin(); it != map.get_environments().end(); it++)
+    {
+	window.draw((*it) -> draw_this());
+    }
+  
+    if(attacking)
+    {
+	if(player.attack_counter > 0)
+	{
+	    window.draw(player.attack());
+	    player.attack_counter--; 
+	}
+    }
+    window.draw(player.draw_this());
+    window.draw(draw_player_health());
+    if(game_won || player_dead)
+    {
+	window.draw(endgamesprite);
+	if(game_won)
+	    window.draw(game_won_text);
+	else
+	    window.draw(game_lost_text);
+
+	window.draw(enter_your_name);
+	window.draw(name_entry);
+    }
+    window.draw(draw_player_attack());
+    window.draw(draw_player_score());
+    window.draw(draw_player_experience());
+    //window.draw(enemies.front()->health_text);
+    window.display();
 
 }
 
 //Handles keypresses
 string Game::handle_player_input(sf::Keyboard::Key key, bool is_pressed)
 {
-  if (!game_won && !player_dead)
+    if (!game_won && !player_dead)
     {
 	if (key == sf::Keyboard::A || key == sf::Keyboard::Left)
-	move_left = is_pressed;
-      else if (key == sf::Keyboard::D || key == sf::Keyboard::Right)
-	move_right = is_pressed;
-      else if (key == sf::Keyboard::Space)
+	    move_left = is_pressed;
+	else if (key == sf::Keyboard::D || key == sf::Keyboard::Right)
+	    move_right = is_pressed;
+	else if (key == sf::Keyboard::Space)
 	{
-	  if(is_pressed)
-	    player.jump();
+	    if(is_pressed)
+		player.jump();
 	}
-      else if (key == sf::Keyboard::S || key == sf::Keyboard::W)
-	attacking = is_pressed;
+	else if (key == sf::Keyboard::S || key == sf::Keyboard::W)
+	    attacking = is_pressed;
     }
-  else
+    else
     {
-      if(is_pressed)
+	if(is_pressed)
 	{
-	  stringstream ss;
-	  string temp = name_entry.getString().toAnsiString();
-	  if (key == sf::Keyboard::A) //friday afternoon code, pls don't judge
-	    temp.append("A");
-	  else if (key == sf::Keyboard::B)
-	    temp.append("B");
-	  else if (key == sf::Keyboard::C)
-	    temp.append("C");
-	  else if (key == sf::Keyboard::D)
-	    temp.append("D");
-	  else if (key == sf::Keyboard::E)
-	    temp.append("E");
-	  else if (key == sf::Keyboard::F)
-	    temp.append("F");
-	  else if (key == sf::Keyboard::G)
-	    temp.append("G");
-	  else if (key == sf::Keyboard::H)
-	    temp.append("H");
-	  else if (key == sf::Keyboard::I)
-	    temp.append("I");
-	  else if (key == sf::Keyboard::J)
-	    temp.append("J");
-	  else if (key == sf::Keyboard::K)
-	    temp.append("K");
-	  else if (key == sf::Keyboard::L)
-	    temp.append("L");
-	  else if (key == sf::Keyboard::M)
-	    temp.append("M");
-	  else if (key == sf::Keyboard::N)
-	    temp.append("N");
-	  else if (key == sf::Keyboard::O)
-	    temp.append("O");
-	  else if (key == sf::Keyboard::P)
-	    temp.append("P");
-	  else if (key == sf::Keyboard::Q)
-	    temp.append("Q");
-	  else if (key == sf::Keyboard::R)
-	    temp.append("R");
-	  else if (key == sf::Keyboard::S)
-	    temp.append("S");
-	  else if (key == sf::Keyboard::T)
-	    temp.append("T");
-	  else if (key == sf::Keyboard::U)
-	    temp.append("U");
-	  else if (key == sf::Keyboard::V)
-	    temp.append("V");
-	  else if (key == sf::Keyboard::W)
-	    temp.append("W");
-	  else if (key == sf::Keyboard::X)
-	    temp.append("X");
-	  else if (key == sf::Keyboard::Y)
-	    temp.append("Y");
-	  else if (key == sf::Keyboard::Z)
-	    temp.append("Z");
-	  else if (key == sf::Keyboard::Return)
-	    return name_entry.getString().toAnsiString();
+	    stringstream ss;
+	    string temp = name_entry.getString().toAnsiString();
+	    if (key == sf::Keyboard::A) //friday afternoon code, pls don't judge
+		temp.append("A");
+	    else if (key == sf::Keyboard::B)
+		temp.append("B");
+	    else if (key == sf::Keyboard::C)
+		temp.append("C");
+	    else if (key == sf::Keyboard::D)
+		temp.append("D");
+	    else if (key == sf::Keyboard::E)
+		temp.append("E");
+	    else if (key == sf::Keyboard::F)
+		temp.append("F");
+	    else if (key == sf::Keyboard::G)
+		temp.append("G");
+	    else if (key == sf::Keyboard::H)
+		temp.append("H");
+	    else if (key == sf::Keyboard::I)
+		temp.append("I");
+	    else if (key == sf::Keyboard::J)
+		temp.append("J");
+	    else if (key == sf::Keyboard::K)
+		temp.append("K");
+	    else if (key == sf::Keyboard::L)
+		temp.append("L");
+	    else if (key == sf::Keyboard::M)
+		temp.append("M");
+	    else if (key == sf::Keyboard::N)
+		temp.append("N");
+	    else if (key == sf::Keyboard::O)
+		temp.append("O");
+	    else if (key == sf::Keyboard::P)
+		temp.append("P");
+	    else if (key == sf::Keyboard::Q)
+		temp.append("Q");
+	    else if (key == sf::Keyboard::R)
+		temp.append("R");
+	    else if (key == sf::Keyboard::S)
+		temp.append("S");
+	    else if (key == sf::Keyboard::T)
+		temp.append("T");
+	    else if (key == sf::Keyboard::U)
+		temp.append("U");
+	    else if (key == sf::Keyboard::V)
+		temp.append("V");
+	    else if (key == sf::Keyboard::W)
+		temp.append("W");
+	    else if (key == sf::Keyboard::X)
+		temp.append("X");
+	    else if (key == sf::Keyboard::Y)
+		temp.append("Y");
+	    else if (key == sf::Keyboard::Z)
+		temp.append("Z");
+	    else if (key == sf::Keyboard::Return)
+		return name_entry.getString().toAnsiString();
 
-	  name_entry.setString(temp);
+	    name_entry.setString(temp);
 	}
     }
-  return "";
+    return "";
 }
 
 //Draws player health
