@@ -298,9 +298,7 @@ void Game::update()
 {
     if(clock.getElapsedTime().asSeconds() >= 1)
     {
-	// if(player.attack_counter <= 0)
-	//     player.attack_counter++;
-	player.attack_counter = 1; // kolla på detta
+	player.set_attack_counter(1);
 	player_recently_hit = false;
 	    
 	clock.restart();
@@ -449,7 +447,7 @@ void Game::render()
     // ------ Collision with Player's Attack and enemies -------
     if(attacking)
     {
-	if(player.attack_counter > 0)
+	if(player.get_attack_counter() > 0)
 	{
 	    if(!enemies.empty())
 	    {
@@ -501,10 +499,10 @@ void Game::render()
   
     if(attacking)
     {
-	if(player.attack_counter > 0)
+	if(player.get_attack_counter() > 0)
 	{
 	    window.draw(player.attack());
-	    player.attack_counter--; 
+	    player.set_attack_counter(player.get_attack_counter() - 1);
 	}
     }
     window.draw(player.draw_this());

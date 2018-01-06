@@ -146,3 +146,13 @@ void Player::load_experience()
     infile.open("resources/experience.txt");
     infile >> experience;
 }
+
+void Player::set_attack_counter(int atk)
+{
+    attack_counter = atk;
+}
+
+int Player::get_attack_counter() const
+{
+    return attack_counter;
+}

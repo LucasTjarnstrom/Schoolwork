@@ -21,6 +21,9 @@ public:
     void set_weapon_damage(int);
     int get_weapon_damage() const;
 
+    void set_attack_counter(int);
+    int get_attack_counter() const;
+
     void set_experience(int);
     int get_experience() const;
 
@@ -32,10 +35,9 @@ public:
     void move(std::string const &) override;
     void is_colliding(std::string) override;
 
-    int attack_counter {1};
-
 private:
-    int jump_counter {1}; // får ändras senare
+    int jump_counter {1};    
+    int attack_counter {1};
     int weapon_damage {};
     Player_Attack attack_ {};
     int experience {};
