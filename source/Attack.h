@@ -1,5 +1,6 @@
 /*
  * Attack.h
+ This class handles the attack ability for characters.
  */
 
 #ifndef ATTACK_H
