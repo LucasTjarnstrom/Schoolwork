@@ -1,5 +1,7 @@
 /*
  * Character.h
+ This class is responsible for handling the characters, i.e the player and the enemies that the player interacts with. 
+ Movement and health are handled here, for example.
  */
 
 #ifndef CHARACTER_H
