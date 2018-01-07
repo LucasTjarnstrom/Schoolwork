@@ -1,5 +1,6 @@
 /*
  * Button.h
+ This class handles the buttons for the start menu.
  */
 
 #ifndef BUTTON_H
