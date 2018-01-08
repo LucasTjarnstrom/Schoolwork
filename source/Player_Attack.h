@@ -1,5 +1,10 @@
 /*
- * Player_Attack.h
+ * IDENTIFICATION 
+ * File: Player_Attack.h 
+ * Module: Character
+ * 
+ * DESCRIPTION
+ * This class handles the attack ability for the player character. 
  */
 
 #ifndef PLAYER_ATTACK_H

@@ -1,5 +1,11 @@
 /*
- * Goal.h
+ * IDENTIFICATION 
+ * File: Goal.h 
+ * Module: Environment
+ * 
+ * DESCRIPTION 
+ * This class acts as a goal in the game loop,
+ * i.e. when the player character enters the goal they win the game.
  */
 
 #ifndef GOAL_H

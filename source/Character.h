@@ -1,7 +1,12 @@
 /*
- * Character.h
- This class is responsible for handling the characters, i.e the player and the enemies that the player interacts with. 
- Movement and health are handled here, for example.
+ * IDENTIFICATION 
+ * File: Character.h 
+ * Module: Character
+ * 
+ * DESCRIPTION
+ * This class is responsible for handling all characters, i.e the player 
+ * and the enemies that the player interacts with. Movement and health 
+ * are handled here, for example. 
  */
 
 #ifndef CHARACTER_H

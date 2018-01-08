@@ -1,5 +1,10 @@
 /*
- * Coin.h
+ * IDENTIFICATION 
+ * File: Coin.h 
+ * Module: Environment
+ * 
+ * DESCRIPTION 
+ * This class acts as a coin in the game loop.
  */
 
 #ifndef COIN_H

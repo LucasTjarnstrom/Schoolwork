@@ -1,5 +1,11 @@
 /*
- * Enemy.h
+ * IDENTIFICATION 
+ * File: Enemy.h 
+ * Module: Character
+ * 
+ * DESCRIPTION
+ * This class handles all the enemies, eg. how they
+ * interact with the player character.
  */
 
 #ifndef ENEMY_H

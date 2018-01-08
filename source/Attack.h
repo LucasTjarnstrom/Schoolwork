@@ -1,6 +1,10 @@
 /*
- * Attack.h
- This class handles the attack ability for characters.
+ * IDENTIFICATION 
+ * File: Attack.h 
+ * Module: Character
+ * 
+ * DESCRIPTION 
+ * This class handles the attack ability for all characters.
  */
 
 #ifndef ATTACK_H

@@ -1,5 +1,12 @@
 /*
- * Player.h
+ * IDENTIFICATION 
+ * File: Player.h 
+ * Module: Character
+ * 
+ * DESCRIPTION
+ * This class handles the main way the user interacts with
+ * the system; through a player character which acts as a 
+ * surrogate for the user in the game loop. 
  */
 
 #ifndef PLAYER_H

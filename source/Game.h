@@ -1,5 +1,11 @@
 /*
- * Game.h
+ * IDENTIFICATION 
+ * File: Game.h 
+ * Module: Game
+ * 
+ * DESCRIPTION 
+ * This class is responsible for all the interaction between
+ * other classes in the game loop.
  */
 
 #ifndef GAME_H

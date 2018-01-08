@@ -1,5 +1,11 @@
 /*
- * Environment.h
+ * IDENTIFICATION 
+ * File: Environment.h 
+ * Module: Environment
+ * 
+ * DESCRIPTION
+ * This class acts as an pure virtual superclass to
+ * all other, realizable, environment classes.
  */
 
 #ifndef ENVIRONMENT_H
@@ -12,8 +18,6 @@ class Environment : public Drawable
 {
 public:
     Environment(double,double,double,double, std::string);
-
-    //sf::Sprite draw_this() override;
 
 };
 

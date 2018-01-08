@@ -1,6 +1,10 @@
 /*
- * High_Score_List.h
- This class handles player entries and display of the high score list.
+ * IDENTIFICATION 
+ * File: High_Score_List.h 
+ * Module: Menu
+ * 
+ * DESCRIPTION
+ * This class handles player entries and display of the high score list. 
  */
 
 #ifndef HIGH_SCORE_LIST_H

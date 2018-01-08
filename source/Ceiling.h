@@ -1,5 +1,10 @@
 /*
- * Ceiling.h
+ * IDENTIFICATION 
+ * File: Ceiling.h 
+ * Module: Environment
+ * 
+ * DESCRIPTION 
+ * This class acts as ceiling in the game loop.
  */
 
 #ifndef CEILING_H

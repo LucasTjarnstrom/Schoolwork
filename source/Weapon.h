@@ -1,5 +1,11 @@
 /*
- * Weapon.h
+ * IDENTIFICATION 
+ * File: Weapon.h 
+ * Module: Environment
+ * 
+ * DESCRIPTION 
+ * This class acts as a weapon in the game loop,
+ * i.e. increases the player characters attack upon collision.
  */
 
 #ifndef WEAPON_H

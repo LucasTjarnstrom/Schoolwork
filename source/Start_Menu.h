@@ -1,6 +1,12 @@
 /*
- * Start_Menu.h
- This class handles the start menu, i.e the window that appears after a user starts the game. The user input (clicking a button) is handled here.
+ * IDENTIFICATION 
+ * File: Start_Menu.h 
+ * Module: Character
+ * 
+ * DESCRIPTION
+ * This class handles the start menu, i.e the window that 
+ * appears after a user starts the game. The user input (clicking a button) 
+ * is handled here. 
  */
 
 #ifndef START_MENU_H

@@ -1,6 +1,12 @@
 /*
- * Entry.h
- This class handles the entries to the highscore list. The entries contain the date, name and score which is saved after a user completes the game.
+ * IDENTIFICATION 
+ * File: Entry.h 
+ * Module: Menu
+ * 
+ * DESCRIPTION
+ * This class handles the entries to the highscore list. 
+ * The entries contain the date, name and score which is 
+ * saved after a user completes the game.
  */
 
 #ifndef ENTRY_H

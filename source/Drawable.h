@@ -1,6 +1,12 @@
 /*
- * Drawable.h
- This is the superclass responsible for drawing everything that appears in the game window. This includes object size, velocity, position etc as well as sprites.
+ * IDENTIFICATION 
+ * File: Drawable.h 
+ * Module: Game
+ * 
+ * DESCRIPTION
+ * This is the superclass responsible for drawing everything that 
+ * appears in the game window. This includes object size, velocity, 
+ * position etc as well as sprites.
  */
 
 #ifndef DRAWABLE_H

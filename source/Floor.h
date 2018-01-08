@@ -1,5 +1,10 @@
 /*
- * Floor.h
+ * IDENTIFICATION 
+ * File: Floor.h 
+ * Module: Environment
+ * 
+ * DESCRIPTION 
+ * This class acts as floor in the game loop.
  */
 
 #ifndef FLOOR_H

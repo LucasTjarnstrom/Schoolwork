@@ -1,5 +1,10 @@
 /*
- * Wall.h
+ * IDENTIFICATION 
+ * File: Wall.h 
+ * Module: Environment
+ * 
+ * DESCRIPTION 
+ * This class acts as wall in the game loop.
  */
 
 #ifndef WALL_H

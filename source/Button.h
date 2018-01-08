@@ -1,6 +1,10 @@
 /*
- * Button.h
- This class handles the buttons for the start menu.
+ * IDENTIFICATION 
+ * File: Button.h 
+ * Module: Menu
+ * 
+ * DESCRIPTION 
+ * This class handles the buttons for all menues.
  */
 
 #ifndef BUTTON_H

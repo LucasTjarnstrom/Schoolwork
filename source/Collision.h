@@ -1,5 +1,6 @@
 /* 
  * File:   collision.h
+ * Module: Game
  * Authors: Nick Koirala (original version), ahnonay (SFML2 compatibility)
  *
  * Collision Detection and handling class

@@ -1,5 +1,12 @@
 /*
- * Health_Orb.h
+ * IDENTIFICATION 
+ * File: Health_Orb.h 
+ * Module: Environment
+ * 
+ * DESCRIPTION 
+ * This class acts as a health orb in the game loop,
+ * i.e. when the player character collides with it they regain 1
+ * (eventually) lost health point.
  */
 
 #ifndef HEALTH_ORB_H

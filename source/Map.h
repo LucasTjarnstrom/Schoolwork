@@ -1,5 +1,11 @@
 /*
- * Map.h (savepoints not implemented)
+ * IDENTIFICATION 
+ * File: Map.h 
+ * Module: Environment
+ * 
+ * DESCRIPTION
+ * This class handles, aggregates, all environment objects
+ * that exist on a map. 
  */
 
 #ifndef MAP_H
